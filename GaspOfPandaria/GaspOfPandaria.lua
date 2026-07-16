@@ -1,10 +1,8 @@
-local nbCoups = 0
-
 -- Création de la fenêtre
 
-local frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
-frame:SetSize(400, 400)
-frame:SetPoint("CENTER")
+Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
+Gasp.frame:SetSize(400, 400)
+Gasp.frame:SetPoint("CENTER")
 
 -- popup rules
 
@@ -26,12 +24,12 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
     hideOnEscape = true,
 
     OnShow = function(self)
-        if nbCoups <= 10 then
-            self.Text:SetText("Bravo ! Resolved in "..nbCoups.."  moves ! Excellent !")
-        elseif nbCoups <= 20 then
-            self.Text:SetText("Good job ! Resolved in "..nbCoups.."  moves.")
+        if Gasp.nbCoups <= 10 then
+            self.Text:SetText("Bravo ! Resolved in "..Gasp.nbCoups.."  moves ! Excellent !")
+        elseif Gasp.nbCoups <= 20 then
+            self.Text:SetText("Good job ! Resolved in "..Gasp.nbCoups.."  moves.")
         else
-            self.Text:SetText("Victory ! Resolved in "..nbCoups.."  moves.")
+            self.Text:SetText("Victory ! Resolved in "..Gasp.nbCoups.."  moves.")
         end
 
         self:ClearAllPoints()
@@ -39,122 +37,44 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
     end,
 }
 
-local grille = {}
-
-local function CreerGrille()
-    for y = 0, 3 do
-        grille[y] = {}
-        for x = 0, 3 do
-            grille[y][x] = 0
-        end
-    end
-end
-
--- Tableau pour stocker les boutons
-
-local boutons = {}
-
--- Fonction pour mettre à jour la couleur d'un pion
-
-local function UpdateButton(x, y)
-    local button = boutons[y][x]
-    if grille[y][x] == 0 then
-        button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
-    else
-        button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_green.tga")
-    end
-end
-
--- On vérifie si le joueur a gagné !
-
-local function VerificationGrille()
-    -- local couleur = grille[0][0]
-    for y = 0, 3 do
-        for x = 0, 3 do
-            if grille[y][x] ~= 1 then
-                return -- pas encore gagné
-            end
-        end
-    end
-    -- appel de la popup de victoire
-    StaticPopup_Show("GASP_VICTOIRE")
-
-    PlaySound(567399) -- petit son de victoire
-end
-
--- On retourne un bouton ! 
-
-local function Retourne(xc, yc)
-    -- Joue un son (facultatif)
-    PlaySound(567482) -- son générique WoW
-
-    -- Incrémente le compteur de coups
-    nbCoups = nbCoups + 1
-    frame.coups:SetText("Moves : "..nbCoups)
-
-    -- Parcourt les voisins autour du pion cliqué
-    for y = yc - 1, yc + 1 do
-        for x = xc - 1, xc + 1 do
-            -- Vérifie que la case existe dans la grille
-            if x >= 0 and x <= 3 and y >= 0 and y <= 3 then
-                -- Ne pas changer la case cliquée elle-même
-                if not (x == xc and y == yc) then
-                    grille[y][x] = 1 - grille[y][x]
-                    UpdateButton(x, y)
-                end
-            end
-        end
-    end
-
-    -- Vérifie la victoire
-    VerificationGrille()
-end
-
--- Fonction pour basculer la couleur d'un pion
-
-local function ToggleColor(x, y)
-    grille[y][x] = 1 - grille[y][x] -- inverse 0 ↔ 1
-    UpdateButton(x, y)
-end
-
-CreerGrille()
+Gasp.CreerGrille()
 
 -- Une zone pour le nombre de coups 
 
-frame.coups = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-frame.coups:SetPoint("BOTTOM", 0, 10)
-frame.coups:SetText("Moves : 0")
+Gasp.frame.coups = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+Gasp.frame.coups:SetPoint("BOTTOM", 0, 10)
+Gasp.frame.coups:SetText("Moves : 0")
 
 -- Une texture dans la fond de la fenêtre
 
-local texture = frame:CreateTexture()
+local texture = Gasp.frame:CreateTexture()
 texture:SetAllPoints()
 texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
 --  un titre pour la fenêtre
 
-frame.title = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-frame.title:SetPoint("TOP", 0, -5)
-frame.title:SetText("Gasp Of Pandaria")
+Gasp.frame.title = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+Gasp.frame.title:SetPoint("TOP", 0, -5)
+Gasp.frame.title:SetText("Gasp Of Pandaria")
 
 -- Une commande pour la console affiche la fenêtre
 
 SLASH_GASP1 = "/gaspofpandaria"
 
 SlashCmdList["GASP"] = function()
-    frame:Show()
+    Gasp.frame:Show()
 end
 
 -- un container pour la zone de jeu 
 
-local gridFrame = CreateFrame("Frame", nil, frame)
+local gridFrame = CreateFrame("Frame", nil, Gasp.frame)
 gridFrame:SetSize(230, 230)
-gridFrame:SetPoint("CENTER", frame, "CENTER", 0, 0)
+gridFrame:SetPoint("CENTER", Gasp.frame, "CENTER", 0, 0)
 
 -- Création des boutons
 
 for y = 0, 3 do
-    boutons[y] = {}
+    Gasp.boutons[y] = {}
     for x = 0, 3 do
         local button = CreateFrame("Button", "GaspPion"..x..y, gridFrame)
         local taille = 50
@@ -165,17 +85,17 @@ for y = 0, 3 do
         button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
 
         button:SetScript("OnClick", function()
-            Retourne(x, y)
+            Gasp.Retourne(x, y)
         end)
 
-        boutons[y][x] = button
+        Gasp.boutons[y][x] = button
     end
 end
 
 -- Bouton RULES (à gauche)
-local boutonRules = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+local boutonRules = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonRules:SetSize(80, 25)
-boutonRules:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 20, 20)
+boutonRules:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 20, 20)
 boutonRules:SetText("Rules")
 
 boutonRules:SetScript("OnClick", function()
@@ -183,42 +103,23 @@ boutonRules:SetScript("OnClick", function()
 end)
 
 -- Bouton RESET (à droite)
-local boutonReset = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+local boutonReset = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonReset:SetSize(80, 25)
-boutonReset:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 20)
+boutonReset:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -20, 20)
 boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
-    nbCoups = 0
-    frame.coups:SetText("Moves : 0")
+    Gasp.nbCoups = 0
+    Gasp.frame.coups:SetText("Moves : 0")
 
-    CreerGrille()
+    Gasp.CreerGrille()
 
     for y = 0, 3 do
         for x = 0, 3 do
-            UpdateButton(x, y)
+            Gasp.UpdateButton(x, y)
         end
     end
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -- Bouton de contrôle (taille standard d'un bouton de minimap)
 local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
@@ -251,6 +152,6 @@ highlight:SetAllPoints(background)
 
 -- Action au clic
 miniButton:SetScript("OnClick", function()
-    frame:Show()
+    Gasp.frame:Show()
 end)
 

@@ -63,8 +63,10 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.6.1
+## v0.6.3
 - [update] nettoyage du code
+- [update] The texts are now in English
+- [update] major code optimization
 
 ---
 

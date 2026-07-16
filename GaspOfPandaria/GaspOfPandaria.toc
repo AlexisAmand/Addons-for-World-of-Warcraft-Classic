@@ -2,5 +2,6 @@
 ## Title: Gasp Of Pandaria
 ## Notes: 
 ## Author: Alexis + Copilot
+functions.lua
 GaspOfPandaria.lua
 
