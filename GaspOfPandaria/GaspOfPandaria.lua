@@ -162,3 +162,38 @@ for y = 0, 3 do
         boutons[y][x] = button
     end
 end
+
+-- Bouton de contrôle (taille standard d'un bouton de minimap)
+local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
+miniButton:SetSize(31, 31)
+miniButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -12, -12) -- Position globale sur la minimap
+miniButton:SetFrameStrata("MEDIUM")
+
+-- Arrière-plan sombre (pour remplir le cercle sous ton icône)
+local background = miniButton:CreateTexture(nil, "BACKGROUND")
+background:SetSize(20, 20)
+background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
+background:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 7, -5) -- Décalage magique Blizzard
+
+-- Icône verte (alignée pile dans le trou de la bordure)
+local icon = miniButton:CreateTexture(nil, "ARTWORK")
+icon:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\play.tga")
+icon:SetSize(17, 17) -- Taille standard du contenu du bouton
+icon:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 7, -5) -- Même décalage que l'arrière-plan
+
+-- Bordure dorée (qui englobe le tout sans aucun offset)
+local border = miniButton:CreateTexture(nil, "OVERLAY")
+border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
+border:SetSize(53, 53)
+border:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 0, 0) -- La bordure reste collée à 0,0
+
+-- Halo au survol (aligné proprement sur le fond)
+miniButton:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
+local highlight = miniButton:GetHighlightTexture()
+highlight:SetAllPoints(background)
+
+-- Action au clic
+miniButton:SetScript("OnClick", function()
+    frame:Show()
+end)
+
