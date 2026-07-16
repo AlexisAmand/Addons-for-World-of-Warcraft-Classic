@@ -1,6 +1,39 @@
-# Gasp of Pandaria
+# Gasp Of Pandaria
 
+Un mini‑jeu de réflexion pour World of Warcraft, inspiré du jeu Gasp : cliquez sur une gemme pour retourner les huit voisines… mais pas celle que vous avez cliquée.  
+Le but : obtenir une grille uniforme en un minimum de coups.
 
+---
+
+## 🎮 Fonctionnement
+
+- La grille est composée de 16 gemmes (4×4).  
+- Chaque gemme est soit **bleue**, soit **verte**.  
+- Cliquer sur une gemme **ne change pas sa couleur**, mais retourne les 8 voisines autour d’elle.  
+- Le compteur de coups augmente à chaque action.  
+- Une vérification automatique détecte la victoire lorsque toutes les gemmes sont identiques.
+
+---
+
+## 🧩 Commande en jeu
+
+Ouvrir la fenêtre du jeu :
+
+/gaspofpandaria
+
+---
+
+## 📦 Installation
+
+1. Télécharger le dossier `GaspOfPandaria`.  
+2. Le placer dans le dossier addons de votre version de WoW
+3. Lancer WoW (ou `/reload`).  
+4. Activer l’addon dans le menu AddOns.
+
+## 📝 Licence
+
+TODO
+Crédits : Alexis AMAND — Saint‑Saulve, France.
 
 
 

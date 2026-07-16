@@ -1,6 +1,35 @@
 print("Gasp chargé !")
 local nbCoups = 0
 
+-- Création de la fenêtre
+
+local frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
+frame:SetSize(400, 400)
+frame:SetPoint("CENTER")
+
+-- popup si on a gagné !
+
+StaticPopupDialogs["GASP_VICTOIRE"] = {
+    text = "", -- sera remplacé dans OnShow
+    button1 = "OK",
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+
+    OnShow = function(self)
+        if nbCoups <= 10 then
+            self.Text:SetText("Bravo ! Résolu en "..nbCoups.." coups ! Excellent !")
+        elseif nbCoups <= 20 then
+            self.Text:SetText("Bien joué ! Résolu en "..nbCoups.." coups.")
+        else
+            self.Text:SetText("Victoire ! Résolu en "..nbCoups.." coups.")
+        end
+
+        self:ClearAllPoints()
+        self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    end,
+}
+
 -- Tableau logique 4x4
 
 local grille = {}
@@ -38,6 +67,9 @@ local function VerificationGrille()
         end
     end
     print("Bravo ! Toutes les gemmes sont de la même couleur !")
+    -- appel de la popup de victoire
+    StaticPopup_Show("GASP_VICTOIRE")
+
     PlaySound(567399) -- petit son de victoire
 end
 
@@ -49,6 +81,7 @@ local function Retourne(xc, yc)
 
     -- Incrémente le compteur de coups
     nbCoups = nbCoups + 1
+    frame.coups:SetText("Coups : "..nbCoups)
     print("Coup n°"..nbCoups)
 
     -- Parcourt les voisins autour du pion cliqué
@@ -76,11 +109,11 @@ local function ToggleColor(x, y)
     UpdateButton(x, y)
 end
 
--- Création de la fenêtre
+-- Une zone pour le nombre de coups 
 
-local frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
-frame:SetSize(400, 400)
-frame:SetPoint("CENTER")
+frame.coups = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+frame.coups:SetPoint("BOTTOM", 0, 10)
+frame.coups:SetText("Coups : 0")
 
 -- Une texture dans la fond de la fenêtre
 
