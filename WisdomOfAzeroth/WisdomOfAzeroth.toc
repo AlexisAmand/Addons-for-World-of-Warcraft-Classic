@@ -1,0 +1,7 @@
+## Interface: 50400
+## Title: Wisdom Of Azeroth
+## Notes: Affiche un proverbe au début de chaque partie
+## Author: Alexis + Copilot
+quotes.lua
+WisdomOfAzeroth.lua
+

@@ -1,0 +1,6 @@
+## Interface: 50400
+## Title: Craft Usage Tooltip
+## Notes: Indique le métier dans lequel un item est utilisé
+## Author: Alexis + Copilot
+CraftUsageTooltip.lua
+
