@@ -58,10 +58,10 @@ end
 -- On vérifie si le joueur a gagné !
 
 local function VerificationGrille()
-    local couleur = grille[0][0]
+    -- local couleur = grille[0][0]
     for y = 0, 3 do
         for x = 0, 3 do
-            if grille[y][x] ~= couleur then
+            if grille[y][x] ~= 1 then
                 return -- pas encore gagné
             end
         end
