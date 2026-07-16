@@ -1,4 +1,3 @@
-print("Gasp chargé !")
 local nbCoups = 0
 
 -- Création de la fenêtre
@@ -10,7 +9,7 @@ frame:SetPoint("CENTER")
 -- popup rules
 
 StaticPopupDialogs["GASP_REGLES"] = {
-    text = "Clique sur une gemme pour retourner les voisines.\nLe but : retourner toutes les gemmes !",
+    text = "Click on a gem to flip the ones next to it.\nThe goal: Flip all the gems!",
     button1 = "OK",
     timeout = 0,
     whileDead = true,
@@ -28,11 +27,11 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
 
     OnShow = function(self)
         if nbCoups <= 10 then
-            self.Text:SetText("Bravo ! Résolu en "..nbCoups.." coups ! Excellent !")
+            self.Text:SetText("Bravo ! Resolved in "..nbCoups.."  moves ! Excellent !")
         elseif nbCoups <= 20 then
-            self.Text:SetText("Bien joué ! Résolu en "..nbCoups.." coups.")
+            self.Text:SetText("Good job ! Resolved in "..nbCoups.."  moves.")
         else
-            self.Text:SetText("Victoire ! Résolu en "..nbCoups.." coups.")
+            self.Text:SetText("Victory ! Resolved in "..nbCoups.."  moves.")
         end
 
         self:ClearAllPoints()
@@ -77,7 +76,6 @@ local function VerificationGrille()
             end
         end
     end
-    print("Bravo ! Toutes les gemmes sont de la même couleur !")
     -- appel de la popup de victoire
     StaticPopup_Show("GASP_VICTOIRE")
 
@@ -92,8 +90,7 @@ local function Retourne(xc, yc)
 
     -- Incrémente le compteur de coups
     nbCoups = nbCoups + 1
-    frame.coups:SetText("Coups : "..nbCoups)
-    print("Coup n°"..nbCoups)
+    frame.coups:SetText("Moves : "..nbCoups)
 
     -- Parcourt les voisins autour du pion cliqué
     for y = yc - 1, yc + 1 do
@@ -126,7 +123,7 @@ CreerGrille()
 
 frame.coups = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 frame.coups:SetPoint("BOTTOM", 0, 10)
-frame.coups:SetText("Coups : 0")
+frame.coups:SetText("Moves : 0")
 
 -- Une texture dans la fond de la fenêtre
 
@@ -145,7 +142,6 @@ frame.title:SetText("Gasp Of Pandaria")
 SLASH_GASP1 = "/gaspofpandaria"
 
 SlashCmdList["GASP"] = function()
-    print("Gasp fonctionne !")
     frame:Show()
 end
 
@@ -180,7 +176,7 @@ end
 local boutonRules = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 boutonRules:SetSize(80, 25)
 boutonRules:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 20, 20)
-boutonRules:SetText("Règles")
+boutonRules:SetText("Rules")
 
 boutonRules:SetScript("OnClick", function()
     StaticPopup_Show("GASP_REGLES")
@@ -194,7 +190,7 @@ boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
     nbCoups = 0
-    frame.coups:SetText("Coups : 0")
+    frame.coups:SetText("Moves : 0")
 
     CreerGrille()
 

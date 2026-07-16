@@ -55,10 +55,16 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.6.0 — Nettoyage et organisation
-- Message en cas de victoire
-- Ajout d'un bouton près de la minimap
-- bugfix sur le gameplay 0/1
+## v0.6.0
+- [update] Message en cas de victoire
+- [update] d'un bouton près de la minimap
+- [bugfix] sur le gameplay 0/1
+- [update] reset et rules buttons
+
+---
+
+## v0.6.1
+- [update] nettoyage du code
 
 ---
 
