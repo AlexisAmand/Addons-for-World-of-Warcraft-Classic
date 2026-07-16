@@ -7,6 +7,16 @@ local frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
 frame:SetSize(400, 400)
 frame:SetPoint("CENTER")
 
+-- popup rules
+
+StaticPopupDialogs["GASP_REGLES"] = {
+    text = "Clique sur une gemme pour retourner les voisines.\nLe but : retourner toutes les gemmes !",
+    button1 = "OK",
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+}
+
 -- popup si on a gagné !
 
 StaticPopupDialogs["GASP_VICTOIRE"] = {
@@ -30,13 +40,14 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
     end,
 }
 
--- Tableau logique 4x4
-
 local grille = {}
-for y = 0, 3 do
-    grille[y] = {}
-    for x = 0, 3 do
-        grille[y][x] = 0 -- 0 = blanc, 1 = noir
+
+local function CreerGrille()
+    for y = 0, 3 do
+        grille[y] = {}
+        for x = 0, 3 do
+            grille[y][x] = 0
+        end
     end
 end
 
@@ -109,6 +120,8 @@ local function ToggleColor(x, y)
     UpdateButton(x, y)
 end
 
+CreerGrille()
+
 -- Une zone pour le nombre de coups 
 
 frame.coups = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
@@ -162,6 +175,54 @@ for y = 0, 3 do
         boutons[y][x] = button
     end
 end
+
+-- Bouton RULES (à gauche)
+local boutonRules = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+boutonRules:SetSize(80, 25)
+boutonRules:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 20, 20)
+boutonRules:SetText("Règles")
+
+boutonRules:SetScript("OnClick", function()
+    StaticPopup_Show("GASP_REGLES")
+end)
+
+-- Bouton RESET (à droite)
+local boutonReset = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+boutonReset:SetSize(80, 25)
+boutonReset:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 20)
+boutonReset:SetText("Reset")
+
+boutonReset:SetScript("OnClick", function()
+    nbCoups = 0
+    frame.coups:SetText("Coups : 0")
+
+    CreerGrille()
+
+    for y = 0, 3 do
+        for x = 0, 3 do
+            UpdateButton(x, y)
+        end
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- Bouton de contrôle (taille standard d'un bouton de minimap)
 local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
