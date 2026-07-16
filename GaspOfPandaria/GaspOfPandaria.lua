@@ -7,7 +7,7 @@ Gasp.frame:SetPoint("CENTER")
 -- popup rules
 
 StaticPopupDialogs["GASP_REGLES"] = {
-    text = "Click on a gem to flip the ones next to it.\nThe goal: Flip all the gems!",
+    text = "Ah, young adventurer… Tea will come later.\nFor now, observe.\nClick on a gem to flip the ones around it.\nYour goal is to flip every gem.\nDo not rush. Patience is a strength.",
     button1 = "OK",
     timeout = 0,
     whileDead = true,
@@ -23,13 +23,25 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
     whileDead = true,
     hideOnEscape = true,
 
+    OnAccept = function()
+        Gasp.CreerGrille()      -- recrée la grille
+        Gasp.nbCoups = 0        -- remet le compteur à zéro
+        Gasp.frame.coups:SetText("Moves : 0")  -- met à jour l'affichage
+        -- Et si tu veux, tu peux aussi rafraîchir les boutons :
+        for y = 0, 3 do
+            for x = 0, 3 do
+                Gasp.UpdateButton(x, y)
+            end
+        end
+    end,
+
     OnShow = function(self)
         if Gasp.nbCoups <= 10 then
-            self.Text:SetText("Bravo ! Resolved in "..Gasp.nbCoups.."  moves ! Excellent !")
+            self.Text:SetText("Swift as a breeze, young adventurer! Only "..Gasp.nbCoups.." moves ! The tea barely had time to steep.")
         elseif Gasp.nbCoups <= 20 then
-            self.Text:SetText("Good job ! Resolved in "..Gasp.nbCoups.."  moves.")
+            self.Text:SetText("Good work, young adventurer! "..Gasp.nbCoups.."  moves. The tea is warm… unlike your thinking.")
         else
-            self.Text:SetText("Victory ! Resolved in "..Gasp.nbCoups.."  moves.")
+            self.Text:SetText("A long journey, young adventurer… "..Gasp.nbCoups.."  moves. Fortunately, tea tastes better when it waits.")
         end
 
         self:ClearAllPoints()
@@ -49,7 +61,12 @@ Gasp.frame.coups:SetText("Moves : 0")
 
 local texture = Gasp.frame:CreateTexture()
 texture:SetAllPoints()
-texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+-- texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back01.tga")
+texture:SetAlpha(0.5)
+-- texture:SetVertexColor(0.8, 0.8, 0.9)
+-- texture:SetDesaturated(true)
+
 
 --  un titre pour la fenêtre
 
@@ -68,8 +85,13 @@ end
 -- un container pour la zone de jeu 
 
 local gridFrame = CreateFrame("Frame", nil, Gasp.frame)
-gridFrame:SetSize(230, 230)
-gridFrame:SetPoint("CENTER", Gasp.frame, "CENTER", 0, 0)
+local taille = 60
+local espace = 5
+local gridSize = (taille * 4) + (espace * 3)
+
+gridFrame:SetSize(gridSize, gridSize)
+gridFrame:SetPoint("CENTER", Gasp.frame, "CENTER", 0, 10)
+
 
 -- Création des boutons
 
@@ -77,8 +99,8 @@ for y = 0, 3 do
     Gasp.boutons[y] = {}
     for x = 0, 3 do
         local button = CreateFrame("Button", "GaspPion"..x..y, gridFrame)
-        local taille = 50
-        local espace = 5
+        -- local taille = 60
+        -- local espace = 5
 
         button:SetSize(taille, taille)
         button:SetPoint("TOPLEFT", x * (taille + espace), -y * (taille + espace))

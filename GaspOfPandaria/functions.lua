@@ -22,11 +22,34 @@ end
 
 function Gasp.UpdateButton(x, y)
     local button = Gasp.boutons[y][x]
+
+    -- Choix de la texture selon l'état
     if Gasp.grille[y][x] == 0 then
         button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
     else
         button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_green.tga")
     end
+
+    -- Animation fade-in / fade-out
+    if not button.fadeAnim then
+        local fade = button:CreateAnimationGroup()
+
+        local a1 = fade:CreateAnimation("Alpha")
+        a1:SetFromAlpha(1)
+        a1:SetToAlpha(0.3)
+        a1:SetDuration(0.05)
+        a1:SetSmoothing("OUT")
+
+        local a2 = fade:CreateAnimation("Alpha")
+        a2:SetFromAlpha(0.3)
+        a2:SetToAlpha(1)
+        a2:SetDuration(0.05)
+        a2:SetSmoothing("IN")
+
+        button.fadeAnim = fade
+    end
+
+    button.fadeAnim:Play()
 end
 
 -- On vérifie si le joueur a gagné !

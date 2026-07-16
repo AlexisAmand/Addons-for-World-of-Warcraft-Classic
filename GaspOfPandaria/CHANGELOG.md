@@ -59,7 +59,8 @@ Toutes les modifications notables du projet sont documentées ici.
 - [update] Message en cas de victoire
 - [update] d'un bouton près de la minimap
 - [bugfix] sur le gameplay 0/1
-- [update] reset et rules buttons
+- [update] reset buttons
+- [update] rules buttons
 
 ---
 
@@ -68,11 +69,18 @@ Toutes les modifications notables du projet sont documentées ici.
 - [update] The texts are now in English
 - [update] major code optimization
 
+## v0.7
+- [update] GUI
+- [update] Légére animation au changement de gemme
+- [update] texte RP pour les rules
+- [bugfix] Quand on a gagné, la partie est automatiquement reset
+
 ---
 
 ## À venir
-- Bouton “Reset”.
-- Animation de retournement.
+- fenêtre qu'on peut bouger ?
+- centrer le message de victoire
 - Sons personnalisés.
 - Timer optionnel.
-- Thème graphique complet.
+- système de record, garder le score du joueur en cas de gain
+- popups dans un fichier séparé
