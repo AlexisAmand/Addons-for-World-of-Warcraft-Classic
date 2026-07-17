@@ -120,37 +120,66 @@ gridFrame:SetPoint("TOP", Gasp.frame, "TOP", 0, -60 - offsetY)
 
 -- Création des boutons
 
-for y = 0, Gasp.niveau do
-    Gasp.boutons[y] = {}
-    for x = 0, Gasp.niveau do
-        local button = CreateFrame("Button", "GaspPion"..x..y, gridFrame)
+Gasp.CreationDesBoutons(gridFrame, espace)
 
-        button:SetSize(Gasp.taille, Gasp.taille)
-        button:SetPoint("TOPLEFT", x * (Gasp.taille + espace), -y * (Gasp.taille + espace))
-        button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
+-- Bouton 6x6
+local bouton6x6 = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
+bouton6x6:SetSize(80, 25)
+-- bouton6x6:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -20, 20)
+bouton6x6:SetText("Level 2")
 
-        button:SetScript("OnClick", function()
-            Gasp.Retourne(x, y)
-        end)
+bouton6x6:SetScript("OnClick", function()
+    Gasp.niveau = 5 -- car on utilise 0..5 pour un 6x6
+    Gasp.taille = 42 -- plus de boutons, donc boutons + petits
+    Gasp.nbCoups = 0
+    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
 
-        Gasp.boutons[y][x] = button
+    Gasp.CreerGrille()
+    Gasp.CreationDesBoutons(gridFrame, espace)
+
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
+            Gasp.UpdateButton(x, y)
+        end
     end
-end
+end)
+
+-- Bouton 4x4
+local bouton4x4 = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
+bouton4x4:SetSize(80, 25)
+-- bouton4x4:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -110, 20)
+bouton4x4:SetText("Level 1")
+
+bouton4x4:SetScript("OnClick", function()
+    Gasp.niveau = 3 -- car on utilise 0..3 pour un 4x4
+    Gasp.taille = 55 -- plus de boutons, donc boutons + petits
+    Gasp.nbCoups = 0
+    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+
+    Gasp.CreerGrille()
+    Gasp.CreationDesBoutons(gridFrame, espace)
+
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
+            Gasp.UpdateButton(x, y)
+        end
+    end
+end)
 
 -- Bouton RULES (à gauche)
 local boutonRules = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonRules:SetSize(80, 25)
-boutonRules:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 20, 20)
+-- boutonRules:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 20, 20)
 boutonRules:SetText("Rules")
 
 boutonRules:SetScript("OnClick", function()
     StaticPopup_Show("GASP_REGLES")
 end)
 
--- Bouton RESET (à droite)
+-- Bouton RESET
 local boutonReset = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonReset:SetSize(80, 25)
-boutonReset:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -20, 20)
+-- boutonReset:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 110, 20) -- à droite du bouton Rules
 boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
@@ -164,6 +193,20 @@ boutonReset:SetScript("OnClick", function()
         end
     end
 end)
+
+-- On place bien les boutons
+
+local boutons = {boutonRules, boutonReset, bouton4x4, bouton6x6}
+
+local total = #boutons
+local espace = 100 -- distance entre les boutons
+local largeurTotale = (total - 1) * espace
+local startX = (Gasp.frame:GetWidth() - largeurTotale) / 2
+
+for i, b in ipairs(boutons) do
+    b:ClearAllPoints()
+    b:SetPoint("BOTTOM", Gasp.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
+end
 
 -- Bouton de contrôle (taille standard d'un bouton de minimap)
 local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)

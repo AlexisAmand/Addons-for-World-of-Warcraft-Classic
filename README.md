@@ -21,3 +21,5 @@ Get it on CurseForge: soon....
 ## Sources 
 
 - https://opengameart.org/content/gems-set-01
+- https://freesound.org/people/JanzigDoplin/sounds/672671/
+- https://freesound.org/people/kwahmah_02/sounds/260620/

@@ -72,15 +72,13 @@ function Gasp.VerificationGrille()
     end
     -- appel de la popup de victoire
     StaticPopup_Show("GASP_VICTOIRE")
-
-    PlaySound(567399) -- petit son de victoire
 end
 
 -- On retourne un bouton ! 
 
 function Gasp.Retourne(xc, yc)
-    -- Joue un son (facultatif)
-    PlaySound(567482) -- son générique WoW
+    -- Joue un son
+    PlaySoundFile("Interface\\AddOns\\GaspOfPandaria\\sounds\\Bottle-7.wav")
 
     -- Incrémente le compteur de coups
     Gasp.nbCoups = Gasp.nbCoups + 1
@@ -90,7 +88,7 @@ function Gasp.Retourne(xc, yc)
     for y = yc - 1, yc + 1 do
         for x = xc - 1, xc + 1 do
             -- Vérifie que la case existe dans la grille
-            if x >= 0 and x <= 3 and y >= 0 and y <= 3 then
+            if x >= 0 and x <= Gasp.niveau and y >= 0 and y <= Gasp.niveau then
                 -- Ne pas changer la case cliquée elle-même
                 if not (x == xc and y == yc) then
                     Gasp.grille[y][x] = 1 - Gasp.grille[y][x]
@@ -118,5 +116,41 @@ function Gasp.GetRecordText()
         return "-"
     else
         return Gasp.record
+    end
+end
+
+-- création des boutons 
+
+function Gasp.CreationDesBoutons(gridFrame, espace)
+
+    -- Si des boutons existent déjà, on les cache
+    if Gasp.boutons then
+        for y, ligne in pairs(Gasp.boutons) do
+            for x, btn in pairs(ligne) do
+                btn:Hide()
+            end
+        end
+    end
+
+    for y = 0, Gasp.niveau do
+        Gasp.boutons[y] = {}
+        for x = 0, Gasp.niveau do
+            local button = CreateFrame("Button", "GaspPion"..x..y, gridFrame)
+            
+            button:SetSize(Gasp.taille, Gasp.taille)
+            local offsetX = (gridFrame:GetWidth() - (Gasp.niveau + 1) * (Gasp.taille + espace)) / 2
+            local offsetY = -((gridFrame:GetHeight() - (Gasp.niveau + 1) * (Gasp.taille + espace)) / 2)
+            button:SetPoint("TOPLEFT", offsetX + x * (Gasp.taille + espace), offsetY - y * (Gasp.taille + espace))
+
+            button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
+
+            -- capture locale des coordonnées
+            local bx, by = x, y
+            button:SetScript("OnClick", function()
+                Gasp.Retourne(x, y)
+            end)
+
+            Gasp.boutons[y][x] = button
+        end
     end
 end

@@ -107,15 +107,31 @@ All notable changes to the project are documented here.
 
 ## v0.9.4 — July 17, 2026
 - GUI improvements.
+- Online !
 
+## v0.10 — July 17, 2026
+- Un son est joué quand on clique sur une gemme
+- niveau 2 fonctionel (grille 6x6)
+- ajout d'un bouton niveau 2 (grille 6x6)
+- ajout d'un bouton niveau 1 (grille 4x4)
+- le record n'est plus affiché dans la console
+- phrase de réussite != si niveau 2
+- si niveau 1 gagné : encouragement à essayer le niveau 2
 
 ---
 
 ## À venir
+- petit recentrage vertical
 - fenêtre qu'on peut bouger ?
 - Sons personnalisés.
 - Timer optionnel.
 - fusion avec Wisdom Of Azeroth
+- record niveau 1 != record niveau 2
+- mélanger les gemmes en cours de partie
+
+
+
+
 
 Gasp of Pandaria is now officially approved on CurseForge!
 A tiny zen Pandaria‑inspired minigame for your WoW UI.
