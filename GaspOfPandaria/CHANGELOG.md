@@ -115,4 +115,11 @@ All notable changes to the project are documented here.
 - fenêtre qu'on peut bouger ?
 - Sons personnalisés.
 - Timer optionnel.
+- fusion avec Wisdom Of Azeroth
 
+Gasp of Pandaria is now officially approved on CurseForge!
+A tiny zen Pandaria‑inspired minigame for your WoW UI.
+Perfect for short breaks between quests.
+
+🔗 Download link  
+🪷 #Warcraft #WoWAddons #Pandaria
