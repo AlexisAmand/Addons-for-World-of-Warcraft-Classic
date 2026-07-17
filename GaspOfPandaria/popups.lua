@@ -35,8 +35,8 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
         Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())  -- met à jour l'affichage
         
         -- Et si tu veux, tu peux aussi rafraîchir les boutons :
-        for y = 0, 3 do
-            for x = 0, 3 do
+        for y = 0, Gasp.niveau do
+            for x = 0, Gasp.niveau do
                 Gasp.UpdateButton(x, y)
             end
         end

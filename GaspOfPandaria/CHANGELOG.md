@@ -1,98 +1,118 @@
-# Changelog — Gasp Of Pandaria
+# Changelog — Gasp of Pandaria
 
-Toutes les modifications notables du projet sont documentées ici.
-
----
-
-## v0.1.0 - 16 juillet 2026
-- Création du projet et structure initiale de l’addon.
-- Ajout de la fenêtre principale avec `BasicFrameTemplate`.
-- Ajout de la commande `/gaspofpandaria` pour afficher l’interface.
-- Mise en place du fond de fenêtre (texture WoW).
-- Création de la grille logique 4×4 (`grille[y][x]`).
-- Création des boutons de la grille (4×4), centrés dans un `gridFrame`.
-- Ajout des textures de test (blanc/noir).
+All notable changes to the project are documented here.
 
 ---
 
-## v0.2.0 - 16 juillet 2026
-- Ajout des images personnalisées (gemmes bleue et verte).
-- Conversion des images en `.tga` pour compatibilité WoW.
-- Mise en place des textures gemmes dans les boutons.
-- Suppression des textures de test.
-- Ajustements visuels pour un rendu plus propre.
+## v0.1.0 — July 16, 2026
+- Initial project creation and addon structure.
+- Added main window using `BasicFrameTemplate`.
+- Added `/gaspofpandaria` command to open the interface.
+- Implemented background texture for the main frame.
+- Created the logical 4×4 grid (`grid[y][x]`).
+- Added 4×4 button grid centered inside a `gridFrame`.
+- Added temporary test textures (white/black).
 
 ---
 
-## v0.3.0 - 16 juillet 2026
-- Ajout de la fonction `Retourne(x, y)` :
-  - Retourne les 8 voisins autour du pion cliqué.
-  - Ne modifie pas la gemme cliquée (règle du jeu Gasp).
-  - Met à jour les textures des gemmes retournées.
-- Ajout du compteur de coups (`nbCoups`).
-- Correction de l’erreur `attempt to perform arithmetic on global 'nbCoups'`.
-- Correction de l’erreur `attempt to call a nil value` en ajoutant `VerificationGrille()`.
+## v0.2.0 — July 16, 2026
+- Added custom gem textures (blue and green).
+- Converted images to `.tga` for WoW compatibility.
+- Integrated gem textures into grid buttons.
+- Removed temporary test textures.
+- Visual adjustments for a cleaner look.
 
 ---
 
-## v0.4.0 - 16 juillet 2026
-- Ajout de la fonction `VerificationGrille()`.
-- Détection automatique lorsque toutes les gemmes sont identiques.
-- Affichage d’un message de victoire.
-- Ajout d’un son WoW lors de la victoire (optionnel).
+## v0.3.0 — July 16, 2026
+- Added `Flip(x, y)` function:
+  - Flips the 8 neighbors around the clicked gem.
+  - Does not flip the clicked gem (Gasp rule).
+  - Updates textures of flipped gems.
+- Added move counter (`nbCoups`).
+- Fixed error: `attempt to perform arithmetic on global 'nbCoups'`.
+- Fixed error: `attempt to call a nil value` by adding `CheckGrid()`.
 
 ---
 
-## v0.5.0 - 16 juillet 2026
-- Réorganisation du code pour respecter l’ordre logique :
-  - Variables globales
-  - Fonctions utilitaires
-  - Fonctions de jeu
-  - Interface WoW
-- Ajout du README.md.
-- Ajout du CHANGELOG.md.
-- Mise en ligne du projet sur GitHub.
+## v0.4.0 — July 16, 2026
+- Added `CheckGrid()` function.
+- Automatic detection when all gems match.
+- Victory message added.
+- Optional WoW victory sound added.
 
 ---
 
-## v0.6.0 - 16 juillet 2026
-- [update] Message en cas de victoire
-- [update] d'un bouton près de la minimap
-- [bugfix] sur le gameplay 0/1
-- [update] reset buttons
-- [update] rules buttons
+## v0.5.0 — July 16, 2026
+- Reorganized code into logical sections:
+  - Global variables
+  - Utility functions
+  - Game functions
+  - WoW interface
+- Added README.md.
+- Added CHANGELOG.md.
+- Project published on GitHub.
 
 ---
 
-## v0.6.3 - 16 juillet 2026
-- [update] nettoyage du code
-- [update] The texts are now in English
-- [update] major code optimization
+## v0.6.0 — July 16, 2026
+- Added improved victory message.
+- Added minimap button.
+- Gameplay 0/1 bugfix.
+- Updated reset button.
+- Updated rules button.
 
-## v0.7 - 16 juillet 2026
-- [update] amélioration de GUI
-- [update] Légére animation au changement de gemme
-- [update] texte RP pour les rules
-- [bugfix] Quand on a gagné, la partie est automatiquement reset
+---
 
-## v0.8 - 17 juillet 2026
-- [update] nettoyage du code
-- [update] le record est gardé pendant la session
+## v0.6.3 — July 16, 2026
+- Code cleanup.
+- All addon text is now in English.
+- Major code optimization.
 
-## v0.9 - 17 juillet 2026
-- [update] le record est gardé entre plusieurs sessions
+---
 
-## v0.9.1 - 17 juillet 2026
-- [bugfix] the add-on no longer starts automatically 
+## v0.7 — July 16, 2026
+- GUI improvements.
+- Added subtle gem‑flip animation.
+- Added RP‑style text for the rules.
+- Fixed issue where the game did not reset automatically after victory.
 
-## v0.9.2 - 17 juillet 2026
-- [bugfix] rules message is now properly centered
+---
+
+## v0.8 — July 17, 2026
+- Code cleanup.
+- Best score is now saved during the session.
+
+---
+
+## v0.9 — July 17, 2026
+- Best score is now saved across sessions.
+
+---
+
+## v0.9.1 — July 17, 2026
+- Fixed issue where the addon started automatically.
+
+---
+
+## v0.9.2 — July 17, 2026
+- Fixed rules message alignment (properly centered).
+
+---
+
+## v0.9.3 — July 17, 2026
+- Code optimization.
+
+---
+
+## v0.9.4 — July 17, 2026
+- GUI improvements.
+
 
 ---
 
 ## À venir
 - fenêtre qu'on peut bouger ?
-- centrer le message de victoire
 - Sons personnalisés.
 - Timer optionnel.
 

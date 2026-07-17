@@ -29,13 +29,55 @@ Gasp.frame:SetPoint("CENTER")
 
 Gasp.CreerGrille()
 
--- Une zone pour le nombre de coups 
+-----------------------------------
+-- Une zone pour le nombre de coups
+----------------------------------- 
 
 Gasp.frame.coups = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-Gasp.frame.coups:SetPoint("BOTTOM", 0, 10)
+Gasp.frame.coups:SetPoint("TOP", Gasp.frame, "TOP", 0, -40)
 Gasp.frame.coups:SetText("Moves : 0   Record : 0")
 
+-- Fond derrière le texte
+local coupsBG = CreateFrame("Frame", nil, Gasp.frame)
+coupsBG:SetPoint("CENTER", Gasp.frame.coups, "CENTER")
+coupsBG:SetSize(Gasp.frame.coups:GetStringWidth() + 20, Gasp.frame.coups:GetStringHeight() + 12)
+
+coupsBG.texture = coupsBG:CreateTexture(nil, "BACKGROUND")
+coupsBG.texture:SetAllPoints()
+coupsBG.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
+coupsBG.texture:SetVertexColor(0.8, 0.7, 0.5, 0.6)  -- ton parchemin chaud
+
+-- Bordure haut
+local top = coupsBG:CreateTexture(nil, "BORDER")
+top:SetColorTexture(1, 1, 1, 0.6)
+top:SetPoint("TOPLEFT", coupsBG, "TOPLEFT", 0, 0)
+top:SetPoint("TOPRIGHT", coupsBG, "TOPRIGHT", 0, 0)
+top:SetHeight(1)
+
+-- Bordure bas
+local bottom = coupsBG:CreateTexture(nil, "BORDER")
+bottom:SetColorTexture(1, 1, 1, 0.6)
+bottom:SetPoint("BOTTOMLEFT", coupsBG, "BOTTOMLEFT", 0, 0)
+bottom:SetPoint("BOTTOMRIGHT", coupsBG, "BOTTOMRIGHT", 0, 0)
+bottom:SetHeight(1)
+
+-- Bordure gauche
+local left = coupsBG:CreateTexture(nil, "BORDER")
+left:SetColorTexture(1, 1, 1, 0.6)
+left:SetPoint("TOPLEFT", coupsBG, "TOPLEFT", 0, 0)
+left:SetPoint("BOTTOMLEFT", coupsBG, "BOTTOMLEFT", 0, 0)
+left:SetWidth(1)
+
+-- Bordure droite
+local right = coupsBG:CreateTexture(nil, "BORDER")
+right:SetColorTexture(1, 1, 1, 0.6)
+right:SetPoint("TOPRIGHT", coupsBG, "TOPRIGHT", 0, 0)
+right:SetPoint("BOTTOMRIGHT", coupsBG, "BOTTOMRIGHT", 0, 0)
+right:SetWidth(1)
+
+-----------------------------------------
 -- Une texture dans la fond de la fenêtre
+-----------------------------------------
 
 local texture = Gasp.frame:CreateTexture()
 texture:SetAllPoints()
@@ -45,7 +87,9 @@ texture:SetAlpha(0.5)
 -- texture:SetVertexColor(0.8, 0.8, 0.9)
 -- texture:SetDesaturated(true)
 
+----------------------------
 --  un titre pour la fenêtre
+----------------------------
 
 Gasp.frame.title = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 Gasp.frame.title:SetPoint("TOP", 0, -5)
@@ -59,27 +103,30 @@ SlashCmdList["GASP"] = function()
     Gasp.frame:Show()
 end
 
+-----------------------------------
 -- un container pour la zone de jeu 
+-----------------------------------
 
 local gridFrame = CreateFrame("Frame", nil, Gasp.frame)
-local taille = 60
 local espace = 5
-local gridSize = (taille * 4) + (espace * 3)
+local totalSize = (Gasp.taille * (Gasp.niveau + 1)) + (espace * Gasp.niveau)
 
-gridFrame:SetSize(gridSize, gridSize)
-gridFrame:SetPoint("CENTER", Gasp.frame, "CENTER", 0, 10)
+-- Hauteur utile entre le titre et les boutons
+local hauteurCadre = Gasp.frame:GetHeight() - 120  -- ajuste selon ton layout
+local offsetY = (hauteurCadre - totalSize) / 2
+
+gridFrame:SetSize(totalSize, totalSize)
+gridFrame:SetPoint("TOP", Gasp.frame, "TOP", 0, -60 - offsetY)
 
 -- Création des boutons
 
-for y = 0, 3 do
+for y = 0, Gasp.niveau do
     Gasp.boutons[y] = {}
-    for x = 0, 3 do
+    for x = 0, Gasp.niveau do
         local button = CreateFrame("Button", "GaspPion"..x..y, gridFrame)
-        -- local taille = 60
-        -- local espace = 5
 
-        button:SetSize(taille, taille)
-        button:SetPoint("TOPLEFT", x * (taille + espace), -y * (taille + espace))
+        button:SetSize(Gasp.taille, Gasp.taille)
+        button:SetPoint("TOPLEFT", x * (Gasp.taille + espace), -y * (Gasp.taille + espace))
         button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
 
         button:SetScript("OnClick", function()
@@ -111,27 +158,12 @@ boutonReset:SetScript("OnClick", function()
     Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
     Gasp.CreerGrille()
 
-    for y = 0, 3 do
-        for x = 0, 3 do
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
             Gasp.UpdateButton(x, y)
         end
     end
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -- Bouton de contrôle (taille standard d'un bouton de minimap)
 local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
@@ -139,7 +171,7 @@ miniButton:SetSize(31, 31)
 miniButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -12, -12) -- Position globale sur la minimap
 miniButton:SetFrameStrata("MEDIUM")
 
--- Arrière-plan sombre (pour remplir le cercle sous ton icône)
+-- Arrière-plan sombre (pour remplir le cercle sous l'icône)
 local background = miniButton:CreateTexture(nil, "BACKGROUND")
 background:SetSize(20, 20)
 background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")

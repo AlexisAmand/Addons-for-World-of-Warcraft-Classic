@@ -8,12 +8,18 @@ Gasp.nbCoups = 0
 Gasp.frame = nil
 Gasp.record = nil
 
+-- Gasp.niveau = 3 -- on fait -1 car le tableau à zéro 
+-- Gasp.taille = 60 -- taille des gemmes
+
+Gasp.niveau = 3
+Gasp.taille = 55
+
 -- création de la grille de jeu
 
 function Gasp.CreerGrille()
-    for y = 0, 3 do
+    for y = 0, Gasp.niveau do
         Gasp.grille[y] = {}
-        for x = 0, 3 do
+        for x = 0, Gasp.niveau do
             Gasp.grille[y][x] = 0
         end
     end
@@ -57,8 +63,8 @@ end
 
 function Gasp.VerificationGrille()
     -- local couleur = Gasp.grille[0][0]
-    for y = 0, 3 do
-        for x = 0, 3 do
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
             if Gasp.grille[y][x] ~= 1 then
                 return -- pas encore gagné
             end
