@@ -21,10 +21,11 @@ end)
 -- Création de la fenêtre
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
+Gasp.frame:Hide()
 Gasp.frame:SetSize(400, 400)
 Gasp.frame:SetPoint("CENTER")
 
--- Affichage de la grille de jeu 
+-- Création de la grille de jeu logique
 
 Gasp.CreerGrille()
 
@@ -43,7 +44,6 @@ texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back01.tga")
 texture:SetAlpha(0.5)
 -- texture:SetVertexColor(0.8, 0.8, 0.9)
 -- texture:SetDesaturated(true)
-
 
 --  un titre pour la fenêtre
 

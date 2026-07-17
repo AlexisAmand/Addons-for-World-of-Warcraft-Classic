@@ -82,6 +82,9 @@ Toutes les modifications notables du projet sont documentées ici.
 ## v0.9
 - [update] le record est gardé entre plusieurs sessions
 
+## v0.9.1
+- [bugfix] the add-on no longer starts automatically 
+
 ---
 
 ## À venir
@@ -90,5 +93,4 @@ Toutes les modifications notables du projet sont documentées ici.
 - centrer le message de victoire
 - Sons personnalisés.
 - Timer optionnel.
-- système de record, garder le score du joueur en cas de gain
 - popups dans un fichier séparé

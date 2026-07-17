@@ -21,6 +21,8 @@ Ouvrir la fenêtre du jeu :
 
 /gaspofpandaria
 
+Ou cliquer sur l'icône vert à côté de la minimap
+
 ---
 
 ## 📦 Installation
