@@ -1,5 +1,7 @@
 # 🌿 Gasp of Pandaria
 
+Get it on CurseForge: soon
+
 **Gasp of Pandaria** is a light and relaxing mini‑game inspired by the calm aesthetics of Pandaria. It features a simple 4×4 puzzle grid designed for quick, enjoyable sessions between quests, dungeons, or raids.
 
 Click on a gem to flip the ones around it.  

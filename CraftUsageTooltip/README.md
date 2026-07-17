@@ -35,10 +35,6 @@ A lightweight World of Warcraft addon that displays the professions using an ing
 
 
 
-
-
-
-
 ```lua
 --[[
     Addon: Craft Usage Tooltip
