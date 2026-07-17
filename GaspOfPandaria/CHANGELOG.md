@@ -70,14 +70,19 @@ Toutes les modifications notables du projet sont documentées ici.
 - [update] major code optimization
 
 ## v0.7
-- [update] GUI
+- [update] amélioration de GUI
 - [update] Légére animation au changement de gemme
 - [update] texte RP pour les rules
 - [bugfix] Quand on a gagné, la partie est automatiquement reset
 
+## v0.8
+- [update] nettoyage du code
+- [update] le record est gardé pendant la session
+
 ---
 
 ## À venir
+- plus de démarrage auto
 - fenêtre qu'on peut bouger ?
 - centrer le message de victoire
 - Sons personnalisés.

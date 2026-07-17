@@ -3,5 +3,6 @@
 ## Notes: 
 ## Author: Alexis + Copilot
 functions.lua
+popups.lua
 GaspOfPandaria.lua
 

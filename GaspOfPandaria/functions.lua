@@ -6,6 +6,7 @@ Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
 Gasp.frame = nil
+Gasp.record = nil
 
 -- création de la grille de jeu
 
@@ -77,7 +78,7 @@ function Gasp.Retourne(xc, yc)
 
     -- Incrémente le compteur de coups
     Gasp.nbCoups = Gasp.nbCoups + 1
-    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups)
+    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."   Record : "..Gasp.GetRecordText())
 
     -- Parcourt les voisins autour du pion cliqué
     for y = yc - 1, yc + 1 do
@@ -102,4 +103,14 @@ end
 function Gasp.ToggleColor(x, y)
     Gasp.grille[y][x] = 1 - Gasp.grille[y][x] -- inverse 0 ↔ 1
     Gasp.UpdateButton(x, y)
+end
+
+-- record
+
+function Gasp.GetRecordText()
+    if Gasp.record == nil then
+        return "-"
+    else
+        return Gasp.record
+    end
 end
