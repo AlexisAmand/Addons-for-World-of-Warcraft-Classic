@@ -79,6 +79,9 @@ Toutes les modifications notables du projet sont documentées ici.
 - [update] nettoyage du code
 - [update] le record est gardé pendant la session
 
+## v0.9
+- [update] le record est gardé entre plusieurs sessions
+
 ---
 
 ## À venir

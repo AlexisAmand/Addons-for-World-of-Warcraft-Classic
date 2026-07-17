@@ -22,6 +22,7 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
         -- mise à jour du record
         if not Gasp.record or Gasp.nbCoups < Gasp.record then
             Gasp.record = Gasp.nbCoups
+            GaspSaved.record = Gasp.record
         end
 
         Gasp.CreerGrille()      -- recrée la grille

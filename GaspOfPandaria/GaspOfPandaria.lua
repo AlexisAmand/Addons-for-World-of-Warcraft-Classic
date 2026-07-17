@@ -1,3 +1,23 @@
+-- Gestion des sauvegardes
+
+local loader = CreateFrame("Frame")
+loader:RegisterEvent("ADDON_LOADED")
+
+loader:SetScript("OnEvent", function(self, event, addonName)
+    if addonName == "GaspOfPandaria" then
+        -- Chargement des sauvegardes
+        GaspSaved = GaspSaved or {}
+        Gasp.record = GaspSaved.record or nil
+
+        print("Record chargé :", Gasp.record)
+
+        -- Mise à jour de l'affichage si l'UI existe déjà
+        if Gasp.frame and Gasp.frame.coups then
+            Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+        end
+    end
+end)
+
 -- Création de la fenêtre
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
