@@ -6,6 +6,11 @@ StaticPopupDialogs["GASP_REGLES"] = {
     timeout = 0,
     whileDead = true,
     hideOnEscape = true,
+
+    OnShow = function(self)
+        self:ClearAllPoints()
+        self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    end,
 }
 
 -- popup si on a gagné !

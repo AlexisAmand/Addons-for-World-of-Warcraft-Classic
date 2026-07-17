@@ -4,7 +4,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.1.0 — Base fonctionnelle
+## v0.1.0 - 16 juillet 2026
 - Création du projet et structure initiale de l’addon.
 - Ajout de la fenêtre principale avec `BasicFrameTemplate`.
 - Ajout de la commande `/gaspofpandaria` pour afficher l’interface.
@@ -15,7 +15,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.2.0 — Intégration des gemmes
+## v0.2.0 - 16 juillet 2026
 - Ajout des images personnalisées (gemmes bleue et verte).
 - Conversion des images en `.tga` pour compatibilité WoW.
 - Mise en place des textures gemmes dans les boutons.
@@ -24,7 +24,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.3.0 — Mécanique du jeu
+## v0.3.0 - 16 juillet 2026
 - Ajout de la fonction `Retourne(x, y)` :
   - Retourne les 8 voisins autour du pion cliqué.
   - Ne modifie pas la gemme cliquée (règle du jeu Gasp).
@@ -35,7 +35,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.4.0 — Vérification de victoire
+## v0.4.0 - 16 juillet 2026
 - Ajout de la fonction `VerificationGrille()`.
 - Détection automatique lorsque toutes les gemmes sont identiques.
 - Affichage d’un message de victoire.
@@ -43,7 +43,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.5.0 — Nettoyage et organisation
+## v0.5.0 - 16 juillet 2026
 - Réorganisation du code pour respecter l’ordre logique :
   - Variables globales
   - Fonctions utilitaires
@@ -55,7 +55,7 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.6.0
+## v0.6.0 - 16 juillet 2026
 - [update] Message en cas de victoire
 - [update] d'un bouton près de la minimap
 - [bugfix] sur le gameplay 0/1
@@ -64,33 +64,35 @@ Toutes les modifications notables du projet sont documentées ici.
 
 ---
 
-## v0.6.3
+## v0.6.3 - 16 juillet 2026
 - [update] nettoyage du code
 - [update] The texts are now in English
 - [update] major code optimization
 
-## v0.7
+## v0.7 - 16 juillet 2026
 - [update] amélioration de GUI
 - [update] Légére animation au changement de gemme
 - [update] texte RP pour les rules
 - [bugfix] Quand on a gagné, la partie est automatiquement reset
 
-## v0.8
+## v0.8 - 17 juillet 2026
 - [update] nettoyage du code
 - [update] le record est gardé pendant la session
 
-## v0.9
+## v0.9 - 17 juillet 2026
 - [update] le record est gardé entre plusieurs sessions
 
-## v0.9.1
+## v0.9.1 - 17 juillet 2026
 - [bugfix] the add-on no longer starts automatically 
+
+## v0.9.2 - 17 juillet 2026
+- [bugfix] rules message is now properly centered
 
 ---
 
 ## À venir
-- plus de démarrage auto
 - fenêtre qu'on peut bouger ?
 - centrer le message de victoire
 - Sons personnalisés.
 - Timer optionnel.
-- popups dans un fichier séparé
+
