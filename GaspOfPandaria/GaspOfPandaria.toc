@@ -5,6 +5,7 @@
 ## SavedVariables: GaspSaved
 
 functions.lua
+options.lua
 popups.lua
 GaspOfPandaria.lua
 

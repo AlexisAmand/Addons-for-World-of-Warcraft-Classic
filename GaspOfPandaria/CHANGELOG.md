@@ -115,27 +115,30 @@ All notable changes to the project are documented here.
 - ajout d'un bouton niveau 2 (grille 6x6)
 - ajout d'un bouton niveau 1 (grille 4x4)
 - le record n'est plus affiché dans la console
-- phrase de réussite != si niveau 2
-- si niveau 1 gagné : encouragement à essayer le niveau 2
+
+## v0.10.1 — July 17, 2026
+- Ombre sur les gemmes
+- ajout d'un bouton shuffle (pour mélanger les gemmes pendant une partie)
+
+## v0.11 — July 20, 2026
+- bugfix : le record ne s'enregistrait plus 
+- Ajout des bambous
+- fonction shuffle disponible
+- fenêtre about via la console : /gaspofpandaria about
+- remise à zéro du record via la console : /gaspofpandaria reset
+
 
 ---
 
 ## À venir
+- ne plus pouvoir interagir avec l'environement pendant le jeu
+- sauvegarde au fur et à mesure
 - petit recentrage vertical
 - fenêtre qu'on peut bouger ?
 - Sons personnalisés.
 - Timer optionnel.
 - fusion avec Wisdom Of Azeroth
-- record niveau 1 != record niveau 2
+- phrase de réussite != si niveau 2
+- si niveau 1 gagné : encouragement à essayer le niveau 2
 - mélanger les gemmes en cours de partie
 
-
-
-
-
-Gasp of Pandaria is now officially approved on CurseForge!
-A tiny zen Pandaria‑inspired minigame for your WoW UI.
-Perfect for short breaks between quests.
-
-🔗 Download link  
-🪷 #Warcraft #WoWAddons #Pandaria

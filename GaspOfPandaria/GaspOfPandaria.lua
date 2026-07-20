@@ -9,8 +9,6 @@ loader:SetScript("OnEvent", function(self, event, addonName)
         GaspSaved = GaspSaved or {}
         Gasp.record = GaspSaved.record or nil
 
-        print("Record chargé :", Gasp.record)
-
         -- Mise à jour de l'affichage si l'UI existe déjà
         if Gasp.frame and Gasp.frame.coups then
             Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
@@ -81,11 +79,8 @@ right:SetWidth(1)
 
 local texture = Gasp.frame:CreateTexture()
 texture:SetAllPoints()
--- texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back01.tga")
+texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back02.tga")
 texture:SetAlpha(0.5)
--- texture:SetVertexColor(0.8, 0.8, 0.9)
--- texture:SetDesaturated(true)
 
 ----------------------------
 --  un titre pour la fenêtre
@@ -94,14 +89,6 @@ texture:SetAlpha(0.5)
 Gasp.frame.title = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 Gasp.frame.title:SetPoint("TOP", 0, -5)
 Gasp.frame.title:SetText("Gasp Of Pandaria")
-
--- Une commande pour la console affiche la fenêtre
-
-SLASH_GASP1 = "/gaspofpandaria"
-
-SlashCmdList["GASP"] = function()
-    Gasp.frame:Show()
-end
 
 -----------------------------------
 -- un container pour la zone de jeu 
@@ -112,20 +99,57 @@ local espace = 5
 local totalSize = (Gasp.taille * (Gasp.niveau + 1)) + (espace * Gasp.niveau)
 
 -- Hauteur utile entre le titre et les boutons
-local hauteurCadre = Gasp.frame:GetHeight() - 120  -- ajuste selon ton layout
+local hauteurCadre = Gasp.frame:GetHeight() - 120  -- ajuster selon le layout
 local offsetY = (hauteurCadre - totalSize) / 2
 
 gridFrame:SetSize(totalSize, totalSize)
 gridFrame:SetPoint("TOP", Gasp.frame, "TOP", 0, -60 - offsetY)
 
--- Création des boutons
+-----------------------
+-- Création des gemmes
+-----------------------
 
 Gasp.CreationDesBoutons(gridFrame, espace)
 
+--------------------------------------
+-- Création des boutons de l'interface
+--------------------------------------
+
+-- Bouton options
+-----------------
+
+local optionsButton = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
+optionsButton:SetSize(25, 25)
+optionsButton:SetPoint("CENTER", Gasp.frame.coups, "CENTER", 170, 0)
+-- optionsButton:SetText("?")
+
+-- Texture de la roue dentée
+local tex = optionsButton:CreateTexture(nil, "ARTWORK")
+tex:SetAllPoints()
+
+tex:SetTexture("Interface\\Buttons\\UI-OptionsButton") -- icône WoW classique
+tex:SetSize(20, 20)  -- taille réelle de la roue dentée
+tex:SetPoint("CENTER")
+optionsButton.texture = tex
+
+optionsButton:SetScript("OnClick", function()
+    showOptions()
+    print("Ouverture du menu d'options !")
+end)
+
+optionsButton:SetScript("OnMouseDown", function()
+    tex:SetVertexColor(0.8, 0.8, 0.8)
+end)
+
+optionsButton:SetScript("OnMouseUp", function()
+    tex:SetVertexColor(1, 1, 1)
+end)
+
 -- Bouton 6x6
+--------------
+
 local bouton6x6 = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
-bouton6x6:SetSize(80, 25)
--- bouton6x6:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -20, 20)
+bouton6x6:SetSize(68, 25)
 bouton6x6:SetText("Level 2")
 
 bouton6x6:SetScript("OnClick", function()
@@ -145,9 +169,9 @@ bouton6x6:SetScript("OnClick", function()
 end)
 
 -- Bouton 4x4
+-------------
 local bouton4x4 = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
-bouton4x4:SetSize(80, 25)
--- bouton4x4:SetPoint("BOTTOMRIGHT", Gasp.frame, "BOTTOMRIGHT", -110, 20)
+bouton4x4:SetSize(68, 25) -- pour 4 bouton c'était 80,25
 bouton4x4:SetText("Level 1")
 
 bouton4x4:SetScript("OnClick", function()
@@ -166,20 +190,35 @@ bouton4x4:SetScript("OnClick", function()
     end
 end)
 
--- Bouton RULES (à gauche)
+-- Bouton shuffle
+-----------------
+
+local boutonShuffle = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
+boutonShuffle:SetSize(68, 25)
+boutonShuffle:SetText("Gust")
+
+boutonShuffle:SetScript("OnClick", function()
+    PlaySoundFile("Interface\\AddOns\\GaspOfPandaria\\sounds\\wind.wav")
+    Gasp.EffetGust()
+    Gasp.melangerGrille()   
+end)
+
+-- Bouton rules
+---------------
+
 local boutonRules = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
-boutonRules:SetSize(80, 25)
--- boutonRules:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 20, 20)
+boutonRules:SetSize(68, 25)
 boutonRules:SetText("Rules")
 
 boutonRules:SetScript("OnClick", function()
     StaticPopup_Show("GASP_REGLES")
 end)
 
--- Bouton RESET
+-- Bouton reset
+---------------
+
 local boutonReset = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
-boutonReset:SetSize(80, 25)
--- boutonReset:SetPoint("BOTTOMLEFT", Gasp.frame, "BOTTOMLEFT", 110, 20) -- à droite du bouton Rules
+boutonReset:SetSize(68, 25)
 boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
@@ -194,12 +233,14 @@ boutonReset:SetScript("OnClick", function()
     end
 end)
 
+----------------------------
 -- On place bien les boutons
+----------------------------
 
-local boutons = {boutonRules, boutonReset, bouton4x4, bouton6x6}
+local boutons = {boutonRules, boutonReset, boutonShuffle, bouton4x4, bouton6x6}
 
 local total = #boutons
-local espace = 100 -- distance entre les boutons
+local espace = 77 -- distance entre les boutons, pour 4 c'est 100
 local largeurTotale = (total - 1) * espace
 local startX = (Gasp.frame:GetWidth() - largeurTotale) / 2
 
@@ -208,7 +249,10 @@ for i, b in ipairs(boutons) do
     b:SetPoint("BOTTOM", Gasp.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
 end
 
--- Bouton de contrôle (taille standard d'un bouton de minimap)
+-----------------------
+-- Bouton de la minimap
+-----------------------
+
 local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
 miniButton:SetSize(31, 31)
 miniButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -12, -12) -- Position globale sur la minimap

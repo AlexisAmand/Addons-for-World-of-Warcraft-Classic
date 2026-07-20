@@ -2,7 +2,7 @@
 
 ## Craft Usage Tooltip
 
-A lightweight World of Warcraft addon that displays the professions using an ingredient directly inside the item tooltip.
+**Craft Usage Tooltip** is a lightweight World of Warcraft addon that displays the professions using an ingredient directly inside the item tooltip.
 
 Get it on CurseForge: https://www.curseforge.com/wow/addons/craft-usage-tooltip
 
@@ -16,10 +16,4 @@ Get it on CurseForge: https://www.curseforge.com/wow/addons/wisdom-of-azeroth
 
 **Gasp of Pandaria** is a light and relaxing mini‑game inspired by the calm aesthetics of Pandaria. It features a simple 4×4 puzzle grid designed for quick, enjoyable sessions between quests, dungeons, or raids.
 
-Get it on CurseForge: soon....
-
-## Sources 
-
-- https://opengameart.org/content/gems-set-01
-- https://freesound.org/people/JanzigDoplin/sounds/672671/
-- https://freesound.org/people/kwahmah_02/sounds/260620/
+Get it on CurseForge: https://www.curseforge.com/wow/addons/gasp-of-pandaria
