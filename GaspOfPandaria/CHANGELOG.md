@@ -127,6 +127,9 @@ All notable changes to the project are documented here.
 - fenêtre about via la console : /gaspofpandaria about
 - remise à zéro du record via la console : /gaspofpandaria reset
 
+## v0.11.1 — July 20, 2026
+- Message en cas de nouveau record
+- bugfixes
 
 ---
 
@@ -140,5 +143,5 @@ All notable changes to the project are documented here.
 - fusion avec Wisdom Of Azeroth
 - phrase de réussite != si niveau 2
 - si niveau 1 gagné : encouragement à essayer le niveau 2
-- mélanger les gemmes en cours de partie
+
 

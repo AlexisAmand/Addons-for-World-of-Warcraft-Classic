@@ -115,36 +115,6 @@ Gasp.CreationDesBoutons(gridFrame, espace)
 -- Création des boutons de l'interface
 --------------------------------------
 
--- Bouton options
------------------
-
-local optionsButton = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
-optionsButton:SetSize(25, 25)
-optionsButton:SetPoint("CENTER", Gasp.frame.coups, "CENTER", 170, 0)
--- optionsButton:SetText("?")
-
--- Texture de la roue dentée
-local tex = optionsButton:CreateTexture(nil, "ARTWORK")
-tex:SetAllPoints()
-
-tex:SetTexture("Interface\\Buttons\\UI-OptionsButton") -- icône WoW classique
-tex:SetSize(20, 20)  -- taille réelle de la roue dentée
-tex:SetPoint("CENTER")
-optionsButton.texture = tex
-
-optionsButton:SetScript("OnClick", function()
-    showOptions()
-    print("Ouverture du menu d'options !")
-end)
-
-optionsButton:SetScript("OnMouseDown", function()
-    tex:SetVertexColor(0.8, 0.8, 0.8)
-end)
-
-optionsButton:SetScript("OnMouseUp", function()
-    tex:SetVertexColor(1, 1, 1)
-end)
-
 -- Bouton 6x6
 --------------
 
@@ -161,11 +131,13 @@ bouton6x6:SetScript("OnClick", function()
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
 
+    -- rafraîchir les boutons :
     for y = 0, Gasp.niveau do
         for x = 0, Gasp.niveau do
             Gasp.UpdateButton(x, y)
         end
     end
+
 end)
 
 -- Bouton 4x4
@@ -183,15 +155,20 @@ bouton4x4:SetScript("OnClick", function()
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
 
+    -- rafraîchir les boutons :
     for y = 0, Gasp.niveau do
         for x = 0, Gasp.niveau do
             Gasp.UpdateButton(x, y)
         end
     end
+
+
 end)
 
 -- Bouton shuffle
 -----------------
+
+print("melangerGrille =", Gasp.melangerGrille)
 
 local boutonShuffle = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonShuffle:SetSize(68, 25)
@@ -199,7 +176,6 @@ boutonShuffle:SetText("Gust")
 
 boutonShuffle:SetScript("OnClick", function()
     PlaySoundFile("Interface\\AddOns\\GaspOfPandaria\\sounds\\wind.wav")
-    Gasp.EffetGust()
     Gasp.melangerGrille()   
 end)
 
@@ -226,11 +202,13 @@ boutonReset:SetScript("OnClick", function()
     Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
     Gasp.CreerGrille()
 
+    -- rafraîchir les boutons :
     for y = 0, Gasp.niveau do
         for x = 0, Gasp.niveau do
             Gasp.UpdateButton(x, y)
         end
     end
+
 end)
 
 ----------------------------

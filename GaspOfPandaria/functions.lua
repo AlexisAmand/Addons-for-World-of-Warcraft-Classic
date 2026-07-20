@@ -1,32 +1,37 @@
 Gasp = {}
 
+-------------------
 -- Variables du jeu
+-------------------
 
-Gasp.version = "v0.11"
+Gasp.version = "v0.11.1"
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
 Gasp.frame = nilff
 Gasp.record = nil
-
--- Gasp.niveau = 3 -- on fait -1 car le tableau à zéro 
--- Gasp.taille = 60 -- taille des gemmes
-
 Gasp.niveau = 3
 Gasp.taille = 55
 
+-------------------------------
 -- création de la grille de jeu
+-------------------------------
 
 function Gasp.CreerGrille()
+
+    -- grille logique
     for y = 0, Gasp.niveau do
         Gasp.grille[y] = {}
         for x = 0, Gasp.niveau do
             Gasp.grille[y][x] = 0
         end
     end
+    
 end
 
+---------------------------------------------------
 -- Fonction pour mettre à jour la couleur d'un pion
+---------------------------------------------------
 
 function Gasp.UpdateButton(x, y)
 
@@ -61,7 +66,9 @@ function Gasp.UpdateButton(x, y)
     button.fadeAnim:Play()
 end
 
+------------------------------------
 -- On vérifie si le joueur a gagné !
+------------------------------------
 
 function Gasp.VerificationGrille()
     -- local couleur = Gasp.grille[0][0]
@@ -72,19 +79,48 @@ function Gasp.VerificationGrille()
             end
         end
     end
+
     -- appel de la popup de victoire
-    StaticPopup_Show("GASP_VICTOIRE")
+
+    local nouveauRecord = false
 
     if Gasp.record == 0 or Gasp.nbCoups < Gasp.record then
+        nouveauRecord = true
         Gasp.record = Gasp.nbCoups
         GaspSaved.record = Gasp.record
     end
 
-    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."   Record : "..Gasp.record)
-    
+    -- popup
+
+    if nouveauRecord then
+        StaticPopupDialogs["NEW_RECORD"].text = "Victoire !\n\nUne gemme déplacée, une leçon apprise.\nNouveau record en "
+        .. Gasp.GetRecordText() .. " coups."
+        StaticPopup_Show("NEW_RECORD")
+    else 
+        StaticPopup_Show("GASP_VICTOIRE")
+    end
+
+    -- affichage
+    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+
+    -- reset de la grille
+    Gasp.CreerGrille()
+
+    -- rafraîchir les boutons :
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
+            Gasp.UpdateButton(x, y)
+        end
+    end
+
+    -- reset du nombre de coups
+    Gasp.nbCoups = 0 
+  
 end
 
+--------------------------
 -- On retourne un bouton ! 
+--------------------------
 
 function Gasp.Retourne(xc, yc)
     -- Joue un son
@@ -112,14 +148,19 @@ function Gasp.Retourne(xc, yc)
     Gasp.VerificationGrille()
 end
 
+----------------------------------------------
 -- Fonction pour basculer la couleur d'un pion
+-- (à supprimer ?)
+----------------------------------------------
 
 function Gasp.ToggleColor(x, y)
     Gasp.grille[y][x] = 1 - Gasp.grille[y][x] -- inverse 0 ↔ 1
     Gasp.UpdateButton(x, y)
 end
 
--- record
+--------------------------------------
+-- Récupération de la valeur du record
+--------------------------------------
 
 function Gasp.GetRecordText()
     if Gasp.record == nil then
@@ -129,7 +170,9 @@ function Gasp.GetRecordText()
     end
 end
 
+-----------------------
 -- création des boutons 
+-----------------------
 
 function Gasp.CreationDesBoutons(gridFrame, espace)
 
@@ -154,28 +197,6 @@ function Gasp.CreationDesBoutons(gridFrame, espace)
 
             button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
 
-            -- Texture Gust (flash blanc)
-            local gust = button:CreateTexture(nil, "OVERLAY")
-            gust:SetAllPoints()
-            gust:SetColorTexture(1, 1, 1, 0) -- invisible au repos
-            button.gust = gust
-
-            -- Animation Gust
-            local ag = gust:CreateAnimationGroup()
-
-            local fadeIn = ag:CreateAnimation("Alpha")
-            fadeIn:SetFromAlpha(0)
-            fadeIn:SetToAlpha(0.4)
-            fadeIn:SetDuration(0.1)
-
-            local fadeOut = ag:CreateAnimation("Alpha")
-            fadeOut:SetFromAlpha(0.4)
-            fadeOut:SetToAlpha(0)
-            fadeOut:SetDuration(0.1)
-
-            button.gustAnim = ag
-
-
             -- capture locale des coordonnées
             -- local bx, by = x, y
             button:SetScript("OnClick", function()
@@ -189,19 +210,9 @@ function Gasp.CreationDesBoutons(gridFrame, espace)
     end
 end
 
-function Gasp.EffetGust()
-    for y = 0, Gasp.niveau do
-        for x = 0, Gasp.niveau do
-            local btn = Gasp.boutons[y][x]
-            if btn and btn.gustAnim then
-                btn.gustAnim:Play()
-            end
-        end
-    end
-end
-
-
--- fonction qui mélange !
+---------------------------------
+-- fonction qui mélange la grille
+---------------------------------
 
 function Gasp.melangerGrille()
     local flat = {}

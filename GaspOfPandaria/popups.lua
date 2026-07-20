@@ -1,4 +1,6 @@
+--------------
 -- popup rules
+--------------
 
 StaticPopupDialogs["GASP_REGLES"] = {
     text = "Ah, young adventurer… Tea will come later.\nFor now, observe.\nClick on a gem to flip the ones around it.\nYour goal is to flip every gem.\nDo not rush. Patience is a strength.",
@@ -13,7 +15,27 @@ StaticPopupDialogs["GASP_REGLES"] = {
     end,
 }
 
--- popup si on a gagné !
+-----------------------
+-- popup nouveau record
+-----------------------
+
+StaticPopupDialogs["NEW_RECORD"] = {
+    text = "",
+    button1 = "OK",
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+
+    OnShow = function(self)
+        self:ClearAllPoints()
+        self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+
+    end,
+}
+
+--------------------------------------------
+-- popup si on a gagné sans battre le record
+--------------------------------------------
 
 StaticPopupDialogs["GASP_VICTOIRE"] = {
     text = "", -- sera remplacé dans OnShow
@@ -29,18 +51,7 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
             Gasp.record = Gasp.nbCoups
             GaspSaved.record = Gasp.record
         end
-
-        Gasp.CreerGrille()      -- recrée la grille
-        Gasp.nbCoups = 0        -- remet le compteur à zéro
-        Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())  -- met à jour l'affichage
         
-        -- Et si tu veux, tu peux aussi rafraîchir les boutons :
-        for y = 0, Gasp.niveau do
-            for x = 0, Gasp.niveau do
-                Gasp.UpdateButton(x, y)
-            end
-        end
-
     end,
 
     OnShow = function(self)
@@ -56,3 +67,4 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
         self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
     end,
 }
+

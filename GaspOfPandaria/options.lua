@@ -1,3 +1,7 @@
+-----------------------------------------
+-- fonction qui affiche une fenêtre about
+-----------------------------------------
+
 function showAbout()
 
     local optionsFrame = CreateFrame("Frame", "GaspOptions", UIParent, "BasicFrameTemplateWithInset")
@@ -38,6 +42,10 @@ function showAbout()
     end)
 
 end
+
+-------------------------------------------------
+-- fonction qui remet à zéro le record sauvegardé
+-------------------------------------------------
 
 function resetGame()
     Gasp.record = 0
