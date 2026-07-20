@@ -1,3 +1,5 @@
+
+
 --------------
 -- popup rules
 --------------
@@ -65,6 +67,42 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
 
         self:ClearAllPoints()
         self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    end,
+}
+
+----------------------------------
+-- popup de continuation de partie
+----------------------------------
+
+StaticPopupDialogs["SAVED_GAME"] = {
+    text = "",
+    button1 = "Continue",
+    button2 = "New Game",
+    timeout = 0,
+    whileDead = true,
+    hideOnEscape = true,
+
+    OnShow = function(self)
+        self:ClearAllPoints()
+        self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+    end,
+
+    OnAccept = function()
+        -- Continuer la partie
+        StaticPopup_Hide("SAVED_GAME")
+    end,
+
+    OnCancel = function()
+        -- Nouvelle partie
+        Gasp.CreerGrille()
+        Gasp.nbCoups = 0
+        -- rafraîchir les boutons 
+        for y = 0, Gasp.niveau do
+            for x = 0, Gasp.niveau do
+                Gasp.UpdateButton(x, y)
+            end
+        end
+        Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
     end,
 }
 

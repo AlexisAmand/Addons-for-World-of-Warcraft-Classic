@@ -131,6 +131,9 @@ All notable changes to the project are documented here.
 - Message en cas de nouveau record
 - bugfixes
 
+# v0.12 - July 20, 2026
+- sauvegarde/restauration de la partie
+
 ---
 
 ## À venir

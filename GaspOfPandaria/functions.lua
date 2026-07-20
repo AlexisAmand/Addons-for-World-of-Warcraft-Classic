@@ -8,7 +8,7 @@ Gasp.version = "v0.11.1"
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
-Gasp.frame = nilff
+Gasp.frame = nil
 Gasp.record = nil
 Gasp.niveau = 3
 Gasp.taille = 55
@@ -91,7 +91,7 @@ function Gasp.VerificationGrille()
     end
 
     -- popup
-Victoire !\n\nUne gemme déplacée, une leçon apprise.\n
+
     if nouveauRecord then
         StaticPopupDialogs["NEW_RECORD"].text = "Victory !\n\nOne gem moved, one lesson learned.\nNew record in "
         .. Gasp.GetRecordText() .. " moves."
@@ -143,6 +143,19 @@ function Gasp.Retourne(xc, yc)
             end
         end
     end
+
+    -- Sauvegarde de la grille
+    GaspSaved.grille = {}
+
+    for y = 0, Gasp.niveau do
+        GaspSaved.grille[y] = {}
+        for x = 0, Gasp.niveau do
+            GaspSaved.grille[y][x] = Gasp.grille[y][x]
+        end
+    end
+
+    -- Sauvegarde du nombre de coups
+    GaspSaved.nbCoups = Gasp.nbCoups
 
     -- Vérifie la victoire
     Gasp.VerificationGrille()

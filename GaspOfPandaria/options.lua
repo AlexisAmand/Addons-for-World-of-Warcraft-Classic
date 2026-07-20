@@ -64,6 +64,18 @@ SlashCmdList["GASP"] = function(msg)
     if msg == "" then
         -- Pas d’argument → on ouvre la fenêtre principale
         Gasp.frame:Show()
+        if GaspSaved.grille then
+            local savedMessages = {
+                "A saved game was found.\nYour puzzle awaits.",
+                "Your previous game has been recovered.\nShall we continue?",
+                "The gems remember you.\nResume your journey?"
+            }
+
+            local msg = savedMessages[math.random(#savedMessages)]
+            StaticPopupDialogs["SAVED_GAME"].text = msg
+
+            StaticPopup_Show("SAVED_GAME")
+        end
         return
     end
 
@@ -77,7 +89,7 @@ SlashCmdList["GASP"] = function(msg)
         return
     end
 
-    print(“Available commands:”)
-    print(“/gasp about  - open about”)
-    print(“/gasp reset    - reset the score”)
+    print("Available commands:")
+    print("/gasp about  - open about")
+    print("/gasp reset    - reset the score")
 end

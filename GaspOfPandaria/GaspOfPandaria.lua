@@ -1,21 +1,3 @@
--- Gestion des sauvegardes
-
-local loader = CreateFrame("Frame")
-loader:RegisterEvent("ADDON_LOADED")
-
-loader:SetScript("OnEvent", function(self, event, addonName)
-    if addonName == "GaspOfPandaria" then
-        -- Chargement des sauvegardes
-        GaspSaved = GaspSaved or {}
-        Gasp.record = GaspSaved.record or nil
-
-        -- Mise à jour de l'affichage si l'UI existe déjà
-        if Gasp.frame and Gasp.frame.coups then
-            Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
-        end
-    end
-end)
-
 -- Création de la fenêtre
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
@@ -262,5 +244,17 @@ highlight:SetAllPoints(background)
 -- Action au clic
 miniButton:SetScript("OnClick", function()
     Gasp.frame:Show()
+    if GaspSaved.grille then
+        local savedMessages = {
+            "A saved game was found.\nYour puzzle awaits.",
+            "Your previous game has been recovered.\nShall we continue?",
+            "The gems remember you.\nResume your journey?"
+        }
+
+        local msg = savedMessages[math.random(#savedMessages)]
+        StaticPopupDialogs["SAVED_GAME"].text = msg
+
+        StaticPopup_Show("SAVED_GAME")
+    end
 end)
 
