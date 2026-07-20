@@ -22,12 +22,12 @@ function showAbout()
     optionsFrame.text:SetText(
     "Gasp of Pandaria\n"..
     "Version "..Gasp.version.."\n"..
-    "Par Hanslex\n\n"..
-    "Notes de développement :\n"..
+    "By Hanslex\n\n"..
+    "Development Notes :\n"..
     "- Les gemmes ne sont pas comestibles.\n"..
-    "- Le bouton Gust ne fait pas vraiment du vent.\n"..
-    "- Aucun pandaren n'a été blessé pendant la création.\n"..
-    "- Le développeur a survécu à 3 cafés froids.\n"
+    "- The Gust button doesn’t actually make any wind.\n"..
+    "- No pandaren were harmed during development.\n"..
+    "- The developer survived three cold coffees.\n"
     )
 
     optionsFrame:Show()
@@ -77,7 +77,7 @@ SlashCmdList["GASP"] = function(msg)
         return
     end
 
-    print("Commandes disponibles :")
-    print("/gasp options  - ouvrir les options")
-    print("/gasp reset    - réinitialiser le score")
+    print(“Available commands:”)
+    print(“/gasp about  - open about”)
+    print(“/gasp reset    - reset the score”)
 end

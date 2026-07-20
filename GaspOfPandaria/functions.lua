@@ -91,10 +91,10 @@ function Gasp.VerificationGrille()
     end
 
     -- popup
-
+Victoire !\n\nUne gemme déplacée, une leçon apprise.\n
     if nouveauRecord then
-        StaticPopupDialogs["NEW_RECORD"].text = "Victoire !\n\nUne gemme déplacée, une leçon apprise.\nNouveau record en "
-        .. Gasp.GetRecordText() .. " coups."
+        StaticPopupDialogs["NEW_RECORD"].text = "Victory !\n\nOne gem moved, one lesson learned.\nNew record in "
+        .. Gasp.GetRecordText() .. " moves."
         StaticPopup_Show("NEW_RECORD")
     else 
         StaticPopup_Show("GASP_VICTOIRE")

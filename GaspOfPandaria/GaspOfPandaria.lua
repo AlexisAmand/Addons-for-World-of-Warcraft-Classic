@@ -103,7 +103,7 @@ local hauteurCadre = Gasp.frame:GetHeight() - 120  -- ajuster selon le layout
 local offsetY = (hauteurCadre - totalSize) / 2
 
 gridFrame:SetSize(totalSize, totalSize)
-gridFrame:SetPoint("TOP", Gasp.frame, "TOP", 0, -60 - offsetY)
+gridFrame:SetPoint("TOP", Gasp.frame, "TOP", 0, -70 - offsetY)
 
 -----------------------
 -- Création des gemmes
