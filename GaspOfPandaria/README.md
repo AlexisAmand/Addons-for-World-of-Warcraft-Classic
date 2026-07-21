@@ -14,13 +14,21 @@ Your goal is to flip every gem.
 
 ## Features
 
+<p align="center">
+  <img src="captures/capture-gasp-01.jpg" width="30%" />
+  <img src="captures/capture-gasp-02.jpg" width="30%" />
+  <img src="captures/capture-gasp-03.jpg" width="30%" />
+</p>
+
 *   Clean and stable 4×4 puzzle grid
+*   Clean and stable 6×6 puzzle grid
+*   Clean and stable 8×8 puzzle grid
 *   Pandaria‑inspired interface
 *   Move counter
 *   Reset button
 *   Rules button
 *   Subtle background and frame styling
-*   No known issues in v0.9.4
+*   Restore saved game
 
 ## Design Philosophy
 

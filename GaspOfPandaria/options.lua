@@ -49,8 +49,8 @@ end
 
 function resetGame()
     Gasp.record = 0
-    GaspSaved.record = 0
-    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."   Record : "..Gasp.GetRecordText())
+    GaspSaved.records[math.floor(Gasp.niveau/2)] = 0
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
     print("Scores réinitialisés.")
 end
 
@@ -64,6 +64,10 @@ SlashCmdList["GASP"] = function(msg)
     if msg == "" then
         -- Pas d’argument → on ouvre la fenêtre principale
         Gasp.frame:Show()
+        -- Charger le record du niveau actuel
+        Gasp.record = GaspSaved.records and GaspSaved.records[math.floor(Gasp.niveau/2)] or nil
+        GaspSaved.record = nil
+
         if GaspSaved.grille then
             local savedMessages = {
                 "A saved game was found.\nYour puzzle awaits.",

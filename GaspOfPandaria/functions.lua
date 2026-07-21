@@ -11,6 +11,7 @@ Gasp.nbCoups = 0
 Gasp.frame = nil
 Gasp.record = nil
 Gasp.niveau = 3
+Gasp.niveauText = nil
 Gasp.taille = 55
 
 -------------------------------
@@ -82,12 +83,10 @@ function Gasp.VerificationGrille()
 
     -- appel de la popup de victoire
 
-    local nouveauRecord = false
-
     if Gasp.record == 0 or Gasp.nbCoups < Gasp.record then
         nouveauRecord = true
         Gasp.record = Gasp.nbCoups
-        GaspSaved.record = Gasp.record
+        GaspSaved.records[math.floor(Gasp.niveau/2)] = Gasp.record
     end
 
     -- popup
@@ -96,12 +95,16 @@ function Gasp.VerificationGrille()
         StaticPopupDialogs["NEW_RECORD"].text = "Victory !\n\nOne gem moved, one lesson learned.\nNew record in "
         .. Gasp.GetRecordText() .. " moves."
         StaticPopup_Show("NEW_RECORD")
+        GaspSaved.grille = nil
+        GaspSaved.nbCoups = nil
     else 
         StaticPopup_Show("GASP_VICTOIRE")
+        GaspSaved.grille = nil
+        GaspSaved.nbCoups = nil
     end
 
     -- affichage
-    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
 
     -- reset de la grille
     Gasp.CreerGrille()
@@ -128,7 +131,7 @@ function Gasp.Retourne(xc, yc)
 
     -- Incrémente le compteur de coups
     Gasp.nbCoups = Gasp.nbCoups + 1
-    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."   Record : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
 
     -- Parcourt les voisins autour du pion cliqué
     for y = yc - 1, yc + 1 do
@@ -176,11 +179,7 @@ end
 --------------------------------------
 
 function Gasp.GetRecordText()
-    if Gasp.record == nil then
-        return "-"
-    else
-        return Gasp.record
-    end
+    return GaspSaved.records[math.floor(Gasp.niveau/2)] or "-"
 end
 
 -----------------------

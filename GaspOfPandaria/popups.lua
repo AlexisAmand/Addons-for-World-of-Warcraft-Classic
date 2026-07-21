@@ -51,7 +51,7 @@ StaticPopupDialogs["GASP_VICTOIRE"] = {
         -- mise à jour du record
         if not Gasp.record or Gasp.nbCoups < Gasp.record then
             Gasp.record = Gasp.nbCoups
-            GaspSaved.record = Gasp.record
+            GaspSaved.records[math.floor(Gasp.niveau/2)] = Gasp.record
         end
         
     end,
@@ -102,7 +102,7 @@ StaticPopupDialogs["SAVED_GAME"] = {
                 Gasp.UpdateButton(x, y)
             end
         end
-        Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+        Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
     end,
 }
 

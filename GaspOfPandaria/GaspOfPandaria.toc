@@ -7,5 +7,4 @@
 functions.lua
 options.lua
 popups.lua
-backup.lua
 GaspOfPandaria.lua

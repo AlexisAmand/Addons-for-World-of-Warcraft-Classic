@@ -1,8 +1,68 @@
+-- Gestion des sauvegardes
+
+local loader = CreateFrame("Frame")
+loader:RegisterEvent("ADDON_LOADED")
+
+loader:SetScript("OnEvent", function(self, event, addonName)
+    if addonName == "GaspOfPandaria" then
+        
+        -- Chargement des sauvegardes
+        GaspSaved = GaspSaved or {}
+
+        -- Record
+        GaspSaved.records = GaspSaved.records or {}
+
+        -- Initialiser les records pour tous les niveaux
+        for lvl = 1, 3 do
+            if GaspSaved.records[lvl] == nil then
+                GaspSaved.records[lvl] = 0
+            end
+        end
+
+        -- Charger le record du niveau actuel
+        Gasp.record = GaspSaved.records[math.floor(Gasp.niveau/2)]
+
+        -- Si une grille sauvegardée existe, on la restaure
+        if GaspSaved.grille then
+            Gasp.grille = {}
+
+            for y = 0, Gasp.niveau do
+                Gasp.grille[y] = {}
+                for x = 0, Gasp.niveau do
+                    Gasp.grille[y][x] = GaspSaved.grille[y][x]
+                end
+            end
+
+            -- Restaurer le nombre de coups
+            Gasp.nbCoups = GaspSaved.nbCoups or 0
+ 
+        else
+            -- Sinon, nouvelle grille
+            Gasp.CreerGrille()
+            Gasp.nbCoups = 0
+        end
+
+        -- Mise à jour visuelle si l'UI existe déjà
+        if Gasp.frame and Gasp.frame.coups then
+            Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+        end
+
+        -- Mise à jour des boutons si déjà créés
+        if Gasp.boutons then
+            for y = 0, Gasp.niveau do
+                for x = 0, Gasp.niveau do
+                    Gasp.UpdateButton(x, y)
+                end
+            end
+        end
+    end
+end)
+
 -- Création de la fenêtre
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
 Gasp.frame:Hide()
-Gasp.frame:SetSize(400, 400)
+Gasp.frame:SetSize(500, 400)
 Gasp.frame:SetPoint("CENTER")
 
 -- Création de la grille de jeu logique
@@ -15,7 +75,7 @@ Gasp.CreerGrille()
 
 Gasp.frame.coups = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 Gasp.frame.coups:SetPoint("TOP", Gasp.frame, "TOP", 0, -40)
-Gasp.frame.coups:SetText("Moves : 0   Record : 0")
+Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : 0")
 
 -- Fond derrière le texte
 local coupsBG = CreateFrame("Frame", nil, Gasp.frame)
@@ -61,7 +121,7 @@ right:SetWidth(1)
 
 local texture = Gasp.frame:CreateTexture()
 texture:SetAllPoints()
-texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back02.tga")
+texture:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\back03.tga")
 texture:SetAlpha(0.5)
 
 ----------------------------
@@ -97,6 +157,32 @@ Gasp.CreationDesBoutons(gridFrame, espace)
 -- Création des boutons de l'interface
 --------------------------------------
 
+-- Bouton 8x8
+--------------
+
+local bouton8x8 = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
+bouton8x8:SetSize(68, 25)
+bouton8x8:SetText("Level 3")
+
+bouton8x8:SetScript("OnClick", function()
+    Gasp.niveau = 7 -- car on utilise 0..5 pour un 6x6
+    Gasp.taille = 29 -- plus de boutons, donc boutons + petits
+    Gasp.nbCoups = 0
+    Gasp.niveauText = "3"
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+
+    Gasp.CreerGrille()
+    Gasp.CreationDesBoutons(gridFrame, espace)
+
+    -- rafraîchir les boutons :
+    for y = 0, Gasp.niveau do
+        for x = 0, Gasp.niveau do
+            Gasp.UpdateButton(x, y)
+        end
+    end
+
+end)
+
 -- Bouton 6x6
 --------------
 
@@ -108,7 +194,8 @@ bouton6x6:SetScript("OnClick", function()
     Gasp.niveau = 5 -- car on utilise 0..5 pour un 6x6
     Gasp.taille = 42 -- plus de boutons, donc boutons + petits
     Gasp.nbCoups = 0
-    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+    Gasp.niveauText = "2"
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
 
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
@@ -132,7 +219,8 @@ bouton4x4:SetScript("OnClick", function()
     Gasp.niveau = 3 -- car on utilise 0..3 pour un 4x4
     Gasp.taille = 55 -- plus de boutons, donc boutons + petits
     Gasp.nbCoups = 0
-    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+    Gasp.niveauText = "1"
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
 
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
@@ -181,7 +269,7 @@ boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
     Gasp.nbCoups = 0
-    Gasp.frame.coups:SetText("Moves : 0  Record : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
     Gasp.CreerGrille()
 
     -- rafraîchir les boutons :
@@ -197,7 +285,7 @@ end)
 -- On place bien les boutons
 ----------------------------
 
-local boutons = {boutonRules, boutonReset, boutonShuffle, bouton4x4, bouton6x6}
+local boutons = {boutonRules, boutonReset, boutonShuffle, bouton4x4, bouton6x6, bouton8x8}
 
 local total = #boutons
 local espace = 77 -- distance entre les boutons, pour 4 c'est 100
@@ -244,6 +332,10 @@ highlight:SetAllPoints(background)
 -- Action au clic
 miniButton:SetScript("OnClick", function()
     Gasp.frame:Show()
+
+    -- Charger le record du niveau actuel
+    Gasp.record = GaspSaved.records and GaspSaved.records[math.floor(Gasp.niveau/2)] or nil
+
     if GaspSaved.grille then
         local savedMessages = {
             "A saved game was found.\nYour puzzle awaits.",
