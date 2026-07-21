@@ -133,6 +133,7 @@ All notable changes to the project are documented here.
 
 # v0.12 - July 20, 2026
 - sauvegarde/restauration de la partie
+- gemmes de couleurs différentes en fonction des niveaux
 
 ---
 

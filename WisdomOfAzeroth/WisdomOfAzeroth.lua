@@ -1,6 +1,5 @@
 local f = CreateFrame("Frame", "WisdomOfAzerothFrame", UIParent, "BasicFrameTemplateWithInset")
 f:SetPoint("CENTER")
-f:SetSize(350, 150)
 
 -- Fond moderne
 local bg = f:CreateTexture(nil, "BORDER")
@@ -28,5 +27,22 @@ t:SetJustifyV("TOP")         -- alignement vertical
 t:SetText(WOW_QUOTES[index])
 
 -- Ajustement automatique de la hauteur du cadre
-local neededHeight = t:GetStringHeight() + 80
+local neededHeight = t:GetStringHeight() + 115
+f:SetWidth(350)
 f:SetHeight(neededHeight)
+
+-- bouton suivant
+-----------------
+
+local boutonNext = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
+boutonNext:SetSize(68, 25)
+boutonNext:SetText("Suivant")
+boutonNext:SetPoint("BOTTOM", f, "BOTTOM", 40, 10)
+
+-- bouton précédent
+-------------------
+
+local boutonPrevious = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
+boutonPrevious:SetSize(68, 25)
+boutonPrevious:SetText("Précédent")
+boutonPrevious:SetPoint("BOTTOM", f, "BOTTOM", -40, 10)
