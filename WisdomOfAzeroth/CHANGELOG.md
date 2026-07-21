@@ -5,5 +5,4 @@
 - Added 21 Azeroth-themed proverbs
 
 ### 0.0.2 — July 21, 2026
-- Initial release of Wisdom of Azeroth
-- Added 21 Azeroth-themed proverbs
+- Add “Next” and “Previous” buttons
