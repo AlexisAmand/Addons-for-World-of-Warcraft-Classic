@@ -4,7 +4,7 @@ Gasp = {}
 -- Variables du jeu
 -------------------
 
-Gasp.version = "v0.11.1"
+Gasp.version = "v0.12"
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
@@ -13,6 +13,21 @@ Gasp.record = nil
 Gasp.niveau = 3
 Gasp.niveauText = nil
 Gasp.taille = 55
+
+Gasp.textures = {
+    [1] = {
+        recto = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga",
+        verso = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_green.tga",
+    },
+    [2] = {
+        recto = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_red.tga",
+        verso = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_yellow.tga",
+    },
+    [3] = {
+        recto = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_purple.tga",
+        verso = "Interface\\AddOns\\GaspOfPandaria\\images\\gem_orange.tga",
+    },
+}
 
 -------------------------------
 -- création de la grille de jeu
@@ -39,10 +54,19 @@ function Gasp.UpdateButton(x, y)
     local button = Gasp.boutons[y][x]
 
     -- Choix de la texture selon l'état
+    --if Gasp.grille[y][x] == 0 then
+    --    button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
+    --else
+    --    button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_green.tga")
+    --end
+
+    local levelId = math.floor(Gasp.niveau / 2)
+    local tex = Gasp.textures[levelId]
+
     if Gasp.grille[y][x] == 0 then
-        button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_blue.tga")
+        button:SetNormalTexture(tex.recto)
     else
-        button:SetNormalTexture("Interface\\AddOns\\GaspOfPandaria\\images\\gem_green.tga")
+        button:SetNormalTexture(tex.verso)
     end
 
     -- Animation fade-in / fade-out

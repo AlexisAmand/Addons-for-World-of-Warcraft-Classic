@@ -6,6 +6,12 @@ Wisdom of Azeroth is a lightweight World of Warcraft flavor addon that displays 
 
 ## Features
 
+<p align="center">
+  <img src="captures/capture-01.jpg" width="30%" />
+  <img src="captures/capture-02.jpg" width="30%" />
+  <img src="captures/capture-03.jpg" width="30%" />
+</p>
+
 - Shows a random proverb on player login
 - 21 handcrafted sayings inspired by Azerothian cultures and lore
 - Simple, non-intrusive frame

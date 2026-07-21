@@ -137,9 +137,8 @@ All notable changes to the project are documented here.
 ---
 
 ## À venir
+- toujours un soucis avec restore/backup
 - ne plus pouvoir interagir avec l'environement pendant le jeu
-- sauvegarde au fur et à mesure
-- petit recentrage vertical
 - fenêtre qu'on peut bouger ?
 - Sons personnalisés.
 - Timer optionnel.
