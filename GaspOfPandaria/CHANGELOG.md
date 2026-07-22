@@ -135,6 +135,10 @@ All notable changes to the project are documented here.
 - Added game save/restore system
 - Gems now have different colors depending on the level
 
+## v0.12.1 — July 22, 2026
+- Online !
+- remove tests
+
 ---
 
 ## À venir
@@ -146,5 +150,4 @@ All notable changes to the project are documented here.
 - fusion avec Wisdom Of Azeroth
 - phrase de réussite != si niveau 2
 - si niveau 1 gagné : encouragement à essayer le niveau 2
-
 

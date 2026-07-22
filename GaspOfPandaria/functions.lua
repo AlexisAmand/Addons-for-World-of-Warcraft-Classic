@@ -4,7 +4,7 @@ Gasp = {}
 -- Variables du jeu
 -------------------
 
-Gasp.version = "v0.12"
+Gasp.version = "v0.12.1"
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
@@ -240,7 +240,6 @@ function Gasp.CreationDesBoutons(gridFrame, espace)
             end)
 
             Gasp.boutons[y][x] = button
-            print("plop")
             C_Timer.After(1, function() end)
         end
     end

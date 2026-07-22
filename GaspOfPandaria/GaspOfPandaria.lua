@@ -238,8 +238,6 @@ end)
 -- Bouton shuffle
 -----------------
 
-print("melangerGrille =", Gasp.melangerGrille)
-
 local boutonShuffle = CreateFrame("Button", nil, Gasp.frame, "UIPanelButtonTemplate")
 boutonShuffle:SetSize(68, 25)
 boutonShuffle:SetText("Gust")
