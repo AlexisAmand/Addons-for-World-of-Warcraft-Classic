@@ -2,6 +2,7 @@
 ## Title: Wisdom Of Azeroth
 ## Notes: Affiche un proverbe au début de chaque partie
 ## Author: Alexis + Copilot
+## Version: 0.0.2
 quotes.lua
 WisdomOfAzeroth.lua
 

@@ -1,10 +1,12 @@
 # Addons for World of Warcraft (classic)
 
+**Please note:** Please note: The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional.
+
 ## Craft Usage Tooltip
 
 **Craft Usage Tooltip** is a lightweight World of Warcraft addon that displays the professions using an ingredient directly inside the item tooltip.
 
-Get it on CurseForge: https://www.curseforge.com/wow/addons/craft-usage-tooltip
+Get the stable release on CurseForge: [Craft Usage Tooltip](https://www.curseforge.com/wow/addons/craft-usage-tooltip)
 
 ## Gasp Of Pandaria
 
@@ -16,7 +18,7 @@ Get it on CurseForge: https://www.curseforge.com/wow/addons/craft-usage-tooltip
   <img src="GaspOfPandaria/captures/capture-gasp-03.jpg" width="30%" />
 </p>
 
-Get it on CurseForge: https://www.curseforge.com/wow/addons/gasp-of-pandaria
+Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/gasp-of-pandaria)
 
 ## Wisdom of Azeroth
 
@@ -28,4 +30,4 @@ Get it on CurseForge: https://www.curseforge.com/wow/addons/gasp-of-pandaria
   <img src="WisdomOfAzeroth/captures/capture-03.jpg" width="30%" />
 </p>
 
-Get it on CurseForge: https://www.curseforge.com/wow/addons/wisdom-of-azeroth
+Get the stable release on CurseForge: [Wisdom of Azeroth](https://www.curseforge.com/wow/addons/wisdom-of-azeroth)

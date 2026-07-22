@@ -1,6 +1,9 @@
 # 🌿 Gasp of Pandaria
 
-Get it on CurseForge: https://www.curseforge.com/wow/addons/gasp-of-pandaria
+**Development notice:** 
+The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional.
+
+Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/gasp-of-pandaria)
 
 **Gasp of Pandaria** is a light and relaxing mini‑game inspired by the calm aesthetics of Pandaria. It features a simple 4×4 puzzle grid designed for quick, enjoyable sessions between quests, dungeons, or raids.
 

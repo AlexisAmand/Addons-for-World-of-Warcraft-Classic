@@ -110,30 +110,30 @@ All notable changes to the project are documented here.
 - Online !
 
 ## v0.10 — July 17, 2026
-- Un son est joué quand on clique sur une gemme
-- niveau 2 fonctionel (grille 6x6)
-- ajout d'un bouton niveau 2 (grille 6x6)
-- ajout d'un bouton niveau 1 (grille 4x4)
-- le record n'est plus affiché dans la console
+- Added a sound effect when clicking a gem
+- Level 2 functional (6×6 grid)
+- Added Level 2 button (6×6 grid)
+- Added Level 1 button (4×4 grid)
+- Record is no longer printed in the console
 
 ## v0.10.1 — July 17, 2026
-- Ombre sur les gemmes
-- ajout d'un bouton shuffle (pour mélanger les gemmes pendant une partie)
+- Added shadow effect on gems
+- Added Shuffle button (mix gems during a game)
 
 ## v0.11 — July 20, 2026
-- bugfix : le record ne s'enregistrait plus 
-- Ajout des bambous
-- fonction shuffle disponible
-- fenêtre about via la console : /gaspofpandaria about
-- remise à zéro du record via la console : /gaspofpandaria reset
+- Bugfix: record was no longer saved
+- Added bamboo tiles
+- Shuffle function available
+- Added “About” window via console: /gaspofpandaria about
+- Reset record via console: /gaspofpandaria reset
 
 ## v0.11.1 — July 20, 2026
-- Message en cas de nouveau record
-- bugfixes
+- Added message when achieving a new record
+- Various bugfixes
 
 # v0.12 - July 20, 2026
-- sauvegarde/restauration de la partie
-- gemmes de couleurs différentes en fonction des niveaux
+- Added game save/restore system
+- Gems now have different colors depending on the level
 
 ---
 

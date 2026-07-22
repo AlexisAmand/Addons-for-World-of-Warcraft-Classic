@@ -1,6 +1,9 @@
 # Wisdom of Azeroth
 
-Get it on CurseForge: https://www.curseforge.com/wow/addons/wisdom-of-azeroth
+**Development notice:** 
+The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional.
+
+Get the stable release on CurseForge: [Wisdom of Azeroth](https://www.curseforge.com/wow/addons/wisdom-of-azeroth)
 
 Wisdom of Azeroth is a lightweight World of Warcraft flavor addon that displays a random Azeroth-themed proverb when you log in.
 
