@@ -20,6 +20,16 @@ Get the stable release on CurseForge: [Craft Usage Tooltip](https://www.cursefor
 
 Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/gasp-of-pandaria)
 
+## Traveler's Notebook
+
+Just a notebook (work in progress)
+
+<p align="center">
+  <img src="TravelersNotebook/captures/capture-01.jpg" width="30%" />
+  <img src="TravelersNotebook/captures/capture-02.jpg" width="30%" />
+  <img src="TravelersNotebook/captures/capture-03.jpg" width="30%" />
+</p>
+
 ## Wisdom of Azeroth
 
 **Wisdom of Azeroth** is a lightweight World of Warcraft flavor addon that displays a random Azeroth-themed proverb when you log in.
