@@ -8,3 +8,6 @@
 - Modification d'une note
 - Message "A Propos"
 - Icone pour lancer l'addon
+
+### 0.0.2 — July 22, 2026
+- Nouvel icone

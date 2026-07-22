@@ -7,3 +7,7 @@ Just a notebook (work in progress)
   <img src="captures/capture-02.jpg" width="30%" />
   <img src="captures/capture-03.jpg" width="30%" />
 </p>
+
+## Assets
+
+- https://opengameart.org/content/book-icon

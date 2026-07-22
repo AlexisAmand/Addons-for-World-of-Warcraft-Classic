@@ -3,7 +3,7 @@ tb = {}
 tb.notes = {}
 tb.noteRows = {}
 tb.currentIndex = nil
-tb.version = "0.0.1"
+tb.version = "0.0.2"
 
 --------------------------
 -- Gestion des sauvegardes
@@ -33,7 +33,7 @@ btn:SetPoint("CENTER") -- position initiale
 -- Icône
 local icon = btn:CreateTexture(nil, "BACKGROUND")
 icon:SetAllPoints()
-icon:SetTexture("Interface\\Icons\\INV_Misc_Note_01") -- icône de parchemin
+icon:SetTexture("Interface\\AddOns\\TravelersNotebook\\images\\book_icon.tga") -- icône de parchemin
 
 -- Tooltip
 btn:SetScript("OnEnter", function(self)
@@ -118,7 +118,7 @@ function tb.saveNote()
     local contenu = tb.editBox:GetText()
 
     if titre == "" then
-        print("Impossible d'enregistrer : aucun titre.")
+        print("Unable to save: no title.")
         return
     end
 
@@ -139,7 +139,7 @@ end
 ------------------------------------------------------------
 function tb.deleteNote()
     if not tb.currentIndex then
-        print("Aucune note à supprimer.")
+        print("No notes to delete.")
         return
     end
 
