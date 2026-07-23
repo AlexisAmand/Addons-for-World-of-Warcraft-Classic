@@ -1,4 +1,6 @@
+--------------------------
 -- Gestion des sauvegardes
+--------------------------
 
 local loader = CreateFrame("Frame")
 loader:RegisterEvent("ADDON_LOADED")
@@ -116,14 +118,34 @@ btn:RegisterForDrag("LeftButton")
 btn:SetScript("OnDragStart", btn.StartMoving)
 btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
 
+-------------------------
 -- Création de la fenêtre
+-------------------------
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
 Gasp.frame:Hide()
 Gasp.frame:SetSize(500, 400)
 Gasp.frame:SetPoint("CENTER")
 
+--------------------------------
+-- On rend la fenêtre déplaçable
+--------------------------------
+
+Gasp.frame:SetMovable(true)
+Gasp.frame:EnableMouse(true)
+Gasp.frame:RegisterForDrag("LeftButton")
+
+Gasp.frame:SetScript("OnDragStart", function(self)
+    self:StartMoving()
+end)
+
+Gasp.frame:SetScript("OnDragStop", function(self)
+    self:StopMovingOrSizing()
+end)
+
+---------------------------------------
 -- Création de la grille de jeu logique
+---------------------------------------
 
 Gasp.CreerGrille()
 

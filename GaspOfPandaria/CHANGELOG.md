@@ -109,6 +109,8 @@ All notable changes to the project are documented here.
 - GUI improvements.
 - Online !
 
+---
+
 ## v0.10 — July 17, 2026
 - Added a sound effect when clicking a gem
 - Level 2 functional (6×6 grid)
@@ -116,9 +118,13 @@ All notable changes to the project are documented here.
 - Added Level 1 button (4×4 grid)
 - Record is no longer printed in the console
 
+---
+
 ## v0.10.1 — July 17, 2026
 - Added shadow effect on gems
 - Added Shuffle button (mix gems during a game)
+
+---
 
 ## v0.11 — July 20, 2026
 - Bugfix: record was no longer saved
@@ -127,30 +133,37 @@ All notable changes to the project are documented here.
 - Added “About” window via console: /gaspofpandaria about
 - Reset record via console: /gaspofpandaria reset
 
+---
+
 ## v0.11.1 — July 20, 2026
 - Added message when achieving a new record
 - Various bugfixes
+
+---
 
 # v0.12 - July 20, 2026
 - Added game save/restore system
 - Gems now have different colors depending on the level
 
+---
+
 ## v0.12.1 — July 22, 2026
 - Online !
 - remove tests
 
+---
+
 ## v0.12.2 — July 22, 2026
 - Now compatible with retail !
 - The button next to the minimap is replaced by a floating button
+- Online !
 
 ---
 
-## À venir
-- ne plus pouvoir interagir avec l'environement pendant le jeu
-- fenêtre qu'on peut bouger ?
-- Sons personnalisés.
-- Timer optionnel.
-- fusion avec Wisdom Of Azeroth
-- phrase de réussite != si niveau 2
-- si niveau 1 gagné : encouragement à essayer le niveau 2
+## v0.12.3 — July 22, 2026
+- fenêtre qui peut bouger
+
+---
+
+
 

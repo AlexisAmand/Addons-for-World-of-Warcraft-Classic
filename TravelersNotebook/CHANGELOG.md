@@ -9,5 +9,14 @@
 - Message "A Propos"
 - Icone pour lancer l'addon
 
+---
+
 ### 0.0.2 — July 22, 2026
-- Nouvel icone
+- Nouvelle icone
+
+---
+
+## v0.0.3 — July 23, 2026
+- fenêtre qui peut bouger
+
+- dans gestion de sauvegarder, cas ou schroll est vide (à tester)

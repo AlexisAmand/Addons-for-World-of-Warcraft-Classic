@@ -4,7 +4,7 @@ Gasp = {}
 -- Variables du jeu
 -------------------
 
-Gasp.version = "v0.12.2"
+Gasp.version = "v0.12.3"
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
