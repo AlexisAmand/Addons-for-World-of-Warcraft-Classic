@@ -2,7 +2,7 @@
 -- fonction qui affiche une fenêtre about
 -----------------------------------------
 
-function showAbout()
+function showGaspAbout()
 
     local optionsFrame = CreateFrame("Frame", "GaspOptions", UIParent, "BasicFrameTemplateWithInset")
 
@@ -24,7 +24,7 @@ function showAbout()
     "Version "..Gasp.version.."\n"..
     "By Hanslex\n\n"..
     "Development Notes :\n"..
-    "- Les gemmes ne sont pas comestibles.\n"..
+    "- Gems are not edible.\n"..
     "- The Gust button doesn’t actually make any wind.\n"..
     "- No pandaren were harmed during development.\n"..
     "- The developer survived three cold coffees.\n"
@@ -36,7 +36,7 @@ function showAbout()
     local closeButton = CreateFrame("Button", nil, optionsFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Fermer")
+    closeButton:SetText("Close")
     closeButton:SetScript("OnClick", function()
         optionsFrame:Hide()
     end)
@@ -47,11 +47,11 @@ end
 -- fonction qui remet à zéro le record sauvegardé
 -------------------------------------------------
 
-function resetGame()
+function resetGaspGame()
     Gasp.record = 0
     GaspSaved.records[math.floor(Gasp.niveau/2)] = 0
     Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
-    print("Scores réinitialisés.")
+    print("Scores have been reset.")
 end
 
 --------------------------------------------------
@@ -84,12 +84,12 @@ SlashCmdList["GASP"] = function(msg)
     end
 
     if msg == "reset" then
-        resetGame()
+        resetGaspGame()
         return
     end
 
     if msg == "about" then
-        showAbout()
+        showGaspAbout()
         return
     end
 

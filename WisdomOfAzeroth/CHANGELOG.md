@@ -6,3 +6,4 @@
 
 ### 0.0.2 — July 21, 2026
 - Add “Next” and “Previous” buttons
+- Now compatible with retail !

@@ -12,7 +12,7 @@ Your goal is to flip every gem.
 
 ## Open the minigame
 
-*   Click the **Gasp of Pandaria** icon near your minimap to open the puzzle window.
+*   Click the **Gasp of Pandaria** floating button to open the puzzle window.
 *   Type `/gaspofpandaria` in the chat to toggle the main interface.
 
 ## Features

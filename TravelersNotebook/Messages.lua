@@ -4,10 +4,10 @@
 
 function showAbout()
 
-    local optionsFrame = CreateFrame("Frame", "GaspOptions", UIParent, "BasicFrameTemplateWithInset")
+    local optionsFrame = CreateFrame("Frame", "TNAbout", UIParent, "BasicFrameTemplateWithInset")
 
     optionsFrame:SetFrameStrata("DIALOG")
-    optionsFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+    optionsFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
 
     optionsFrame:SetSize(250, 120)
     optionsFrame:SetPoint("CENTER")

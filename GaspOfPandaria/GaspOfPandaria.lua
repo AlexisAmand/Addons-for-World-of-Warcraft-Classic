@@ -58,6 +58,64 @@ loader:SetScript("OnEvent", function(self, event, addonName)
     end
 end)
 
+------------------
+-- Bouton flottant
+------------------
+
+-- Bouton 
+local btn = CreateFrame("Button", "GOPFloatingButton", UIParent, "SecureActionButtonTemplate")
+btn:SetSize(32, 32)
+btn:SetPoint("CENTER") -- position initiale
+
+-- Icône
+local icon = btn:CreateTexture(nil, "BACKGROUND")
+icon:SetAllPoints()
+icon:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\play.tga") 
+
+-- Tooltip
+btn:SetScript("OnEnter", function(self)
+    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+    GameTooltip:SetText("Gasp Of Pandaria")
+    GameTooltip:AddLine("Clic to play", 1, 1, 1)
+    GameTooltip:Show()
+end)
+
+btn:SetScript("OnLeave", function()
+    GameTooltip:Hide()
+end)
+
+-- Clic pour ouvrir ton addon
+btn:SetScript("OnClick", function()
+    if Gasp.frame:IsShown() then
+        Gasp.frame:Hide()
+    else
+        Gasp.frame:Show()
+
+        -- Charger le record du niveau actuel
+        Gasp.record = GaspSaved.records and GaspSaved.records[math.floor(Gasp.niveau/2)] or nil
+
+        if GaspSaved.grille then
+            local savedMessages = {
+                "A saved game was found.\nYour puzzle awaits.",
+                "Your previous game has been recovered.\nShall we continue?",
+                "The gems remember you.\nResume your journey?"
+            }
+
+            local msg = savedMessages[math.random(#savedMessages)]
+            StaticPopupDialogs["SAVED_GAME"].text = msg
+
+            StaticPopup_Show("SAVED_GAME")
+        end
+    end
+end)
+
+-- Déplacement du bouton
+btn:SetMovable(true)
+btn:EnableMouse(true)
+btn:RegisterForDrag("LeftButton")
+btn:SetScript("OnDragStart", btn.StartMoving)
+btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
+
 -- Création de la fenêtre
 
 Gasp.frame = CreateFrame("Frame", "GaspWindow", UIParent, "BasicFrameTemplate")
@@ -295,56 +353,4 @@ for i, b in ipairs(boutons) do
     b:SetPoint("BOTTOM", Gasp.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
 end
 
------------------------
--- Bouton de la minimap
------------------------
-
-local miniButton = CreateFrame("Button", "GaspMiniButton", Minimap)
-miniButton:SetSize(31, 31)
-miniButton:SetPoint("TOPLEFT", Minimap, "TOPLEFT", -12, -12) -- Position globale sur la minimap
-miniButton:SetFrameStrata("MEDIUM")
-
--- Arrière-plan sombre (pour remplir le cercle sous l'icône)
-local background = miniButton:CreateTexture(nil, "BACKGROUND")
-background:SetSize(20, 20)
-background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
-background:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 7, -5) -- Décalage magique Blizzard
-
--- Icône verte (alignée pile dans le trou de la bordure)
-local icon = miniButton:CreateTexture(nil, "ARTWORK")
-icon:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\play.tga")
-icon:SetSize(17, 17) -- Taille standard du contenu du bouton
-icon:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 7, -5) -- Même décalage que l'arrière-plan
-
--- Bordure dorée (qui englobe le tout sans aucun offset)
-local border = miniButton:CreateTexture(nil, "OVERLAY")
-border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
-border:SetSize(53, 53)
-border:SetPoint("TOPLEFT", miniButton, "TOPLEFT", 0, 0) -- La bordure reste collée à 0,0
-
--- Halo au survol (aligné proprement sur le fond)
-miniButton:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-local highlight = miniButton:GetHighlightTexture()
-highlight:SetAllPoints(background)
-
--- Action au clic
-miniButton:SetScript("OnClick", function()
-    Gasp.frame:Show()
-
-    -- Charger le record du niveau actuel
-    Gasp.record = GaspSaved.records and GaspSaved.records[math.floor(Gasp.niveau/2)] or nil
-
-    if GaspSaved.grille then
-        local savedMessages = {
-            "A saved game was found.\nYour puzzle awaits.",
-            "Your previous game has been recovered.\nShall we continue?",
-            "The gems remember you.\nResume your journey?"
-        }
-
-        local msg = savedMessages[math.random(#savedMessages)]
-        StaticPopupDialogs["SAVED_GAME"].text = msg
-
-        StaticPopup_Show("SAVED_GAME")
-    end
-end)
 

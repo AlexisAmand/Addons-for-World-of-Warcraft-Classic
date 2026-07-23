@@ -139,10 +139,13 @@ All notable changes to the project are documented here.
 - Online !
 - remove tests
 
+## v0.12.2 — July 22, 2026
+- Now compatible with retail !
+- The button next to the minimap is replaced by a floating button
+
 ---
 
 ## À venir
-- toujours un soucis avec restore/backup
 - ne plus pouvoir interagir avec l'environement pendant le jeu
 - fenêtre qu'on peut bouger ?
 - Sons personnalisés.

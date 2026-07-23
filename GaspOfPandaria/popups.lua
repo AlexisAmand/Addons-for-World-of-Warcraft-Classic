@@ -6,7 +6,7 @@
 
 StaticPopupDialogs["GASP_REGLES"] = {
     text = "Ah, young adventurer… Tea will come later.\nFor now, observe.\nClick on a gem to flip the ones around it.\nYour goal is to flip every gem.\nDo not rush. Patience is a strength.",
-    button1 = "OK",
+    button1 = "Ok",
     timeout = 0,
     whileDead = true,
     hideOnEscape = true,
@@ -23,7 +23,7 @@ StaticPopupDialogs["GASP_REGLES"] = {
 
 StaticPopupDialogs["NEW_RECORD"] = {
     text = "",
-    button1 = "OK",
+    button1 = "Ok",
     timeout = 0,
     whileDead = true,
     hideOnEscape = true,
@@ -41,7 +41,7 @@ StaticPopupDialogs["NEW_RECORD"] = {
 
 StaticPopupDialogs["GASP_VICTOIRE"] = {
     text = "", -- sera remplacé dans OnShow
-    button1 = "OK",
+    button1 = "Ok",
     timeout = 0,
     whileDead = true,
     hideOnEscape = true,
