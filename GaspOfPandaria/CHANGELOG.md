@@ -161,9 +161,7 @@ All notable changes to the project are documented here.
 ---
 
 ## v0.12.3 — July 22, 2026
-- fenêtre qui peut bouger
+- ajout : fenêtre qui peut bouger
+- bugfix : les éléments in-game ne sont plus accessible à travers la fenêtre de l'addon
 
 ---
-
-
-

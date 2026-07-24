@@ -195,11 +195,13 @@ tb.frame = CreateFrame("Frame", "tbWindow", UIParent, "BasicFrameTemplate")
 tb.frame:SetSize(700, 400)
 tb.frame:SetPoint("CENTER")
 
-tb.frame.title = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-tb.frame.title:SetPoint("TOP", 0, -5)
-tb.frame.title:SetText("Traveler's Notebook")
+-- texture de fond
 
---------------------------------
+local bg = tb.frame:CreateTexture(nil, "BACKGROUND")
+bg:SetAllPoints()
+bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+
+---------------------------------
 -- On rend la fenêtre déplaçable
 --------------------------------
 

@@ -19,4 +19,7 @@
 ## v0.0.3 — July 23, 2026
 - fenêtre qui peut bouger
 
-- dans gestion de sauvegarder, cas ou schroll est vide (à tester)
+- dans gestion des sauvegardes, cas où on n'a pas encore de notes (à tester)
+- texture de fond (à tester)
+
+---

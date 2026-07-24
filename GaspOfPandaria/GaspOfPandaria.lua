@@ -112,6 +112,7 @@ btn:SetScript("OnClick", function()
 end)
 
 -- Déplacement du bouton
+
 btn:SetMovable(true)
 btn:EnableMouse(true)
 btn:RegisterForDrag("LeftButton")
@@ -131,6 +132,7 @@ Gasp.frame:SetPoint("CENTER")
 -- On rend la fenêtre déplaçable
 --------------------------------
 
+Gasp.frame:SetFrameStrata("HIGH")
 Gasp.frame:SetMovable(true)
 Gasp.frame:EnableMouse(true)
 Gasp.frame:RegisterForDrag("LeftButton")
@@ -165,7 +167,7 @@ coupsBG:SetSize(Gasp.frame.coups:GetStringWidth() + 20, Gasp.frame.coups:GetStri
 coupsBG.texture = coupsBG:CreateTexture(nil, "BACKGROUND")
 coupsBG.texture:SetAllPoints()
 coupsBG.texture:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background-Dark")
-coupsBG.texture:SetVertexColor(0.8, 0.7, 0.5, 0.6)  -- ton parchemin chaud
+coupsBG.texture:SetVertexColor(0.8, 0.7, 0.5, 0.6)
 
 -- Bordure haut
 local top = coupsBG:CreateTexture(nil, "BORDER")
