@@ -3,7 +3,7 @@
 ## Notes: Un bloc-note
 ## Author: Alexis + Copilot
 ## SavedVariables: TBSaved
-## Version: 0.0.1
+## Version: 0.0.3
 
 Messages.lua
 TravelersNotebook.lua

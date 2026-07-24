@@ -3,7 +3,7 @@
 ## Notes: 
 ## Author: Alexis + Copilot
 ## SavedVariables: GaspSaved
-## Version: 0.12.2
+## Version: 0.12.3
 
 functions.lua
 options.lua

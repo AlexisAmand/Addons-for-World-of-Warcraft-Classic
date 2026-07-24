@@ -10,4 +10,4 @@ Just a notebook (work in progress)
 
 ## Assets
 
-- https://opengameart.org/content/book-icon
+- https://opengameart.org/content/stylized-magic-book

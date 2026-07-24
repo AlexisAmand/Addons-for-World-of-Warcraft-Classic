@@ -65,14 +65,20 @@ end)
 ------------------
 
 -- Bouton 
-local btn = CreateFrame("Button", "GOPFloatingButton", UIParent, "SecureActionButtonTemplate")
-btn:SetSize(32, 32)
-btn:SetPoint("CENTER") -- position initiale
+local btn = CreateFrame("CheckButton", "GOPFloatingButton", UIParent, "ActionButtonTemplate")
+btn:SetSize(36, 36)
+btn:SetPoint("CENTER")
 
 -- Icône
-local icon = btn:CreateTexture(nil, "BACKGROUND")
-icon:SetAllPoints()
-icon:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\play.tga") 
+local icon = _G[btn:GetName().."Icon"]
+icon:SetTexture("Interface\\AddOns\\GaspOfPandaria\\images\\play.tga")
+
+local cd = _G[btn:GetName().."Cooldown"]
+cd:SetCooldown(GetTime(), 1) 
+
+local bg = btn:CreateTexture(nil, "BACKGROUND")
+bg:SetAllPoints()
+bg:SetTexture("Interface\\Buttons\\UI-Quickslot")
 
 -- Tooltip
 btn:SetScript("OnEnter", function(self)
@@ -87,7 +93,8 @@ btn:SetScript("OnLeave", function()
 end)
 
 -- Clic pour ouvrir ton addon
-btn:SetScript("OnClick", function()
+btn:SetScript("OnClick", function(self)
+    self:SetChecked(false)
     if Gasp.frame:IsShown() then
         Gasp.frame:Hide()
     else

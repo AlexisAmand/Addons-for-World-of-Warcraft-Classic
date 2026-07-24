@@ -18,8 +18,8 @@
 
 ## v0.0.3 — July 23, 2026
 - fenêtre qui peut bouger
-
-- dans gestion des sauvegardes, cas où on n'a pas encore de notes (à tester)
-- texture de fond (à tester)
-
----
+- message d'erreur si "pas de titre"
+- message d'erreur si "pas de note à effacer"
+- message si pas encore de notes
+- GUI
+- nouvelle icone

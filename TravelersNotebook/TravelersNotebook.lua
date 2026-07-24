@@ -40,14 +40,20 @@ end)
 --------------------------
 
 -- Bouton flottant Traveler's Notebook
-local btn = CreateFrame("Button", "TNFloatingButton", UIParent, "SecureActionButtonTemplate")
-btn:SetSize(40, 40)
-btn:SetPoint("CENTER") -- position initiale
+local btn = CreateFrame("CheckButton", "TNFloatingButton", UIParent, "ActionButtonTemplate")
+btn:SetSize(36, 36)
+btn:SetPoint("CENTER")
 
 -- Icône
-local icon = btn:CreateTexture(nil, "BACKGROUND")
-icon:SetAllPoints()
-icon:SetTexture("Interface\\AddOns\\TravelersNotebook\\images\\book_icon.tga") -- icône de parchemin
+local icon = _G[btn:GetName().."Icon"]
+icon:SetTexture("Interface\\AddOns\\TravelersNotebook\\images\\book.tga") 
+
+local cd = _G[btn:GetName().."Cooldown"]
+cd:SetCooldown(GetTime(), 1) 
+
+local bg = btn:CreateTexture(nil, "BACKGROUND")
+bg:SetAllPoints()
+bg:SetTexture("Interface\\Buttons\\UI-Quickslot")
 
 -- Tooltip
 btn:SetScript("OnEnter", function(self)
@@ -62,7 +68,8 @@ btn:SetScript("OnLeave", function()
 end)
 
 -- Clic pour ouvrir ton addon
-btn:SetScript("OnClick", function()
+btn:SetScript("OnClick", function(self)
+    self:SetChecked(false) 
     if tb.frame:IsShown() then
         tb.frame:Hide()
     else
@@ -99,7 +106,7 @@ function tb.tnRefreshList()
         row.text:SetText(note.title)
 
         row:SetScript("OnClick", function()
-            tb.tntnLoadNote(index)
+            tb.tnLoadNote(index)
         end)
 
         table.insert(tb.noteRows, row)
@@ -110,7 +117,7 @@ end
 ------------------------------------------------------------
 -- Charger une note
 ------------------------------------------------------------
-function tb.tntnLoadNote(index)
+function tb.tnLoadNote(index)
     tb.currentIndex = index
     tb.titleBox:SetText(tb.notes[index].title)
     tb.editBox:SetText(tb.notes[index].content)
@@ -134,6 +141,7 @@ function tb.tnSaveNote()
 
     if titre == "" then
         print("Unable to save: no title.")
+        showNoTitle()
         return
     end
 
@@ -145,7 +153,7 @@ function tb.tnSaveNote()
     tb.notes[tb.currentIndex].title = titre
     tb.notes[tb.currentIndex].content = contenu
     TBSaved.notes = tb.notes
-    showSaved()
+    tnshowSaved()
     tb.tnRefreshList()
 end
 
@@ -155,6 +163,7 @@ end
 function tb.tnDeleteNote()
     if not tb.currentIndex then
         print("No notes to delete.")
+        tnshowNoNote()
         return
     end
 
@@ -164,7 +173,7 @@ function tb.tnDeleteNote()
     tb.titleBox:SetText("")
     tb.editBox:SetText("")
 
-    showDeleted()
+    tnshowDeleted()
     tb.tnRefreshList()
 end
 
@@ -172,7 +181,7 @@ end
 -- À propos
 ------------------------------------------------------------
 function tb.tnAboutWindows()
-    showAbout()
+    tnshowAbout()
 end
 
 ------------------------------------------------------------
@@ -199,7 +208,7 @@ tb.frame:SetPoint("CENTER")
 
 local bg = tb.frame:CreateTexture(nil, "BACKGROUND")
 bg:SetAllPoints()
-bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+bg:SetTexture("interface/framegeneral/ui-background-rock.blp")
 
 ---------------------------------
 -- On rend la fenêtre déplaçable
@@ -216,6 +225,14 @@ end)
 tb.frame:SetScript("OnDragStop", function(self)
     self:StopMovingOrSizing()
 end)
+
+----------------------------
+--  un titre pour la fenêtre
+----------------------------
+
+tb.frame.title = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+tb.frame.title:SetPoint("TOP", 0, -5)
+tb.frame.title:SetText("Traveler's Notebook")
 
 ------------------------------------------------------------
 -- LISTBOX (à gauche)
@@ -238,9 +255,14 @@ tb.listFrame:SetScrollChild(tb.listContent)
 -- Champ titre (à droite)
 ------------------------------------------------------------
 tb.titleBox = CreateFrame("EditBox", "tbTitleBox", tb.frame, "InputBoxTemplate")
-tb.titleBox:SetSize(300, 20)
+tb.titleBox:SetSize(400, 20)
 tb.titleBox:SetPoint("TOPLEFT", tb.listFrame, "TOPRIGHT", 20, 0)
 tb.titleBox:SetAutoFocus(false)
+
+-- Add a background texture
+local bg = tb.titleBox:CreateTexture(nil, "BACKGROUND")
+bg:SetAllPoints(tb.titleBox) -- make it fill the frame
+bg:SetColorTexture(0, 0, 0, 0.5) -- RGBA: black with 50% transparency
 
 ------------------------------------------------------------
 -- Zone de texte (scrollable)
@@ -311,3 +333,5 @@ for i, b in ipairs(boutons) do
     b:ClearAllPoints()
     b:SetPoint("BOTTOM", tb.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
 end
+
+print("Traveler's Notebook loaded")
