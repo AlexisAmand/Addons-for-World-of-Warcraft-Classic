@@ -102,7 +102,7 @@ StaticPopupDialogs["SAVED_GAME"] = {
                 Gasp.UpdateButton(x, y)
             end
         end
-        Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+        Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
     end,
 }
 

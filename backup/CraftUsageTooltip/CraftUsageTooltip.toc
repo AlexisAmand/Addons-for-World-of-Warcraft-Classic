@@ -1,0 +1,11 @@
+## Interface: 50400
+## Title: Craft Usage Tooltip
+## Notes: Indique le métier dans lequel un item est utilisé
+## Author: Alexis + Copilot
+## Version: 0.0.14
+
+## SavedVariables: CraftUsageDB
+
+ReagentDB.lua
+Classifier.lua
+CraftUsageTooltip.lua

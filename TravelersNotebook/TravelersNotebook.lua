@@ -1,13 +1,13 @@
-tb = {}
+tb = tb or {}
 
 tb.notes = {}
 tb.noteRows = {}
 tb.currentIndex = nil
-tb.version = "0.0.3"
+tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
 
 function tb.ShowPlaceholder()
     local child = tb.scrollFrame:GetScrollChild()
-    child:SetText("Aucune note pour l’instant...")
+    child:SetText(tb.text.NO_NOTE_YET)
     child:SetTextColor(0.7, 0.7, 0.7)
     child.isPlaceholder = true
 end
@@ -58,8 +58,8 @@ bg:SetTexture("Interface\\Buttons\\UI-Quickslot")
 -- Tooltip
 btn:SetScript("OnEnter", function(self)
     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-    GameTooltip:SetText("Traveler's Notebook")
-    GameTooltip:AddLine("Clic to open Traveler's Notebook", 1, 1, 1)
+    GameTooltip:SetText(tb.text.ADDON_TITLE)
+    GameTooltip:AddLine(tb.text.ICON_TOOLTIP, 1, 1, 1)
     GameTooltip:Show()
 end)
 
@@ -96,7 +96,7 @@ function tb.tnRefreshList()
     tb.noteRows = {}
 
     local y = -10
-    for index, note in pairs(tb.notes) do
+    for index, note in ipairs(tb.notes) do
         local row = CreateFrame("Button", nil, tb.listContent)
         row:SetPoint("TOPLEFT", 0, y)
         row:SetSize(200, 20)
@@ -128,8 +128,8 @@ end
 ------------------------------------------------------------
 function tb.tnNewNote()
     tb.currentIndex = nil
-    tb.titleBox:SetText("Enter the title")
-    tb.editBox:SetText("And here the content")
+    tb.titleBox:SetText(tb.text.ENTER_TITLE)
+    tb.editBox:SetText(tb.text.ENTER_CONTENT)
 end
 
 ------------------------------------------------------------
@@ -140,8 +140,8 @@ function tb.tnSaveNote()
     local contenu = tb.editBox:GetText()
 
     if titre == "" then
-        print("Unable to save: no title.")
-        showNoTitle()
+        print(tb.text.NO_TITLE)
+        tnshowNoTitle()
         return
     end
 
@@ -160,14 +160,15 @@ end
 ------------------------------------------------------------
 -- Supprimer une note
 ------------------------------------------------------------
+
 function tb.tnDeleteNote()
     if not tb.currentIndex then
-        print("No notes to delete.")
+        print(tb.text.NO_NOTE_DELETE)
         tnshowNoNote()
         return
     end
 
-    tb.notes[tb.currentIndex] = nil
+    table.remove(tb.notes, tb.currentIndex)
     tb.currentIndex = nil
 
     tb.titleBox:SetText("")
@@ -180,6 +181,7 @@ end
 ------------------------------------------------------------
 -- À propos
 ------------------------------------------------------------
+
 function tb.tnAboutWindows()
     tnshowAbout()
 end
@@ -187,6 +189,7 @@ end
 ------------------------------------------------------------
 -- Commande /tn
 ------------------------------------------------------------
+
 SLASH_TRAVELERNOTE1 = "/tn"
 SlashCmdList["TRAVELERNOTE"] = function()
     if tb.frame:IsShown() then
@@ -232,17 +235,22 @@ end)
 
 tb.frame.title = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 tb.frame.title:SetPoint("TOP", 0, -5)
-tb.frame.title:SetText("Traveler's Notebook")
+tb.frame.title:SetText(tb.text.ADDON_TITLE)
 
 ------------------------------------------------------------
 -- LISTBOX (à gauche)
 ------------------------------------------------------------
 tb.listFrame = CreateFrame("ScrollFrame", "tbListFrame", tb.frame, "UIPanelScrollFrameTemplate")
-tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -40)
-tb.listFrame:SetSize(200, 300)
+tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -60)
+tb.listFrame:SetSize(200, 280)
 
 tb.listContent = CreateFrame("Frame", nil, tb.listFrame)
 tb.listContent:SetSize(200, 600)
+
+-- Add a title
+tb.listTitle = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+tb.listTitle:SetText(tb.text.MY_NOTES)
+tb.listTitle:SetPoint("BOTTOMLEFT", tb.listFrame, "TOPLEFT", 0, 10)
 
 -- Add a background texture
 local bg = tb.listContent:CreateTexture(nil, "BACKGROUND")
@@ -256,7 +264,7 @@ tb.listFrame:SetScrollChild(tb.listContent)
 ------------------------------------------------------------
 tb.titleBox = CreateFrame("EditBox", "tbTitleBox", tb.frame, "InputBoxTemplate")
 tb.titleBox:SetSize(400, 20)
-tb.titleBox:SetPoint("TOPLEFT", tb.listFrame, "TOPRIGHT", 20, 0)
+tb.titleBox:SetPoint("TOPLEFT", tb.listFrame, "TOPRIGHT", 40, 0)
 tb.titleBox:SetAutoFocus(false)
 
 -- Add a background texture
@@ -274,9 +282,22 @@ tb.scrollFrame:SetPoint("BOTTOMRIGHT", tb.frame, "BOTTOMRIGHT", -40, 60)
 tb.editBox = CreateFrame("EditBox", "tbEditBox", tb.scrollFrame)
 tb.editBox:SetMultiLine(true)
 tb.editBox:SetFontObject("GameFontNormal")
-tb.editBox:SetWidth(400)
+
+-- tb.editBox:SetWidth(400)
+tb.editBox:SetWidth(tb.scrollFrame:GetWidth())
+
 tb.editBox:SetHeight(800)
 tb.editBox:SetAutoFocus(false)
+
+tb.editBox:SetScript("OnCursorChanged", function(self, x, y, w, h)
+    tb.scrollFrame:UpdateScrollChildRect()
+
+    local scrollHeight = tb.scrollFrame:GetVerticalScrollRange()
+
+    if y < -scrollHeight then
+        tb.scrollFrame:SetVerticalScroll(scrollHeight)
+    end
+end)
 
 tb.scrollFrame:SetScrollChild(tb.editBox)
 
@@ -297,29 +318,29 @@ bg:SetColorTexture(0, 0, 0, 0.5) -- RGBA: black with 50% transparency
 
 tb.scrollFrame:SetScrollChild(tb.editBox)
 
-tb.editBox:SetText("Welcome in Traveler's Notebook !")
+tb.editBox:SetText(tb.text.WELCOME)
 
 ------------------------------------------------------------
 -- Boutons
 ------------------------------------------------------------
 tb.newButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
 tb.newButton:SetSize(115, 25)
-tb.newButton:SetText("New note")
+tb.newButton:SetText(tb.text.BUTTON_NEW)
 tb.newButton:SetScript("OnClick", tb.tnNewNote)
 
 tb.saveButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
 tb.saveButton:SetSize(115, 25)
-tb.saveButton:SetText("Save")
+tb.saveButton:SetText(tb.text.BUTTON_SAVE)
 tb.saveButton:SetScript("OnClick", tb.tnSaveNote)
 
 tb.deleteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
 tb.deleteButton:SetSize(115, 25)
-tb.deleteButton:SetText("Delete")
+tb.deleteButton:SetText(tb.text.BUTTON_DEL)
 tb.deleteButton:SetScript("OnClick", tb.tnDeleteNote)
 
 tb.aboutButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
 tb.aboutButton:SetSize(115, 25)
-tb.aboutButton:SetText("About")
+tb.aboutButton:SetText(tb.text.BUTTON_ABOUT)
 tb.aboutButton:SetScript("OnClick", tb.tnAboutWindows)
 
 -- Placement automatique des boutons
@@ -334,4 +355,4 @@ for i, b in ipairs(boutons) do
     b:SetPoint("BOTTOM", tb.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
 end
 
-print("Traveler's Notebook loaded")
+print(tb.text.ADDON_LOADED)

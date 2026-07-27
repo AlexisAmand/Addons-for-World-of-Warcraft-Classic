@@ -14,7 +14,7 @@ function tnshowAbout()
     
     aboutFrame.title = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     aboutFrame.title:SetPoint("TOP", 0, -5)
-    aboutFrame.title:SetText("About")
+    aboutFrame.title:SetText(tb.text.BUTTON_ABOUT)
 
     aboutFrame.text = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     aboutFrame.text:SetWidth(250)
@@ -22,9 +22,9 @@ function tnshowAbout()
     aboutFrame.text:SetPoint("TOP", 0, -40)
 
     aboutFrame.text:SetText(
-    "Traveler's Notebook\n"..
+    tb.text.ADDON_TITLE.."\n"..
     "Version "..tb.version.."\n"..
-    "By Hanslex\n\n"
+    "By "..tb.text.AUTHOR.."\n\n"
     )
 
     aboutFrame:Show()
@@ -32,7 +32,7 @@ function tnshowAbout()
     local closeButton = CreateFrame("Button", nil, aboutFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Close")
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
     closeButton:SetScript("OnClick", function()
         aboutFrame:Hide()
     end)
@@ -55,20 +55,20 @@ function tnshowSaved()
     
     saveFrame.title = saveFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     saveFrame.title:SetPoint("TOP", 0, -5)
-    saveFrame.title:SetText("Message")
+    saveFrame.title:SetText(tb.text.MSG_TITLE)
 
     saveFrame.text = saveFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     saveFrame.text:SetWidth(250)
     saveFrame.text:SetJustifyH("CENTER")
     saveFrame.text:SetPoint("TOP", 0, -40)
-    saveFrame.text:SetText("The note has been saved successfully!")
+    saveFrame.text:SetText(tb.text.SAVE_OK)
 
     saveFrame:Show()
 
     local closeButton = CreateFrame("Button", nil, saveFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Close")
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
     closeButton:SetScript("OnClick", function()
         saveFrame:Hide()
     end)
@@ -91,20 +91,20 @@ function tnshowDeleted()
     
     deleteFrame.title = deleteFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     deleteFrame.title:SetPoint("TOP", 0, -5)
-    deleteFrame.title:SetText("Message")
+    deleteFrame.title:SetText(tb.text.MSG_TITLE)
 
     deleteFrame.text = deleteFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     deleteFrame.text:SetWidth(250)
     deleteFrame.text:SetJustifyH("CENTER")
     deleteFrame.text:SetPoint("TOP", 0, -40)
-    deleteFrame.text:SetText("The note has been deleted.")
+    deleteFrame.text:SetText(tb.text.DEL_OK)
 
     deleteFrame:Show()
 
     local closeButton = CreateFrame("Button", nil, deleteFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Close")
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
     closeButton:SetScript("OnClick", function()
         deleteFrame:Hide()
     end)
@@ -127,20 +127,20 @@ function tnshowNoTitle()
     
     notitleFrame.title = notitleFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     notitleFrame.title:SetPoint("TOP", 0, -5)
-    notitleFrame.title:SetText("Message")
+    notitleFrame.title:SetText(tb.text.MSG_TITLE)
 
     notitleFrame.text = notitleFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     notitleFrame.text:SetWidth(250)
     notitleFrame.text:SetJustifyH("CENTER")
     notitleFrame.text:SetPoint("TOP", 0, -40)
-    notitleFrame.text:SetText("Unable to save: no title.")
+    notitleFrame.text:SetText(tb.text.NO_TITLE)
 
     notitleFrame:Show()
 
     local closeButton = CreateFrame("Button", nil, notitleFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Close")
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
     closeButton:SetScript("OnClick", function()
         notitleFrame:Hide()
     end)
@@ -163,20 +163,20 @@ function tnshowNoNote()
     
     nonoteFrame.title = nonoteFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     nonoteFrame.title:SetPoint("TOP", 0, -5)
-    nonoteFrame.title:SetText("Message")
+    nonoteFrame.title:SetText(tb.text.MSG_TITLE)
 
     nonoteFrame.text = nonoteFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     nonoteFrame.text:SetWidth(250)
     nonoteFrame.text:SetJustifyH("CENTER")
     nonoteFrame.text:SetPoint("TOP", 0, -40)
-    nonoteFrame.text:SetText("Unable to save: no title.")
+    nonoteFrame.text:SetText(tb.text.NO_MSG)
 
     nonoteFrame:Show()
 
     local closeButton = CreateFrame("Button", nil, nonoteFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("Close")
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
     closeButton:SetScript("OnClick", function()
         nonoteFrame:Hide()
     end)

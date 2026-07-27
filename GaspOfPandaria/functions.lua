@@ -4,7 +4,7 @@ Gasp = {}
 -- Variables du jeu
 -------------------
 
-Gasp.version = "v0.12.3"
+Gasp.version = C_AddOns.GetAddOnMetadata("GaspOfPandaria", "Version")
 Gasp.grille = {}
 Gasp.boutons = {}
 Gasp.nbCoups = 0
@@ -13,6 +13,12 @@ Gasp.record = nil
 Gasp.niveau = 3
 Gasp.niveauText = nil
 Gasp.taille = 55
+
+Gasp.wisdomText = {
+    [1] = "Level 1 Wisdom",
+    [2] = "Level 2 Wisdom",
+    [3] = "Level 3 Wisdom",
+}
 
 Gasp.textures = {
     [1] = {
@@ -128,7 +134,7 @@ function Gasp.VerificationGrille()
     end
 
     -- affichage
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
 
     -- reset de la grille
     Gasp.CreerGrille()
@@ -155,7 +161,7 @@ function Gasp.Retourne(xc, yc)
 
     -- Incrémente le compteur de coups
     Gasp.nbCoups = Gasp.nbCoups + 1
-    Gasp.frame.coups:SetText("Moves : "..Gasp.nbCoups.."  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves :   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
 
     -- Parcourt les voisins autour du pion cliqué
     for y = yc - 1, yc + 1 do

@@ -23,7 +23,7 @@ function showGaspAbout()
     "Gasp of Pandaria\n"..
     "Version "..Gasp.version.."\n"..
     "By Hanslex\n\n"..
-    "Development Notes :\n"..
+    "Development Notes:\n"..
     "- Gems are not edible.\n"..
     "- The Gust button doesn’t actually make any wind.\n"..
     "- No pandaren were harmed during development.\n"..
@@ -50,7 +50,7 @@ end
 function resetGaspGame()
     Gasp.record = 0
     GaspSaved.records[math.floor(Gasp.niveau/2)] = 0
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
     print("Scores have been reset.")
 end
 

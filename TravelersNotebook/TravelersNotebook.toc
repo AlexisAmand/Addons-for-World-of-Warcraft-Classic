@@ -1,10 +1,11 @@
 ## Interface: 50504
 ## Title: Traveler's Notebook
 ## Notes: Un bloc-note
-## Author: Alexis + Copilot
+## Author: Hanslex
 ## SavedVariables: TBSaved
-## Version: 0.0.3
+## Version: 0.0.4
 
+TravelerNoteBookText.lua
 Messages.lua
 TravelersNotebook.lua
 

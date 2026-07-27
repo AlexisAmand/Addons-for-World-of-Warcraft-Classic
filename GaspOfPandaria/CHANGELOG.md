@@ -160,10 +160,11 @@ All notable changes to the project are documented here.
 
 ---
 
-## v0.12.3 — July 22, 2026
+## v0.13 — July 27, 2026
 - The game window can be moved
 - In-game elements are no longer accessible via the window
 - Minor GUI changes
 - New icon
+- Nouveau texte pour l'affichage du record
 
 ---

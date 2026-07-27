@@ -46,7 +46,7 @@ loader:SetScript("OnEvent", function(self, event, addonName)
 
         -- Mise à jour visuelle si l'UI existe déjà
         if Gasp.frame and Gasp.frame.coups then
-            Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+            Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
         end
 
         -- Mise à jour des boutons si déjà créés
@@ -164,7 +164,7 @@ Gasp.CreerGrille()
 
 Gasp.frame.coups = Gasp.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 Gasp.frame.coups:SetPoint("TOP", Gasp.frame, "TOP", 0, -40)
-Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : 0")
+Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : 0")
 
 -- Fond derrière le texte
 local coupsBG = CreateFrame("Frame", nil, Gasp.frame)
@@ -258,7 +258,7 @@ bouton8x8:SetScript("OnClick", function()
     Gasp.taille = 29 -- plus de boutons, donc boutons + petits
     Gasp.nbCoups = 0
     Gasp.niveauText = "3"
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
 
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
@@ -284,7 +284,7 @@ bouton6x6:SetScript("OnClick", function()
     Gasp.taille = 42 -- plus de boutons, donc boutons + petits
     Gasp.nbCoups = 0
     Gasp.niveauText = "2"
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
 
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
@@ -309,7 +309,7 @@ bouton4x4:SetScript("OnClick", function()
     Gasp.taille = 55 -- plus de boutons, donc boutons + petits
     Gasp.nbCoups = 0
     Gasp.niveauText = "1"
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
 
     Gasp.CreerGrille()
     Gasp.CreationDesBoutons(gridFrame, espace)
@@ -356,7 +356,7 @@ boutonReset:SetText("Reset")
 
 boutonReset:SetScript("OnClick", function()
     Gasp.nbCoups = 0
-    Gasp.frame.coups:SetText("Moves : 0  Wisdom of level "..math.floor(Gasp.niveau/2).." : "..Gasp.GetRecordText())
+    Gasp.frame.coups:SetText("Moves : 0   "..Gasp.wisdomText[math.floor(Gasp.niveau/2)].." : "..Gasp.GetRecordText())
     Gasp.CreerGrille()
 
     -- rafraîchir les boutons :

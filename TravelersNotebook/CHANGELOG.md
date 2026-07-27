@@ -23,3 +23,16 @@
 - message si pas encore de notes
 - GUI
 - nouvelle icone
+
+---
+
+## v0.0.4 — July 23, 2026
+- code review
+- GUI
+
+---
+
+## TODO
+- Hide button
+
+interface/adventuremap/adventuremapparchmenttile.blp
