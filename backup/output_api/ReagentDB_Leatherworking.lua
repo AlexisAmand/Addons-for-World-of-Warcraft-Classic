@@ -1,2 +1,0 @@
-REAGENT_TO_PROF_LEAT = {
-}
