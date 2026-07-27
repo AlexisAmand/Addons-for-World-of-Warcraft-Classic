@@ -1,19 +1,22 @@
 # 🌿 Gasp of Pandaria
 
-**Development notice:** 
-The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional.
-
-Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/gasp-of-pandaria)
-
 **Gasp of Pandaria** is a light and relaxing mini‑game inspired by the calm aesthetics of Pandaria. It features a simple 4×4 puzzle grid designed for quick, enjoyable sessions between quests, dungeons, or raids.
 
 Click on a gem to flip the ones around it.  
 Your goal is to flip every gem.
 
+## Development notice
+
+The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional. Stable versions are available in the "releases" folder.
+
+Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/gasp-of-pandaria)
+
 ## Open the minigame
 
-*   Click the **Gasp of Pandaria** floating button to open the puzzle window.
-*   Type `/gaspofpandaria` in the chat to toggle the main interface.
+*  Click the **Gasp of Pandaria** floating button to open the puzzle window.
+*  Type `/gaspofpandaria` in the chat to toggle the main interface.
+*  Type `/gaspofpandaria about` about in the chat to show the about window.
+*  Type `/gaspofpandaria reset` reset in the chat to reset the record.
 
 ## Features
 
@@ -40,11 +43,11 @@ Simple, peaceful, and distraction‑free.
 
 ## Roadmap
 
-Upcoming versions (0.10.x) will introduce:
+Future versions will focus on:
 
-*   Larger grids (5×5, 6×6, and more)
-*   Additional visual polish
-*   Optional customization settings
+* Additional visual polish
+* Optional customization settings
+* Small quality-of-life improvements
 
 ## Assets
 
