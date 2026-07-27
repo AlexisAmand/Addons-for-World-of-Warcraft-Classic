@@ -1,9 +1,9 @@
 ## Interface: 50504
 ## Title: Traveler's Notebook
-## Notes: Un bloc-note
+## Notes: A simple notebook to write and save your own notes in WoW.
 ## Author: Hanslex
 ## SavedVariables: TBSaved
-## Version: 0.0.4
+## Version: 0.0.5
 
 TravelerNoteBookText.lua
 Messages.lua

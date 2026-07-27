@@ -1,6 +1,6 @@
 ## Interface: 120007, 50504
 ## Title: Gasp Of Pandaria
-## Notes: 
+## Notes: A relaxing Pandaren puzzle game to play between adventures.
 ## Author: Alexis + Copilot
 ## SavedVariables: GaspSaved
 ## Version: 0.13

@@ -84,6 +84,16 @@ btn:RegisterForDrag("LeftButton")
 btn:SetScript("OnDragStart", btn.StartMoving)
 btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
 
+-------------------------------
+-- Cacher la fenêtre principale
+-------------------------------
+
+function tb.tnHideWindows()
+    if tb.frame:IsShown() then
+        tb.frame:Hide()
+    end
+end
+
 ------------------------------------------------------------
 -- LISTBOX : rafraîchir la liste des notes
 ------------------------------------------------------------
@@ -329,22 +339,27 @@ tb.newButton:SetText(tb.text.BUTTON_NEW)
 tb.newButton:SetScript("OnClick", tb.tnNewNote)
 
 tb.saveButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.saveButton:SetSize(115, 25)
+tb.saveButton:SetSize(100, 25)
 tb.saveButton:SetText(tb.text.BUTTON_SAVE)
 tb.saveButton:SetScript("OnClick", tb.tnSaveNote)
 
 tb.deleteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.deleteButton:SetSize(115, 25)
+tb.deleteButton:SetSize(100, 25)
 tb.deleteButton:SetText(tb.text.BUTTON_DEL)
 tb.deleteButton:SetScript("OnClick", tb.tnDeleteNote)
 
 tb.aboutButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.aboutButton:SetSize(115, 25)
+tb.aboutButton:SetSize(100, 25)
 tb.aboutButton:SetText(tb.text.BUTTON_ABOUT)
 tb.aboutButton:SetScript("OnClick", tb.tnAboutWindows)
 
+tb.hideButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
+tb.hideButton:SetSize(100, 25)
+tb.hideButton:SetText("Hide")
+tb.hideButton:SetScript("OnClick", tb.tnHideWindows)
+
 -- Placement automatique des boutons
-local boutons = {tb.newButton, tb.saveButton, tb.deleteButton, tb.aboutButton}
+local boutons = {tb.newButton, tb.saveButton, tb.deleteButton, tb.aboutButton, tb.hideButton}
 local total = #boutons
 local espace = 120
 local largeurTotale = (total - 1) * espace

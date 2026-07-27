@@ -26,13 +26,12 @@
 
 ---
 
-## v0.0.4 — July 23, 2026
+## v0.0.4 — July 27, 2026
 - code review
 - GUI
 
 ---
 
-## TODO
+## v0.0.5 — July 27, 2026
 - Hide button
-
-interface/adventuremap/adventuremapparchmenttile.blp
+- update "Notes" in toc file

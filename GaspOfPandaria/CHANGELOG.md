@@ -168,3 +168,6 @@ All notable changes to the project are documented here.
 - Nouveau texte pour l'affichage du record
 
 ---
+
+## v0.13.1 — Work in progress
+- update "Notes" in toc file
