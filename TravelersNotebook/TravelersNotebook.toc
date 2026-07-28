@@ -1,7 +1,7 @@
 ## Interface: 50504
 ## Title: Traveler's Notebook
 ## Notes: A simple notebook to write and save your own notes in WoW.
-## Author: Hanslex
+## Author: La Team Panda
 ## SavedVariables: TBSaved
 ## Version: 0.0.5
 

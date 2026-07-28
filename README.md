@@ -6,6 +6,8 @@ Stable versions are available in the "releases" folder.
 
 ## Craft Usage Tooltip
 
+(work in progress)
+
 **Craft Usage Tooltip** is a lightweight World of Warcraft addon that displays the professions using an ingredient directly inside the item tooltip.
 
 Get the stable release on CurseForge: [Craft Usage Tooltip](https://www.curseforge.com/wow/addons/craft-usage-tooltip)
@@ -33,6 +35,8 @@ While playing World of Warcraft, I often keep a real notebook next to me to writ
   <img src="TravelersNotebook/captures/capture-03.jpg" width="30%" />
   <img src="TravelersNotebook/captures/capture-04.jpg" width="30%" />
 </p>
+
+Get the stable release on CurseForge: As soon as possible :)
 
 ## Wisdom of Azeroth
 

@@ -1,4 +1,4 @@
-## Changelog
+## Changelog — Wisdom of Azeroth
 
 ### 0.0.1 — July 13, 2026
 - Initial release of Wisdom of Azeroth

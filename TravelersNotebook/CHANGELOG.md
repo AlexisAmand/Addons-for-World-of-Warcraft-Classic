@@ -1,4 +1,4 @@
-## Changelog
+## Changelog — Traveler's Notebook
 
 ### 0.0.1 — July 22, 2026
 - GUI
