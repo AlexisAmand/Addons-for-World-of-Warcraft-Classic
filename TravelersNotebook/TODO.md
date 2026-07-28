@@ -2,7 +2,7 @@
 
 ## Identité du projet
 - [x] Mettre à jour les fichiers .toc avec les informations de la Team Panda
-- [ ] Harmoniser les descriptions des addons
+- [x] Harmoniser les descriptions des addons
 - [ ] Ajouter les crédits dans la fenêtre "À propos"
 
 ## Architecture

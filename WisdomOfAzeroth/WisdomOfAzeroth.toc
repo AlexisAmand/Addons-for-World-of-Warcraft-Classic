@@ -1,6 +1,6 @@
 ## Interface: 120007, 50504
 ## Title: Wisdom Of Azeroth
-## Notes: Affiche un proverbe au début de chaque partie
+## Notes: Displays a proverb every time a game session starts.
 ## Author: La Team Panda
 ## Version: 0.0.3
 quotes.lua

@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: Craft Usage Tooltip
-## Notes: Indique le métier dans lequel un item est utilisé
+## Notes: Displays a tooltip when you hover over an item, showing the profession it corresponds to
 ## Author: La Team Panda
 ## Version: 0.0.14
 CraftUsageTooltip.lua
