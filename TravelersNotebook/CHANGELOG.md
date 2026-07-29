@@ -35,3 +35,6 @@
 ## v0.0.5 — July 27, 2026
 - Hide button
 - update "Notes" in toc file
+
+## v0.1 — July 28, 2026
+- Ajout du système de modes (LISTE / EDITION)

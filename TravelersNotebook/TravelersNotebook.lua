@@ -78,21 +78,12 @@ btn:SetScript("OnClick", function(self)
 end)
 
 -- Déplacement du bouton
+
 btn:SetMovable(true)
 btn:EnableMouse(true)
 btn:RegisterForDrag("LeftButton")
 btn:SetScript("OnDragStart", btn.StartMoving)
 btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
-
--------------------------------
--- Cacher la fenêtre principale
--------------------------------
-
-function tb.tnHideWindows()
-    if tb.frame:IsShown() then
-        tb.frame:Hide()
-    end
-end
 
 ------------------------------------------------------------
 -- LISTBOX : rafraîchir la liste des notes
@@ -122,78 +113,6 @@ function tb.tnRefreshList()
         table.insert(tb.noteRows, row)
         y = y - 22
     end
-end
-
-------------------------------------------------------------
--- Charger une note
-------------------------------------------------------------
-function tb.tnLoadNote(index)
-    tb.currentIndex = index
-    tb.titleBox:SetText(tb.notes[index].title)
-    tb.editBox:SetText(tb.notes[index].content)
-end
-
-------------------------------------------------------------
--- Nouvelle note
-------------------------------------------------------------
-function tb.tnNewNote()
-    tb.currentIndex = nil
-    tb.titleBox:SetText(tb.text.ENTER_TITLE)
-    tb.editBox:SetText(tb.text.ENTER_CONTENT)
-end
-
-------------------------------------------------------------
--- Sauvegarder une note
-------------------------------------------------------------
-function tb.tnSaveNote()
-    local titre = tb.titleBox:GetText()
-    local contenu = tb.editBox:GetText()
-
-    if titre == "" then
-        print(tb.text.NO_TITLE)
-        tnshowNoTitle()
-        return
-    end
-
-    if not tb.currentIndex then
-        tb.currentIndex = #tb.notes + 1
-        tb.notes[tb.currentIndex] = {}
-    end
-
-    tb.notes[tb.currentIndex].title = titre
-    tb.notes[tb.currentIndex].content = contenu
-    TBSaved.notes = tb.notes
-    tnshowSaved()
-    tb.tnRefreshList()
-end
-
-------------------------------------------------------------
--- Supprimer une note
-------------------------------------------------------------
-
-function tb.tnDeleteNote()
-    if not tb.currentIndex then
-        print(tb.text.NO_NOTE_DELETE)
-        tnshowNoNote()
-        return
-    end
-
-    table.remove(tb.notes, tb.currentIndex)
-    tb.currentIndex = nil
-
-    tb.titleBox:SetText("")
-    tb.editBox:SetText("")
-
-    tnshowDeleted()
-    tb.tnRefreshList()
-end
-
-------------------------------------------------------------
--- À propos
-------------------------------------------------------------
-
-function tb.tnAboutWindows()
-    tnshowAbout()
 end
 
 ------------------------------------------------------------
@@ -330,44 +249,9 @@ tb.scrollFrame:SetScrollChild(tb.editBox)
 
 tb.editBox:SetText(tb.text.WELCOME)
 
-------------------------------------------------------------
--- Boutons
-------------------------------------------------------------
-tb.newButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.newButton:SetSize(115, 25)
-tb.newButton:SetText(tb.text.BUTTON_NEW)
-tb.newButton:SetScript("OnClick", tb.tnNewNote)
+-- Traitement de l'affichage des boutons
 
-tb.saveButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.saveButton:SetSize(100, 25)
-tb.saveButton:SetText(tb.text.BUTTON_SAVE)
-tb.saveButton:SetScript("OnClick", tb.tnSaveNote)
-
-tb.deleteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.deleteButton:SetSize(100, 25)
-tb.deleteButton:SetText(tb.text.BUTTON_DEL)
-tb.deleteButton:SetScript("OnClick", tb.tnDeleteNote)
-
-tb.aboutButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.aboutButton:SetSize(100, 25)
-tb.aboutButton:SetText(tb.text.BUTTON_ABOUT)
-tb.aboutButton:SetScript("OnClick", tb.tnAboutWindows)
-
-tb.hideButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-tb.hideButton:SetSize(100, 25)
-tb.hideButton:SetText("Hide")
-tb.hideButton:SetScript("OnClick", tb.tnHideWindows)
-
--- Placement automatique des boutons
-local boutons = {tb.newButton, tb.saveButton, tb.deleteButton, tb.aboutButton, tb.hideButton}
-local total = #boutons
-local espace = 120
-local largeurTotale = (total - 1) * espace
-local startX = (tb.frame:GetWidth() - largeurTotale) / 2
-
-for i, b in ipairs(boutons) do
-    b:ClearAllPoints()
-    b:SetPoint("BOTTOM", tb.frame, "BOTTOMLEFT", startX + (i - 1) * espace, 20)
-end
-
-print(tb.text.ADDON_LOADED)
+tb.CreationBoutons()
+tb.mode = "LISTE"
+print("Mode actuel :", tb.mode)
+tb.AfficherBoutons()

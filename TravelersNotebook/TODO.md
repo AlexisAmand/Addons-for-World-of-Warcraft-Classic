@@ -3,18 +3,16 @@
 ## Identité du projet
 - [x] Mettre à jour les fichiers .toc avec les informations de la Team Panda
 - [x] Harmoniser les descriptions des addons
-- [ ] Ajouter les crédits dans la fenêtre "À propos"
+- [x] Ajouter les crédits dans la fenêtre "À propos"
 
 ## Architecture
 - [ ] Déplacer les fonctions utilitaires dans un fichier externe
 - [ ] Séparer la logique des notes de l'interface
 - [ ] Organiser les fichiers Lua par fonctionnalité : fonctions, boutons, ....etc.
-
-## En cours
 - [ ] Mettre les fonctions dans un fichier externe
-- [ ] Ajouter le système de modes (LISTE / EDITION)
 
 ## Prochaines fonctionnalités
+- [x] Ajouter le système de modes (LISTE / EDITION)
 - [ ] Notes épinglées
 - [ ] Ajouter la position du joueur dans une note
 - [ ] Améliorer la liste des notes
