@@ -4,6 +4,7 @@ tb.notes = {}
 tb.noteRows = {}
 tb.currentIndex = nil
 tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
+tb.noteModifiee = false
 
 function tb.ShowPlaceholder()
     local child = tb.scrollFrame:GetScrollChild()
@@ -215,6 +216,10 @@ tb.editBox:SetWidth(tb.scrollFrame:GetWidth())
 tb.editBox:SetHeight(800)
 tb.editBox:SetAutoFocus(false)
 
+tb.editBox:SetScript("OnTextChanged", function()
+    tb.noteModifiee = true
+end)
+
 tb.editBox:SetScript("OnCursorChanged", function(self, x, y, w, h)
     tb.scrollFrame:UpdateScrollChildRect()
 
@@ -250,5 +255,13 @@ tb.editBox:SetText(tb.text.WELCOME)
 
 tb.CreationBoutons()
 tb.mode = "LISTE"
+
+C_Timer.NewTicker(15, function()
+    if tb.mode == "EDITION" and tb.noteModifiee then
+        tb.tnSaveAutoNote()
+        tb.noteModifiee = false
+    end
+end)
+
 print("Mode actuel :", tb.mode)
 tb.AfficherBoutons()

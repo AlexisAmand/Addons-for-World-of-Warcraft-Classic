@@ -42,3 +42,6 @@
 ## v0.2 — July 29, 2026
 - GUI
 - Add the GPS button
+
+## v0.3 — July 29, 2026
+- Sauvegarde automatique de la note en cours d'édition

@@ -36,9 +36,9 @@ function tb.tnNewNote()
     tb.AfficherBoutons()
 end
 
-----------------------------------------
--- Sauvegarde la note en cours d'édition
-----------------------------------------
+-----------------------------------------------------
+-- Sauvegarde manuellement la note en cours d'édition
+-----------------------------------------------------
 
 function tb.tnSaveNote()
     local titre = tb.titleBox:GetText()
@@ -59,6 +59,33 @@ function tb.tnSaveNote()
     tb.notes[tb.currentIndex].content = contenu
     TBSaved.notes = tb.notes
     tnshowSaved()
+    tb.tnRefreshList()
+end
+
+
+---------------------------------------------
+-- Sauvegarde atuo la note en cours d'édition
+---------------------------------------------
+
+function tb.tnSaveAutoNote()
+    local titre = tb.titleBox:GetText()
+    local contenu = tb.editBox:GetText()
+
+    if titre == "" then
+        print(tb.text.NO_TITLE)
+        tnshowNoTitle()
+        return
+    end
+
+    if not tb.currentIndex then
+        tb.currentIndex = #tb.notes + 1
+        tb.notes[tb.currentIndex] = {}
+    end
+
+    tb.notes[tb.currentIndex].title = titre
+    tb.notes[tb.currentIndex].content = contenu
+    TBSaved.notes = tb.notes
+    print("|cff00ff00Traveler's Notebook :|r sauvegarde automatique")
     tb.tnRefreshList()
 end
 
@@ -127,7 +154,7 @@ end
 
 function tb.closeNote()
     print("fermeture de la note")
-    tb.tnSaveNote()
+    tb.tnSaveAutoNote()
     tb.mode = "LISTE"
     tb.AfficherBoutons()
 end

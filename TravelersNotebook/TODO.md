@@ -8,7 +8,7 @@
 ## Architecture
 - [ ] Déplacer les fonctions utilitaires dans un fichier externe
 - [ ] Séparer la logique des notes de l'interface
-- [ ] Organiser les fichiers Lua par fonctionnalité : fonctions, boutons, ....etc.
+- [x] Organiser les fichiers Lua par fonctionnalité : fonctions, boutons, ....etc.
 - [ ] Mettre les fonctions dans un fichier externe
 
 ## Prochaines fonctionnalités
@@ -18,7 +18,7 @@
 - [ ] Améliorer la liste des notes
 
 ## Améliorations
-- [ ] Revoir l'apparence des boutons
+- [x] Revoir l'apparence des boutons
 - [ ] Ajouter des tooltips
 - [ ] Améliorer la gestion des erreurs
 
@@ -26,33 +26,6 @@
 - [ ] Recherche dans les notes
 - [ ] Catégories
 - [ ] Export / import
-
-**1. idée: pas tous les boutons à la fois** 
-
-```lua
-if tb.mode == "EDITION" then
-    -- boutons de note : sauvegarder, position, épingler, hide, a propos, supprimer
-elseif tb.mode == "LISTE" then
-    -- boutons principaux : créer une note, a propos, hide
-end
-
-tb.modes = {
-    LISTE = {
-        tb.newButton,
-        tb.aboutButton,
-        tb.hideButton
-    },
-
-    EDITION = {
-        tb.saveButton,
-        tb.positionButton,
-        tb.pinButton,
-        tb.deleteButton,
-        tb.aboutButton,
-        tb.hideButton
-    }
-}
-```
 
 **4. épingler une note en haut de la liste**
 
