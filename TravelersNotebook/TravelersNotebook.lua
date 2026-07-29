@@ -68,13 +68,10 @@ btn:SetScript("OnLeave", function()
 end)
 
 -- Clic pour ouvrir ton addon
+
 btn:SetScript("OnClick", function(self)
     self:SetChecked(false) 
-    if tb.frame:IsShown() then
-        tb.frame:Hide()
-    else
-        tb.frame:Show()
-    end
+    tb.Toggle()
 end)
 
 -- Déplacement du bouton

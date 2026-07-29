@@ -7,29 +7,44 @@ tb = tb or {}
 function tb.CreationBoutons()
 
     tb.newButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-    tb.newButton:SetSize(115, 25)
+    tb.newButton:SetSize(85, 25)
     tb.newButton:SetText(tb.text.BUTTON_NEW)
     tb.newButton:SetScript("OnClick", tb.tnNewNote)
 
     tb.saveButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-    tb.saveButton:SetSize(100, 25)
+    tb.saveButton:SetSize(85, 25)
     tb.saveButton:SetText(tb.text.BUTTON_SAVE)
     tb.saveButton:SetScript("OnClick", tb.tnSaveNote)
 
     tb.deleteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-    tb.deleteButton:SetSize(100, 25)
+    tb.deleteButton:SetSize(85, 25)
     tb.deleteButton:SetText(tb.text.BUTTON_DEL)
     tb.deleteButton:SetScript("OnClick", tb.tnDeleteNote)
 
     tb.aboutButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-    tb.aboutButton:SetSize(100, 25)
+    tb.aboutButton:SetSize(85, 25)
     tb.aboutButton:SetText(tb.text.BUTTON_ABOUT)
     tb.aboutButton:SetScript("OnClick", tb.tnAboutWindows)
 
     tb.hideButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
-    tb.hideButton:SetSize(100, 25)
+    tb.hideButton:SetSize(85, 25)
     tb.hideButton:SetText("Hide")
     tb.hideButton:SetScript("OnClick", tb.tnHideWindows)
+
+    tb.gpsButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
+    tb.gpsButton:SetSize(85, 25)
+    tb.gpsButton:SetText("GPS")
+    tb.gpsButton:SetScript("OnClick", tb.CoordGPS)
+
+    tb.closeNoteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
+    tb.closeNoteButton:SetSize(85, 25)
+    tb.closeNoteButton:SetText("Return")
+    tb.closeNoteButton:SetScript("OnClick", tb.closeNote)
+
+    tb.pinButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
+    tb.pinButton:SetSize(85, 25)
+    tb.pinButton:SetText("Pin")
+    tb.pinButton:SetScript("OnClick", tb.pinNote)
 
     -- tous les boutons
 
@@ -37,6 +52,9 @@ function tb.CreationBoutons()
         tb.newButton,
         tb.saveButton,
         tb.deleteButton,
+        tb.gpsButton,
+        tb.closeNoteButton,
+        tb.pinButton,
         tb.aboutButton,
         tb.hideButton
     }
@@ -53,7 +71,9 @@ function tb.CreationBoutons()
         EDITION = {
             tb.saveButton,
             tb.deleteButton,
-            tb.aboutButton,
+            tb.gpsButton,
+            tb.pinButton,
+            tb.closeNoteButton,
             tb.hideButton
         }
     }
@@ -77,7 +97,7 @@ function tb.AfficherBoutons()
     end
 
     local total = #boutons
-    local espace = 120
+    local espace = 100
     local largeurTotale = (total - 1) * espace
     local startX = (tb.frame:GetWidth() - largeurTotale) / 2
 

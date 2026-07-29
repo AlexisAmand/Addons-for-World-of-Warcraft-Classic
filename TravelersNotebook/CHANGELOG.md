@@ -38,3 +38,7 @@
 
 ## v0.1 — July 28, 2026
 - Ajout du système de modes (LISTE / EDITION)
+
+## v0.2 — July 29, 2026
+- GUI
+- Add the GPS button

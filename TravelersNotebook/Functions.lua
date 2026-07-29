@@ -1,3 +1,17 @@
+-------------------------------------
+-- Le bouton flottant quand on clique
+-------------------------------------
+
+function tb.Toggle()
+    if tb.frame:IsShown() then
+        tb.frame:Hide()
+    else
+        tb.mode = "EDITION"
+        tb.AfficherBoutons()
+        tb.frame:Show()
+    end
+end
+
 -------------------------------
 -- Charger une note de la liste
 --------------------------------
@@ -48,6 +62,43 @@ function tb.tnSaveNote()
     tb.tnRefreshList()
 end
 
+-------------------------
+-- Affiche les coords X,Y
+-------------------------
+
+function tb.CoordGPS()
+
+    local mapID = C_Map.GetBestMapForUnit("player")
+    local zone = C_Map.GetMapInfo(mapID)
+    local subZoneName = GetSubZoneText()
+    local nomLieu = zone.name
+
+    if subZoneName ~= "" and subZoneName ~= zone.name then
+        nomLieu = string.format(
+            "%s (%s)",
+            subZoneName,
+            zone.name
+        )
+    end
+
+    if zone then
+        local position = C_Map.GetPlayerMapPosition(mapID, "player")
+
+        if position then
+            local x, y = position:GetXY()
+
+            local texte = string.format(
+                "[%s] %.1f, %.1f",
+                nomLieu,
+                x * 100,
+                y * 100
+            )
+
+            tb.editBox:Insert(texte)
+        end
+    end
+
+end
 
 --------------------------------------
 -- Supprime la note en cours d'édition
@@ -68,6 +119,25 @@ function tb.tnDeleteNote()
 
     tnshowDeleted()
     tb.tnRefreshList()
+end
+
+-----------------------------------
+-- Ferme la note en cours d'édition
+------------------------------------
+
+function tb.closeNote()
+    print("fermeture de la note")
+    tb.tnSaveNote()
+    tb.mode = "LISTE"
+    tb.AfficherBoutons()
+end
+
+--------------------------------------
+-- épingle la note en cours d'édition
+--------------------------------------
+
+function tb.pinNote()
+    print("pin de la note")
 end
 
 -----------

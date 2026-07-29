@@ -14,7 +14,7 @@
 ## Prochaines fonctionnalités
 - [x] Ajouter le système de modes (LISTE / EDITION)
 - [ ] Notes épinglées
-- [ ] Ajouter la position du joueur dans une note
+- [x] Ajouter la position du joueur dans une note
 - [ ] Améliorer la liste des notes
 
 ## Améliorations
@@ -52,56 +52,6 @@ tb.modes = {
         tb.hideButton
     }
 }
-```
-
-**2. capture de position (nom zone)**
-
-```lua
-local zone = C_Map.GetMapInfo(mapID)
-print(zone.name)
-```
-
-**3. Capture de position (coordonées)**
-
-```lua
-local mapID = C_Map.GetBestMapForUnit("player")
-local position = C_Map.GetPlayerMapPosition(mapID, "player")
-
-if position then
-    local x, y = position:GetXY()
-    print(x, y)
-end
-```
-
-Ou, si on veut le mettre dans la zone d'édition
-
-```lua
-local mapID = C_Map.GetBestMapForUnit("player")
-local zone = C_Map.GetMapInfo(mapID)
-
-if zone then
-    local position = C_Map.GetPlayerMapPosition(mapID, "player")
-
-    if position then
-        local x, y = position:GetXY()
-
-        local texte = string.format(
-            "\n📍 %s\nPosition : %.1f, %.1f\n",
-            zone.name,
-            x * 100,
-            y * 100
-        )
-
-        tb.editBox:Insert(texte)
-    end
-end
-```lua
-
-x et y sont entre 0 et 1, il faut faire x 100
-
-```lua
-local xPercent = x * 100
-local yPercent = y * 100
 ```
 
 **4. épingler une note en haut de la liste**
