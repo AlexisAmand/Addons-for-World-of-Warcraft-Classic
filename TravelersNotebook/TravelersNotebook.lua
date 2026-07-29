@@ -88,21 +88,59 @@ btn:SetScript("OnDragStop", btn.StopMovingOrSizing)
 ------------------------------------------------------------
 
 function tb.tnRefreshList()
+
+    local sortedNotes = {}
+
     -- Effacer les anciennes lignes
     for _, row in ipairs(tb.noteRows) do
         row:Hide()
     end
     tb.noteRows = {}
 
-    local y = -10
+    -- D'abord les notes épinglées
     for index, note in ipairs(tb.notes) do
+        if note.pinned then
+            table.insert(sortedNotes, {
+                index = index,
+                note = note
+            })
+        end
+    end
+
+    -- Ensuite les notes normales
+    for index, note in ipairs(tb.notes) do
+        if not note.pinned then
+            table.insert(sortedNotes, {
+                index = index,
+                note = note
+            })
+        end
+    end
+
+    local y = -10
+
+    for _, entry in ipairs(sortedNotes) do
+
+        local index = entry.index
+        local note = entry.note
+
         local row = CreateFrame("Button", nil, tb.listContent)
         row:SetPoint("TOPLEFT", 0, y)
         row:SetSize(200, 20)
 
+        row.pinIcon = row:CreateTexture(nil, "ARTWORK")
+        row.pinIcon:SetSize(12, 12)
+        row.pinIcon:SetPoint("LEFT", 2, 0)
+
         row.text = row:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-        row.text:SetPoint("LEFT", 5, 0)
+        row.text:SetPoint("LEFT", 20, 0)
         row.text:SetText(note.title)
+
+        if note.pinned then
+            row.pinIcon:SetTexture("Interface\\COMMON\\Indicator-green")
+        else
+            row.pinIcon:SetTexture("Interface\\COMMON\\Indicator-gray")
+        end
 
         row:SetScript("OnClick", function()
             tb.tnLoadNote(index)

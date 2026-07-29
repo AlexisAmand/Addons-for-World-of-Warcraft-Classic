@@ -22,6 +22,12 @@ function tb.tnLoadNote(index)
     tb.editBox:SetText(tb.notes[index].content)
     tb.mode = "EDITION"
     tb.AfficherBoutons()
+
+    if tb.notes[index].pinned then
+        tb.pinButton:SetText("Unpin")
+    else
+        tb.pinButton:SetText("Pin")
+    end
 end
 
 -------------------------------
@@ -38,6 +44,7 @@ end
 
 -----------------------------------------------------
 -- Sauvegarde manuellement la note en cours d'édition
+-- C'est ici que le tableau est agrandi de +1
 -----------------------------------------------------
 
 function tb.tnSaveNote()
@@ -64,10 +71,14 @@ end
 
 
 ---------------------------------------------
--- Sauvegarde atuo la note en cours d'édition
+-- Sauvegarde auto la note en cours d'édition
+-- C'est ici que le tableau est agrandi de +1
 ---------------------------------------------
 
 function tb.tnSaveAutoNote()
+
+    tb.notes = tb.notes or {}
+
     local titre = tb.titleBox:GetText()
     local contenu = tb.editBox:GetText()
 
@@ -80,6 +91,10 @@ function tb.tnSaveAutoNote()
     if not tb.currentIndex then
         tb.currentIndex = #tb.notes + 1
         tb.notes[tb.currentIndex] = {}
+    end
+
+    if tb.notes[tb.currentIndex].pinned == nil then
+        tb.notes[tb.currentIndex].pinned = false
     end
 
     tb.notes[tb.currentIndex].title = titre
@@ -159,12 +174,29 @@ function tb.closeNote()
     tb.AfficherBoutons()
 end
 
---------------------------------------
--- épingle la note en cours d'édition
---------------------------------------
+------------------------------------------
+-- (des)épingle la note en cours d'édition
+------------------------------------------
 
 function tb.pinNote()
-    print("pin de la note")
+
+    if tb.currentIndex then
+        local note = tb.notes[tb.currentIndex]
+
+        if note then
+            note.pinned = not (note.pinned == true)
+            TBSaved.notes = tb.notes
+            tb.tnRefreshList()
+        end
+
+        if note.pinned then
+            tb.pinButton:SetText("Unpin")
+        else
+            tb.pinButton:SetText("Pin")
+        end
+
+    end
+
 end
 
 -----------

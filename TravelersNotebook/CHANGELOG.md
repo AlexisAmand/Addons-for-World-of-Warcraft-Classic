@@ -45,3 +45,6 @@
 
 ## v0.3 — July 29, 2026
 - Sauvegarde automatique de la note en cours d'édition
+
+## v0.4 — July 29, 2026
+- pin/unpin a note
