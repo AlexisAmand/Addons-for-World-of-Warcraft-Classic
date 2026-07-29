@@ -13,7 +13,7 @@
 
 ## Prochaines fonctionnalités
 - [x] Ajouter le système de modes (LISTE / EDITION)
-- [ ] Notes épinglées
+- [x] Notes épinglées
 - [x] Ajouter la position du joueur dans une note
 - [ ] Améliorer la liste des notes
 

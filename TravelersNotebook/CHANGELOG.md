@@ -48,3 +48,4 @@
 
 ## v0.4 — July 29, 2026
 - pin/unpin a note
+- 
