@@ -16,12 +16,29 @@ function tb.CreationInsertMenu()
     tb.insertMenu:SetPoint("TOPLEFT", tb.menuButton, "BOTTOMLEFT", 0, -5)
     tb.insertMenu:Hide()
 
-
     tb.gpsButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.gpsButton:SetSize(75, 25)
     tb.gpsButton:SetText("GPS")
     tb.gpsButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -10)
     tb.gpsButton:SetScript("OnClick", tb.CoordGPS)
+
+    tb.timeButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.timeButton:SetSize(75, 25)
+    tb.timeButton:SetText("Time")
+    tb.timeButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -40)
+    tb.timeButton:SetScript("OnClick", tb.AddTime)
+
+    tb.dateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.dateButton:SetSize(75, 25)
+    tb.dateButton:SetText("Date")
+    tb.dateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -70)
+    tb.dateButton:SetScript("OnClick", tb.AddDate)
+   
+    tb.nomZoneDateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.nomZoneDateButton:SetSize(75, 25)
+    tb.nomZoneDateButton:SetText("Zone")
+    tb.nomZoneDateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -100)
+    tb.nomZoneDateButton:SetScript("OnClick", tb.nomZone)
 
 end
 

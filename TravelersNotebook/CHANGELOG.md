@@ -51,4 +51,9 @@
 - adding tooltips to the buttons
 
 ## v0.5 — July 30, 2026
-- Add Add button and insert menu system
+- Add "Add" button with insert submenu
+- Add Date insertion button
+- Add Time insertion button
+- Add Zone insertion button
+- Add GPS coordinate insertion button
+

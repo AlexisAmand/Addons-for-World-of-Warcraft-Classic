@@ -104,11 +104,11 @@ function tb.tnSaveAutoNote()
     tb.tnRefreshList()
 end
 
--------------------------
--- Affiche les coords X,Y
--------------------------
+----------------------------
+-- Affiche le nom de la zone
+----------------------------
 
-function tb.CoordGPS()
+function tb.nomZone()
 
     local mapID = C_Map.GetBestMapForUnit("player")
     local zone = C_Map.GetMapInfo(mapID)
@@ -127,13 +127,10 @@ function tb.CoordGPS()
         local position = C_Map.GetPlayerMapPosition(mapID, "player")
 
         if position then
-            local x, y = position:GetXY()
 
             local texte = string.format(
-                "[%s] %.1f, %.1f",
-                nomLieu,
-                x * 100,
-                y * 100
+                "[%s]",
+                nomLieu
             )
 
             tb.editBox:Insert(texte)
@@ -220,3 +217,49 @@ function tb.tnHideWindows()
     end
 end
 
+------------------
+-- Affiche l'heure
+------------------
+
+function tb.AddTime()
+    local heure = date("%X")
+    tb.editBox:Insert(heure)
+end
+
+------------------
+-- Affiche la date
+------------------
+
+function tb.AddDate()
+    local currentDate = date("%x")
+    tb.editBox:Insert(currentDate)
+end
+
+-----------------------------
+-- Affiche les X,Y de la zone
+-----------------------------
+
+function tb.CoordGPS()
+
+    local mapID = C_Map.GetBestMapForUnit("player")
+    local zone = C_Map.GetMapInfo(mapID)
+    local subZoneName = GetSubZoneText()
+    local nomLieu = zone.name
+
+    if zone then
+        local position = C_Map.GetPlayerMapPosition(mapID, "player")
+
+        if position then
+            local x, y = position:GetXY()
+
+            local texte = string.format(
+                "%.1f, %.1f",
+                x * 100,
+                y * 100
+            )
+
+            tb.editBox:Insert(texte)
+        end
+    end
+
+end
