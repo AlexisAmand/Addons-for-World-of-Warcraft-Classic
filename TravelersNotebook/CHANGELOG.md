@@ -48,4 +48,7 @@
 
 ## v0.4 — July 29, 2026
 - pin/unpin a note
-- 
+- adding tooltips to the buttons
+
+## v0.5 — July 30, 2026
+- Add Add button and insert menu system

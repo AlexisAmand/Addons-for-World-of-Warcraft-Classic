@@ -3,7 +3,7 @@
 ## Notes: A simple notebook to write and save your own notes in WoW.
 ## Author: La Team Panda
 ## SavedVariables: TBSaved
-## Version: 0.4
+## Version: 0.5
 
 TravelerNoteBookText.lua
 Messages.lua

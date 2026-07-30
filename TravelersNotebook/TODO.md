@@ -19,7 +19,7 @@
 
 ## Améliorations
 - [x] Revoir l'apparence des boutons
-- [ ] Ajouter des tooltips
+- [x] Ajouter des tooltips
 - [ ] Améliorer la gestion des erreurs
 
 ## Idées
@@ -43,6 +43,24 @@ pinned = false (point gris sur GUI)
 📍 Position
 ❓ About
 × Hide
+
+
+Heure :
+https://game-icons.net/1x1/lorc/stopwatch.html#download
+
+Pin :
+https://game-icons.net/1x1/delapouite/pin.html
+
+Carte :
+https://game-icons.net/1x1/lorc/treasure-map.html
+
+Save : 
+https://game-icons.net/1x1/delapouite/save.html
+
+
+
+
+
 
 
 

@@ -200,7 +200,7 @@ end)
 
 tb.frame.title = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 tb.frame.title:SetPoint("TOP", 0, -5)
-tb.frame.title:SetText(tb.text.ADDON_TITLE)
+tb.frame.title:SetText(tb.text.ADDON_TITLE.." v"..tb.version)
 
 ------------------------------------------------------------
 -- LISTBOX (à gauche)
@@ -231,6 +231,7 @@ tb.titleBox = CreateFrame("EditBox", "tbTitleBox", tb.frame, "InputBoxTemplate")
 tb.titleBox:SetSize(400, 20)
 tb.titleBox:SetPoint("TOPLEFT", tb.listFrame, "TOPRIGHT", 40, 0)
 tb.titleBox:SetAutoFocus(false)
+tb.titleBox:SetFontObject("GameFontNormal")
 
 -- Add a background texture
 local bg = tb.titleBox:CreateTexture(nil, "BACKGROUND")
