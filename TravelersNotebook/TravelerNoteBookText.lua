@@ -11,13 +11,10 @@ tb.text.BUTTON_NEW = "New"
 tb.text.BUTTON_SAVE = "Save"
 tb.text.BUTTON_DEL = "Delete"
 tb.text.BUTTON_ABOUT = "About"
-tb.text.RECORD_LVL1 = "Level 1 Wisdom"
-tb.text.RECORD_LVL2 = "Level 2 Wisdom"
-tb.text.RECORD_LVL3 = "Level 3 Wisdom"
 
 -- création d'une note
 
-tb.text.ENTER_TITLE = "Enter the title"
+tb.text.ENTER_TITLE = "Enter the title here"
 tb.text.ENTER_CONTENT = "And here the content"
 
 -- messages

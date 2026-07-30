@@ -24,9 +24,9 @@ It brings a small, personal journal directly into your WoW interface, allowing y
 ## Features
 
 <p align="center">
+  <img src="captures/capture-01.jpg" width="30%" />
   <img src="captures/capture-02.jpg" width="30%" />
   <img src="captures/capture-03.jpg" width="30%" />
-  <img src="captures/capture-04.jpg" width="30%" />
 </p>
 
 ### Notebook
@@ -35,7 +35,7 @@ It brings a small, personal journal directly into your WoW interface, allowing y
 * Save your notes for later use.
 * Keep your own travel journal and reminders.
 
-### Add menu
+### Insert menu
 
 Traveler's Notebook includes an **Insert** menu to quickly insert useful information into your current note.
 

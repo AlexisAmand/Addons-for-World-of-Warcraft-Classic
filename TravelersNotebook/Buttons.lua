@@ -3,7 +3,7 @@ tb = tb or {}
 function tb.CreationInsertMenu()
 
     tb.insertMenu = CreateFrame("Frame", nil, tb.frame, "BackdropTemplate")
-    tb.insertMenu:SetSize(120, 150)
+    tb.insertMenu:SetSize(120, 170)
 
     tb.insertMenu:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -13,7 +13,7 @@ function tb.CreationInsertMenu()
 
     tb.insertMenu:SetBackdropColor(0, 0, 0, 0.9)
     tb.insertMenu:SetFrameStrata("DIALOG")
-    tb.insertMenu:SetPoint("TOPLEFT", tb.menuButton, "BOTTOMLEFT", 0, -5)
+    tb.insertMenu:SetPoint("BOTTOMLEFT", tb.menuButton, "TOPLEFT", 0, 5)
     tb.insertMenu:Hide()
 
     tb.gpsButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
@@ -40,6 +40,12 @@ function tb.CreationInsertMenu()
     tb.nomZoneDateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -100)
     tb.nomZoneDateButton:SetScript("OnClick", tb.nomZone)
 
+    tb.separatorButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.separatorButton:SetSize(75, 25)
+    tb.separatorButton:SetText("Line")
+    tb.separatorButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -130)
+    tb.separatorButton:SetScript("OnClick", tb.addSeparator)
+
 end
 
 -------------------------
@@ -54,13 +60,9 @@ function tb.CreationBoutons()
     tb.menuButton:SetSize(75, 25)
     tb.menuButton:SetText("Insert")
     tb.menuButton:SetScript("OnClick", function(self)
-        print(tb.insertMenu:GetWidth(), tb.insertMenu:GetHeight())
-        print(tb.insertMenu:GetLeft(), tb.insertMenu:GetTop())
         if tb.insertMenu:IsShown() then
-            print("menu caché")
             tb.insertMenu:Hide()
         else
-            print("menu affiché")
             tb.insertMenu:Show()
         end
     end)

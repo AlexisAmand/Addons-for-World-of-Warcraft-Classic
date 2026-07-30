@@ -26,10 +26,36 @@ frame:SetScript("OnEvent", function(self, event, addon)
         tb.notes = TBSaved.notes
 
         if #tb.notes == 0 then
-            tb.ShowPlaceholder()
-        else
+
+            tb.notes[1] = {
+            title = "Welcome !",
+            content = [[
+            This notebook is ready for your adventures.
+
+            Use the Add button to insert useful information.
+
+            Available tools:
+            - New : Create a note.
+            - GPS: Insert your current coordinates.
+            - Zone: Insert your current zone.
+            - Date: Insert the current date.
+            - Time: Insert the current time.
+            - Separator: Add a visual separator.
+
+            Write down your discoveries, reminders, and memories.
+
+            Happy travels!
+            ]]
+            }
+            TBSaved.notes = tb.notes
+
+            tb.titleBox:SetText(tb.notes[1].title)
             tb.editBox:SetText(tb.notes[1].content)
-            tb.editBox.isPlaceholder = false
+            tb.tnRefreshList()
+
+        else
+            tb.titleBox:SetText(tb.notes[1].title)
+            tb.editBox:SetText(tb.notes[1].content)
             tb.tnRefreshList()
         end
     end
@@ -294,13 +320,6 @@ tb.editBox:SetText(tb.text.WELCOME)
 
 tb.CreationBoutons()
 tb.mode = "LISTE"
-
-C_Timer.NewTicker(15, function()
-    if tb.mode == "EDITION" and tb.noteModifiee then
-        tb.tnSaveAutoNote()
-        tb.noteModifiee = false
-    end
-end)
-
-print("Mode actuel :", tb.mode)
 tb.AfficherBoutons()
+
+print("|cff00ff00Traveler's Notebook :|r Hello there !")

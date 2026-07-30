@@ -1,3 +1,5 @@
+tb = tb or {}
+
 -------------------------------------
 -- Le bouton flottant quand on clique
 -------------------------------------
@@ -5,10 +7,12 @@
 function tb.Toggle()
     if tb.frame:IsShown() then
         tb.frame:Hide()
+        print("|cff00ff00Traveler's Notebook :|r Until next time, adventurer!")
     else
-        tb.mode = "EDITION"
+        tb.mode = "LISTE"
         tb.AfficherBoutons()
         tb.frame:Show()
+        print("|cff00ff00Traveler's Notebook :|r A new adventure begins!")
     end
 end
 
@@ -40,6 +44,7 @@ function tb.tnNewNote()
     tb.editBox:SetText(tb.text.ENTER_CONTENT)
     tb.mode = "EDITION"
     tb.AfficherBoutons()
+    print("|cff00ff00Traveler's Notebook :|r A new journey begins!")
 end
 
 -----------------------------------------------------
@@ -64,8 +69,10 @@ function tb.tnSaveNote()
 
     tb.notes[tb.currentIndex].title = titre
     tb.notes[tb.currentIndex].content = contenu
+    TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
     tnshowSaved()
+    print("|cff00ff00Traveler's Notebook :|r Notes saved.")
     tb.tnRefreshList()
 end
 
@@ -76,16 +83,18 @@ end
 ---------------------------------------------
 
 function tb.tnSaveAutoNote()
-
     tb.notes = tb.notes or {}
 
     local titre = tb.titleBox:GetText()
     local contenu = tb.editBox:GetText()
 
-    if titre == "" then
-        print(tb.text.NO_TITLE)
-        tnshowNoTitle()
+    if titre == tb.text.ENTER_TITLE and contenu == tb.text.ENTER_CONTENT then
         return
+    end
+
+    if not titre or titre:match("^%s*$") then
+        titre = "no-title"
+        tb.notes[tb.currentIndex].title = titre
     end
 
     if not tb.currentIndex then
@@ -99,8 +108,9 @@ function tb.tnSaveAutoNote()
 
     tb.notes[tb.currentIndex].title = titre
     tb.notes[tb.currentIndex].content = contenu
+    TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
-    print("|cff00ff00Traveler's Notebook :|r sauvegarde automatique")
+    print("|cff00ff00Traveler's Notebook :|r Notes saved.")
     tb.tnRefreshList()
 end
 
@@ -136,7 +146,7 @@ function tb.nomZone()
             tb.editBox:Insert(texte)
         end
     end
-
+    tb.insertMenu:Hide()
 end
 
 --------------------------------------
@@ -153,11 +163,13 @@ function tb.tnDeleteNote()
     table.remove(tb.notes, tb.currentIndex)
     tb.currentIndex = nil
 
-    tb.titleBox:SetText("")
-    tb.editBox:SetText("")
+    tb.titleBox:SetText("Enter the title here")
+    tb.editBox:SetText("And here the content")
 
     tnshowDeleted()
+    print("|cff00ff00Traveler's Notebook :|r This page has been removed.")
     tb.tnRefreshList()
+    -- tb.closeNote()
 end
 
 -----------------------------------
@@ -165,10 +177,11 @@ end
 ------------------------------------
 
 function tb.closeNote()
-    print("fermeture de la note")
     tb.tnSaveAutoNote()
     tb.mode = "LISTE"
     tb.AfficherBoutons()
+    tb.insertMenu:Hide()
+
 end
 
 ------------------------------------------
@@ -187,13 +200,15 @@ function tb.pinNote()
         end
 
         if note.pinned then
+            print("|cff00ff00Traveler's Notebook :|r A page worth remembering!")
             tb.pinButton:SetText("Unpin")
         else
+            print("|cff00ff00Traveler's Notebook :|r This page is no longer marked.")
             tb.pinButton:SetText("Pin")
         end
 
     end
-
+    tb.insertMenu:Hide()
 end
 
 -----------
@@ -212,8 +227,9 @@ function tb.tnHideWindows()
     if tb.frame:IsShown() then
         tb.mode = "LISTE"
         tb.AfficherBoutons()
-        tb.frame:Hide()
-        print("Hide - Mode actuel :", tb.mode)
+        tb.frame:Hide()  
+        tb.insertMenu:Hide()  
+        print("|cff00ff00Traveler's Notebook :|r See you later !")
     end
 end
 
@@ -224,6 +240,7 @@ end
 function tb.AddTime()
     local heure = date("%X")
     tb.editBox:Insert(heure)
+    tb.insertMenu:Hide()
 end
 
 ------------------
@@ -233,6 +250,7 @@ end
 function tb.AddDate()
     local currentDate = date("%x")
     tb.editBox:Insert(currentDate)
+    tb.insertMenu:Hide()
 end
 
 -----------------------------
@@ -261,5 +279,14 @@ function tb.CoordGPS()
             tb.editBox:Insert(texte)
         end
     end
-
+    tb.insertMenu:Hide()
 end
+
+-----------------------
+-- Ajoute un séparateur
+-----------------------
+
+function tb.addSeparator()
+    tb.editBox:Insert("\n--------------------------------------------------------------\n")
+    tb.insertMenu:Hide()
+end 

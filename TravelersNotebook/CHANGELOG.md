@@ -57,3 +57,15 @@
 - Add Zone insertion button
 - Add GPS coordinate insertion button
 
+## v0.5.9 — July 30, 2026
+- bugfix: sousmenu qui restait affiché quand on ferme une note
+- bugfix: sousmenu qui restait affiché quand on masque la fenêtre
+- bugfix: sauvegarde auto qui enregstrait mal les notes vides
+- bugfix: plus de sauvegarde auto des notes fantômes
+- Add : Log dans la console
+- GUI and code review
+- Add : Separator button
+- Add : Welcome to Traveler's Notebook
+
+## A TESTER
+- Quand on clique sur return, la note est enregistrée, même si le titre est tb.text.ENTER_TITLE
