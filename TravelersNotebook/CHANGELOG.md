@@ -72,3 +72,4 @@
 - code review
 - Add : Tooltip sur les éléments du sousmenu insert
 - Add : message si pas de pnj selectionné
+- Add : Combo button (en test)

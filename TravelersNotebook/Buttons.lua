@@ -3,7 +3,7 @@ tb = tb or {}
 function tb.CreationInsertMenu()
 
     tb.insertMenu = CreateFrame("Frame", nil, tb.frame, "BackdropTemplate")
-    tb.insertMenu:SetSize(120, 200)
+    tb.insertMenu:SetSize(180, 135)
 
     tb.insertMenu:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -15,7 +15,7 @@ function tb.CreationInsertMenu()
 
     tb.insertMenu:SetBackdropColor(0, 0, 0, 0.9)
     tb.insertMenu:SetFrameStrata("DIALOG")
-    tb.insertMenu:SetPoint("BOTTOMLEFT", tb.menuButton, "TOPLEFT", 0, 5)
+    tb.insertMenu:SetPoint("BOTTOM", tb.menuButton, "TOP", 0, 5)
     tb.insertMenu:Hide()
 
     -- bouton GPS
@@ -23,7 +23,7 @@ function tb.CreationInsertMenu()
     tb.gpsButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.gpsButton:SetSize(75, 25)
     tb.gpsButton:SetText(tb.text.BUTTON_GPS)
-    tb.gpsButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -10)
+    tb.gpsButton:SetPoint("TOPLEFT", tb.insertMenu, "TOPLEFT", 10, -10)
     tb.gpsButton:SetScript("OnClick", tb.CoordGPS)
 
     tb.gpsButton:SetScript("OnEnter", function(self)
@@ -41,7 +41,8 @@ function tb.CreationInsertMenu()
     tb.timeButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.timeButton:SetSize(75, 25)
     tb.timeButton:SetText(tb.text.BUTTON_TIME)
-    tb.timeButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -40)
+    -- tb.timeButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -40)
+    tb.timeButton:SetPoint("TOPRIGHT", tb.insertMenu, "TOPRIGHT", -10, -10)
     tb.timeButton:SetScript("OnClick", tb.AddTime)
 
     tb.timeButton:SetScript("OnEnter", function(self)
@@ -59,7 +60,7 @@ function tb.CreationInsertMenu()
     tb.dateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.dateButton:SetSize(75, 25)
     tb.dateButton:SetText(tb.text.BUTTON_DATE)
-    tb.dateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -70)
+    tb.dateButton:SetPoint("TOPLEFT", tb.insertMenu, "TOPLEFT", 10, -40)
     tb.dateButton:SetScript("OnClick", tb.AddDate)
 
     tb.dateButton:SetScript("OnEnter", function(self)
@@ -77,7 +78,7 @@ function tb.CreationInsertMenu()
     tb.nomZoneDateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.nomZoneDateButton:SetSize(75, 25)
     tb.nomZoneDateButton:SetText(tb.text.BUTTON_ZONE)
-    tb.nomZoneDateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -100)
+    tb.nomZoneDateButton:SetPoint("TOPRIGHT", tb.insertMenu, "TOPRIGHT", -10, -40)
     tb.nomZoneDateButton:SetScript("OnClick", tb.nomZone)
 
     tb.nomZoneDateButton:SetScript("OnEnter", function(self)
@@ -95,7 +96,7 @@ function tb.CreationInsertMenu()
     tb.separatorButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.separatorButton:SetSize(75, 25)
     tb.separatorButton:SetText(tb.text.BUTTON_LINE)
-    tb.separatorButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -130)
+    tb.separatorButton:SetPoint("TOPLEFT", tb.insertMenu, "TOPLEFT", 10, -70)
     tb.separatorButton:SetScript("OnClick", tb.addSeparator)
 
     tb.separatorButton:SetScript("OnEnter", function(self)
@@ -113,7 +114,7 @@ function tb.CreationInsertMenu()
     tb.targetButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.targetButton:SetSize(75, 25)
     tb.targetButton:SetText(tb.text.BUTTON_PNJ)
-    tb.targetButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -160)
+    tb.targetButton:SetPoint("TOPRIGHT", tb.insertMenu, "TOPRIGHT", -10, -70)
     tb.targetButton:SetScript("OnClick", tb.afficheTarget)
 
     tb.targetButton:SetScript("OnEnter", function(self)
@@ -125,6 +126,25 @@ function tb.CreationInsertMenu()
     tb.targetButton:SetScript("OnLeave", function()
         GameTooltip:Hide()
     end)
+
+    -- bouton combo
+
+    tb.comboButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.comboButton:SetSize(75, 25)
+    tb.comboButton:SetText("Position")
+    tb.comboButton:SetPoint("TOPLEFT", tb.insertMenu, "TOPLEFT", 10, -100)
+    tb.comboButton:SetScript("OnClick", tb.comboLocation)
+
+    tb.comboButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Insert le nom de la position ainsi que les coordonnées du joueur")
+        GameTooltip:Show()
+    end)
+
+    tb.comboButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
 end
 
 -------------------------

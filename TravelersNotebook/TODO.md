@@ -28,6 +28,6 @@
 - [ ] Recherche dans les notes
 - [ ] Catégories
 - [ ] Export / import
-- [ ] menu "insert" sur deux colonnes si besoin
+- [x] menu "insert" sur deux colonnes si besoin
 
 

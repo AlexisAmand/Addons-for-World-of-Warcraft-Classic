@@ -304,3 +304,43 @@ function tb.afficheTarget()
         print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_NOTARGET)
     end
 end
+
+------------------------------
+-- Ajoute le combo PNJ + Place
+------------------------------
+
+function tb.comboLocation()
+    print("combo test")
+
+    local mapID = C_Map.GetBestMapForUnit("player")
+    local zone = C_Map.GetMapInfo(mapID)
+    local subZoneName = GetSubZoneText()
+    local nomLieu = zone.name
+
+    if subZoneName ~= "" and subZoneName ~= zone.name then
+        nomLieu = string.format(
+            "[%s (%s)]",
+            subZoneName,
+            zone.name
+        )
+    end
+
+    if zone then
+        local position = C_Map.GetPlayerMapPosition(mapID, "player")
+
+        if position then
+            local x, y = position:GetXY()
+
+            local texte = string.format(
+                "%s %.1f, %.1f",
+                nomLieu,
+                x * 100,
+                y * 100
+            )
+
+            tb.editBox:Insert(texte)
+        end
+    end
+    tb.insertMenu:Hide()
+
+end
