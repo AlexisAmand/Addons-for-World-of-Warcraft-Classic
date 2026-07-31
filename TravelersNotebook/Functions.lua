@@ -27,6 +27,12 @@ function tb.tnLoadNote(index)
     tb.mode = "EDITION"
     tb.AfficherBoutons()
 
+    if not tb.notes[index].color then
+        tb.notes[index].color = {1, 0.82, 0}
+    end
+
+    tb.editBox:SetTextColor(tb.notes[index].color[1], tb.notes[index].color[2], tb.notes[index].color[3])
+
     if tb.notes[index].pinned then
         tb.pinButton:SetText(tb.text.BUTTON_UNPIN)
     else
@@ -206,7 +212,7 @@ function tb.pinNote()
         end
 
     end
-    tb.insertMenu:Hide()
+    tb.editMenu:Hide()
 end
 
 -----------
@@ -343,4 +349,13 @@ function tb.comboLocation()
     end
     tb.insertMenu:Hide()
 
+end
+
+-------------------------------
+-- couleur de la zone d'édition
+-------------------------------
+
+function tb.choisirColor(couleur)
+    tb.editBox:SetTextColor(couleur[1], couleur[2], couleur[3])
+    tb.notes[tb.currentIndex].color = couleur
 end

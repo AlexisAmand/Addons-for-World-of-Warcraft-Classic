@@ -281,7 +281,7 @@ tb.editBox:SetFontObject("GameFontNormal")
 -- tb.editBox:SetWidth(400)
 tb.editBox:SetWidth(tb.scrollFrame:GetWidth())
 
-tb.editBox:SetHeight(800)
+tb.editBox:SetHeight(800) 
 tb.editBox:SetAutoFocus(false)
 
 tb.editBox:SetScript("OnTextChanged", function()

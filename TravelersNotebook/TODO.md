@@ -16,7 +16,7 @@
 - [x] Notes épinglées
 - [x] Ajouter la position du joueur dans une note
 - [ ] Améliorer la liste des notes
-- [ ] Bouton combo : "Coordinates + Zone"
+- [x] Bouton combo : "Coordinates + Zone"
 - [ ] Bouton "Money" : insérer l'argent actuel du personnage
 
 ## Améliorations

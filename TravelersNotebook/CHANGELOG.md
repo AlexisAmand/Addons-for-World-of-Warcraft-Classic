@@ -72,4 +72,10 @@
 - code review
 - Add : Tooltip sur les éléments du sousmenu insert
 - Add : message si pas de pnj selectionné
+
+## v0.7 - July 31, 2026
 - Add : Combo button (en test)
+- Add : Edit button (en test)
+- Add : Changer la couleur du texte dans la zone d'édition (en test)
+
+
