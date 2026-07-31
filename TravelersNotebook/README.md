@@ -43,7 +43,7 @@ Available insertions:
 
 * **GPS** — Insert your current coordinates.
 * **Zone** — Insert your current zone name.
-* **Date** — Insert the current date and time.
+* **Date** — Insert the current date.
 * **Time** — Insert the current time.
 
 More insert options may be added in future versions.

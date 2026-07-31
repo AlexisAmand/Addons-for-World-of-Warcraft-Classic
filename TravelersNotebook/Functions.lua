@@ -7,12 +7,12 @@ tb = tb or {}
 function tb.Toggle()
     if tb.frame:IsShown() then
         tb.frame:Hide()
-        print("|cff00ff00Traveler's Notebook :|r Until next time, adventurer!")
+        print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_HIDE_01)
     else
         tb.mode = "LISTE"
         tb.AfficherBoutons()
         tb.frame:Show()
-        print("|cff00ff00Traveler's Notebook :|r A new adventure begins!")
+        print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_SHOW_01)
     end
 end
 
@@ -28,9 +28,9 @@ function tb.tnLoadNote(index)
     tb.AfficherBoutons()
 
     if tb.notes[index].pinned then
-        tb.pinButton:SetText("Unpin")
+        tb.pinButton:SetText(tb.text.BUTTON_UNPIN)
     else
-        tb.pinButton:SetText("Pin")
+        tb.pinButton:SetText(tb.text.BUTTON_PIN)
     end
 end
 
@@ -44,7 +44,7 @@ function tb.tnNewNote()
     tb.editBox:SetText(tb.text.ENTER_CONTENT)
     tb.mode = "EDITION"
     tb.AfficherBoutons()
-    print("|cff00ff00Traveler's Notebook :|r A new journey begins!")
+    print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_SHOW_02)
 end
 
 -----------------------------------------------------
@@ -72,10 +72,9 @@ function tb.tnSaveNote()
     TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
     tnshowSaved()
-    print("|cff00ff00Traveler's Notebook :|r Notes saved.")
+    print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_SAVE_01)
     tb.tnRefreshList()
 end
-
 
 ---------------------------------------------
 -- Sauvegarde auto la note en cours d'édition
@@ -93,7 +92,7 @@ function tb.tnSaveAutoNote()
     end
 
     if not titre or titre:match("^%s*$") then
-        titre = "no-title"
+        titre = tb.text.NO_TITLE_01
         tb.notes[tb.currentIndex].title = titre
     end
 
@@ -110,7 +109,7 @@ function tb.tnSaveAutoNote()
     tb.notes[tb.currentIndex].content = contenu
     TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
-    print("|cff00ff00Traveler's Notebook :|r Notes saved.")
+    print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_SAVE_01)
     tb.tnRefreshList()
 end
 
@@ -163,11 +162,11 @@ function tb.tnDeleteNote()
     table.remove(tb.notes, tb.currentIndex)
     tb.currentIndex = nil
 
-    tb.titleBox:SetText("Enter the title here")
-    tb.editBox:SetText("And here the content")
+    tb.titleBox:SetText(tb.text.ENTER_TITLE)
+    tb.editBox:SetText(tb.text.ENTER_CONTENT)
 
     tnshowDeleted()
-    print("|cff00ff00Traveler's Notebook :|r This page has been removed.")
+    print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_DELETE)
     tb.tnRefreshList()
     -- tb.closeNote()
 end
@@ -181,7 +180,6 @@ function tb.closeNote()
     tb.mode = "LISTE"
     tb.AfficherBoutons()
     tb.insertMenu:Hide()
-
 end
 
 ------------------------------------------
@@ -200,11 +198,11 @@ function tb.pinNote()
         end
 
         if note.pinned then
-            print("|cff00ff00Traveler's Notebook :|r A page worth remembering!")
-            tb.pinButton:SetText("Unpin")
+            print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_PIN)
+            tb.pinButton:SetText(tb.text.BUTTON_UNPIN)
         else
-            print("|cff00ff00Traveler's Notebook :|r This page is no longer marked.")
-            tb.pinButton:SetText("Pin")
+            print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_UNPIN)
+            tb.pinButton:SetText(tb.text.BUTTON_PIN)
         end
 
     end
@@ -229,7 +227,7 @@ function tb.tnHideWindows()
         tb.AfficherBoutons()
         tb.frame:Hide()  
         tb.insertMenu:Hide()  
-        print("|cff00ff00Traveler's Notebook :|r See you later !")
+        print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_HIDE_02)
     end
 end
 
@@ -290,3 +288,18 @@ function tb.addSeparator()
     tb.editBox:Insert("\n--------------------------------------------------------------\n")
     tb.insertMenu:Hide()
 end 
+
+--------------------------------
+-- Ajoute le nom d'un PNJ ciblé
+--------------------------------
+
+function tb.afficheTarget()
+    local nom = UnitName("target")
+
+    if nom then
+        tb.editBox:Insert(nom)
+        print(nom)
+    else
+        print(tb.text.CONSOLE_NOTARGET)
+    end
+end

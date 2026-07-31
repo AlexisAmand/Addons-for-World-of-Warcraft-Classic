@@ -1,3 +1,6 @@
+-- Remember:
+-- This is a notebook, not an office suite.
+
 tb = tb or {}
 
 tb.notes = {}
@@ -322,4 +325,4 @@ tb.CreationBoutons()
 tb.mode = "LISTE"
 tb.AfficherBoutons()
 
-print("|cff00ff00Traveler's Notebook :|r Hello there !")
+print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_HELLO)

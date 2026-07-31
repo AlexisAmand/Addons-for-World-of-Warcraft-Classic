@@ -6,10 +6,10 @@
 - [x] Ajouter les crédits dans la fenêtre "À propos"
 
 ## Architecture
-- [ ] Déplacer les fonctions utilitaires dans un fichier externe
+- [x] Déplacer les fonctions utilitaires dans un fichier externe
 - [ ] Séparer la logique des notes de l'interface
 - [x] Organiser les fichiers Lua par fonctionnalité : fonctions, boutons, ....etc.
-- [ ] Mettre les fonctions dans un fichier externe
+- [x] Mettre les fonctions dans un fichier externe
 
 ## Prochaines fonctionnalités
 - [x] Ajouter le système de modes (LISTE / EDITION)
@@ -27,41 +27,11 @@
 - [ ] Catégories
 - [ ] Export / import
 
-**4. épingler une note en haut de la liste**
+## Todo
 
-ajout d'un champ pinned = true (point doré sur GUI) 
-ou
-pinned = false (point gris sur GUI)
-
-**5. Sauvegarde automatique de la note en cours**
-
-**6. boutons carrés**
-
-💾 Save
-🗑 Delete
-📌 Pin
-📍 Position
-❓ About
-× Hide
-
-
-Heure :
-https://game-icons.net/1x1/lorc/stopwatch.html#download
-
-Pin :
-https://game-icons.net/1x1/delapouite/pin.html
-
-Carte :
-https://game-icons.net/1x1/lorc/treasure-map.html
-
-Save : 
-https://game-icons.net/1x1/delapouite/save.html
-
-
-
-
-
-
-
+- Bouton "Money" : insérer l'argent actuel du personnage
+- Bouton combo : "Coordinates + Zone"
+- menu "insert" sur deux colonnes si besoin
+- Tooltip sur les éléments du sousmenu insert
 
 

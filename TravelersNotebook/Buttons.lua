@@ -3,7 +3,7 @@ tb = tb or {}
 function tb.CreationInsertMenu()
 
     tb.insertMenu = CreateFrame("Frame", nil, tb.frame, "BackdropTemplate")
-    tb.insertMenu:SetSize(120, 170)
+    tb.insertMenu:SetSize(120, 200)
 
     tb.insertMenu:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -18,33 +18,39 @@ function tb.CreationInsertMenu()
 
     tb.gpsButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.gpsButton:SetSize(75, 25)
-    tb.gpsButton:SetText("GPS")
+    tb.gpsButton:SetText(tb.text.BUTTON_GPS)
     tb.gpsButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -10)
     tb.gpsButton:SetScript("OnClick", tb.CoordGPS)
 
     tb.timeButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.timeButton:SetSize(75, 25)
-    tb.timeButton:SetText("Time")
+    tb.timeButton:SetText(tb.text.BUTTON_TIME)
     tb.timeButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -40)
     tb.timeButton:SetScript("OnClick", tb.AddTime)
 
     tb.dateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.dateButton:SetSize(75, 25)
-    tb.dateButton:SetText("Date")
+    tb.dateButton:SetText(tb.text.BUTTON_DATE)
     tb.dateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -70)
     tb.dateButton:SetScript("OnClick", tb.AddDate)
    
     tb.nomZoneDateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.nomZoneDateButton:SetSize(75, 25)
-    tb.nomZoneDateButton:SetText("Zone")
+    tb.nomZoneDateButton:SetText(tb.text.BUTTON_ZONE)
     tb.nomZoneDateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -100)
     tb.nomZoneDateButton:SetScript("OnClick", tb.nomZone)
 
     tb.separatorButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.separatorButton:SetSize(75, 25)
-    tb.separatorButton:SetText("Line")
+    tb.separatorButton:SetText(tb.text.BUTTON_LINE)
     tb.separatorButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -130)
     tb.separatorButton:SetScript("OnClick", tb.addSeparator)
+
+    tb.targetButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
+    tb.targetButton:SetSize(75, 25)
+    tb.targetButton:SetText(tb.text.BUTTON_PNJ)
+    tb.targetButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -160)
+    tb.targetButton:SetScript("OnClick", tb.afficheTarget)
 
 end
 
@@ -58,7 +64,7 @@ function tb.CreationBoutons()
 
     tb.menuButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.menuButton:SetSize(75, 25)
-    tb.menuButton:SetText("Insert")
+    tb.menuButton:SetText(tb.text.BUTTON_INSERT)
     tb.menuButton:SetScript("OnClick", function(self)
         if tb.insertMenu:IsShown() then
             tb.insertMenu:Hide()
@@ -69,7 +75,7 @@ function tb.CreationBoutons()
 
     tb.menuButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Afficher le sous menu")
+        GameTooltip:SetText(tb.text.BUTTON_INSERT_HELP)
         GameTooltip:Show()
     end)
 
@@ -89,7 +95,7 @@ function tb.CreationBoutons()
 
     tb.newButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Create a new note")
+        GameTooltip:SetText(tb.text.BUTTON_NEW_HELP)
         GameTooltip:Show()
     end)
 
@@ -106,7 +112,7 @@ function tb.CreationBoutons()
 
     tb.saveButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Save current note")
+        GameTooltip:SetText(tb.text.BUTTON_SAVE_HELP)
         GameTooltip:Show()
     end)
 
@@ -123,7 +129,7 @@ function tb.CreationBoutons()
 
     tb.deleteButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Delete this note")
+        GameTooltip:SetText(tb.text.BUTTON_DEL_HELP)
         GameTooltip:Show()
     end)
 
@@ -140,7 +146,7 @@ function tb.CreationBoutons()
 
     tb.aboutButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("About this addon")
+        GameTooltip:SetText(tb.text.BUTTON_ABOUT_HELP)
         GameTooltip:Show()
     end)
 
@@ -152,12 +158,12 @@ function tb.CreationBoutons()
 
     tb.hideButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.hideButton:SetSize(75, 25)
-    tb.hideButton:SetText("Hide")
+    tb.hideButton:SetText(tb.text.BUTTON_HIDE)
     tb.hideButton:SetScript("OnClick", tb.tnHideWindows)
 
     tb.hideButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Hide this windows")
+        GameTooltip:SetText(tb.text.BUTTON_HIDE_HELP)
         GameTooltip:Show()
     end)
 
@@ -169,12 +175,12 @@ function tb.CreationBoutons()
 
     tb.closeNoteButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.closeNoteButton:SetSize(75, 25)
-    tb.closeNoteButton:SetText("Return")
+    tb.closeNoteButton:SetText(tb.text.BUTTON_RETURN)
     tb.closeNoteButton:SetScript("OnClick", tb.closeNote)
 
     tb.closeNoteButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Close this note")
+        GameTooltip:SetText(tb.text.BUTTON_RETURN_HELP)
         GameTooltip:Show()
     end)
 
@@ -186,12 +192,12 @@ function tb.CreationBoutons()
 
     tb.pinButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.pinButton:SetSize(75, 25)
-    tb.pinButton:SetText("Pin")
+    tb.pinButton:SetText(tb.text.BUTTON_PIN)
     tb.pinButton:SetScript("OnClick", tb.pinNote)
 
     tb.pinButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Pin/unpin this note")
+        GameTooltip:SetText(tb.text.BUTTON_PIN_HELP)
         GameTooltip:Show()
     end)
 

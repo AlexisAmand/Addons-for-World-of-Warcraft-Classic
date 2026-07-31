@@ -65,7 +65,8 @@
 - Add : Log dans la console
 - GUI and code review
 - Add : Separator button
-- Add : Welcome to Traveler's Notebook
+- Add : "Welcome to Traveler's Notebook" message
 
-## A TESTER
-- Quand on clique sur return, la note est enregistrée, même si le titre est tb.text.ENTER_TITLE
+## v0.6 — July 31, 2026
+- Add : PNJ button (en test)
+- code review
