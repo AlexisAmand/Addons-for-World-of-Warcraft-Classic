@@ -182,3 +182,39 @@ function tnshowNoNote()
     end)
 
 end
+
+------------------------------------------------------
+-- fonction qui alerte si un pnj n'est pas selectionné
+------------------------------------------------------
+
+function tnNoPnjSelected()
+
+    local messageFrame = CreateFrame("Frame", "TNnonote", UIParent, "BasicFrameTemplateWithInset")
+
+    messageFrame:SetFrameStrata("DIALOG")
+    messageFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+
+    messageFrame:SetSize(250, 100)
+    messageFrame:SetPoint("CENTER")
+    
+    messageFrame.title = messageFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    messageFrame.title:SetPoint("TOP", 0, -5)
+    messageFrame.title:SetText(tb.text.MSG_TITLE)
+
+    messageFrame.text = messageFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    messageFrame.text:SetWidth(250)
+    messageFrame.text:SetJustifyH("CENTER")
+    messageFrame.text:SetPoint("TOP", 0, -40)
+    messageFrame.text:SetText(tb.text.NO_PNJ)
+
+    messageFrame:Show()
+
+    local closeButton = CreateFrame("Button", nil, messageFrame, "UIPanelButtonTemplate")
+    closeButton:SetSize(80, 25)
+    closeButton:SetPoint("BOTTOM", 0, 10)
+    closeButton:SetText(tb.text.BUTTON_CLOSE)
+    closeButton:SetScript("OnClick", function()
+        messageFrame:Hide()
+    end)
+
+end

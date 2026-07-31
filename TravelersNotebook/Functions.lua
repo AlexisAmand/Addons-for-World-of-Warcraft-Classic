@@ -300,6 +300,7 @@ function tb.afficheTarget()
         tb.editBox:Insert(nom)
         print(nom)
     else
-        print(tb.text.CONSOLE_NOTARGET)
+        tnNoPnjSelected()
+        print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_NOTARGET)
     end
 end

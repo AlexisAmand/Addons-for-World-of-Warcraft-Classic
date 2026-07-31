@@ -70,3 +70,5 @@
 ## v0.6 — July 31, 2026
 - Add : PNJ button (en test)
 - code review
+- Add : Tooltip sur les éléments du sousmenu insert
+- Add : message si pas de pnj selectionné

@@ -16,22 +16,18 @@
 - [x] Notes épinglées
 - [x] Ajouter la position du joueur dans une note
 - [ ] Améliorer la liste des notes
+- [ ] Bouton combo : "Coordinates + Zone"
+- [ ] Bouton "Money" : insérer l'argent actuel du personnage
 
 ## Améliorations
 - [x] Revoir l'apparence des boutons
 - [x] Ajouter des tooltips
-- [ ] Améliorer la gestion des erreurs
+- [x] Améliorer la gestion des erreurs
 
 ## Idées
 - [ ] Recherche dans les notes
 - [ ] Catégories
 - [ ] Export / import
-
-## Todo
-
-- Bouton "Money" : insérer l'argent actuel du personnage
-- Bouton combo : "Coordinates + Zone"
-- menu "insert" sur deux colonnes si besoin
-- Tooltip sur les éléments du sousmenu insert
+- [ ] menu "insert" sur deux colonnes si besoin
 
 

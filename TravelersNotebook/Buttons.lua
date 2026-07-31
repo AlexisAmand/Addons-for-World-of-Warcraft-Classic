@@ -11,10 +11,14 @@ function tb.CreationInsertMenu()
         edgeSize = 12,
     })
 
+    -- bouton insert
+
     tb.insertMenu:SetBackdropColor(0, 0, 0, 0.9)
     tb.insertMenu:SetFrameStrata("DIALOG")
     tb.insertMenu:SetPoint("BOTTOMLEFT", tb.menuButton, "TOPLEFT", 0, 5)
     tb.insertMenu:Hide()
+
+    -- bouton GPS
 
     tb.gpsButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.gpsButton:SetSize(75, 25)
@@ -22,17 +26,53 @@ function tb.CreationInsertMenu()
     tb.gpsButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -10)
     tb.gpsButton:SetScript("OnClick", tb.CoordGPS)
 
+    tb.gpsButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_GPS_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.menuButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- bouton time
+
     tb.timeButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.timeButton:SetSize(75, 25)
     tb.timeButton:SetText(tb.text.BUTTON_TIME)
     tb.timeButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -40)
     tb.timeButton:SetScript("OnClick", tb.AddTime)
 
+    tb.timeButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_TIME_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.menuButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- bouton date
+
     tb.dateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.dateButton:SetSize(75, 25)
     tb.dateButton:SetText(tb.text.BUTTON_DATE)
     tb.dateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -70)
     tb.dateButton:SetScript("OnClick", tb.AddDate)
+
+    tb.dateButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_DATE_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.menuButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- bouton zone
    
     tb.nomZoneDateButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.nomZoneDateButton:SetSize(75, 25)
@@ -40,11 +80,35 @@ function tb.CreationInsertMenu()
     tb.nomZoneDateButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -100)
     tb.nomZoneDateButton:SetScript("OnClick", tb.nomZone)
 
+    tb.nomZoneDateButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_ZONE_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.nomZoneDateButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- bouton line
+
     tb.separatorButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.separatorButton:SetSize(75, 25)
     tb.separatorButton:SetText(tb.text.BUTTON_LINE)
     tb.separatorButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -130)
     tb.separatorButton:SetScript("OnClick", tb.addSeparator)
+
+    tb.separatorButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_LINE_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.separatorButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- bouton pnj
 
     tb.targetButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.targetButton:SetSize(75, 25)
@@ -52,6 +116,15 @@ function tb.CreationInsertMenu()
     tb.targetButton:SetPoint("TOP", tb.insertMenu, "TOP", 0, -160)
     tb.targetButton:SetScript("OnClick", tb.afficheTarget)
 
+    tb.targetButton:SetScript("OnEnter", function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText(tb.text.BUTTON_PNJ_HELP)
+        GameTooltip:Show()
+    end)
+
+    tb.targetButton:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
 end
 
 -------------------------
@@ -60,7 +133,7 @@ end
 
 function tb.CreationBoutons()
 
-    -- bouton pour le sousmenu
+    -- bouton insert : pour le sousmenu
 
     tb.menuButton = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.menuButton:SetSize(75, 25)
