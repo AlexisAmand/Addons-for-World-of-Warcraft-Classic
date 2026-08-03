@@ -19,3 +19,5 @@
 - Improved reagent classification (classID = 5)
 - Fixed tooltip duplication issue
 - Cleaned code and removed redundant checks
+
+## 0.0.1 - August 3, 2026
