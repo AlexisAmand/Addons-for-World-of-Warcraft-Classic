@@ -43,7 +43,14 @@ frame:SetScript("OnEvent", function(self, event, addon)
             - Zone: Insert your current zone.
             - Date: Insert the current date.
             - Time: Insert the current time.
-            - Separator: Add a visual separator.
+            - Line: Add a visual separator.
+            - NPC: Insert the name of selected NPC.
+            - Location: Insert your current zone name and your current coordinates.
+
+            You can also :
+
+            - Pin: Pin/unpin to highlight your most important notes
+            - Color palette: Choose a color for your text
 
             Write down your discoveries, reminders, and memories.
 
@@ -200,6 +207,7 @@ end
 tb.frame = CreateFrame("Frame", "tbWindow", UIParent, "BasicFrameTemplate")
 tb.frame:SetSize(700, 400)
 tb.frame:SetPoint("CENTER")
+tb.frame:Hide()
 
 -- texture de fond
 

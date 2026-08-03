@@ -186,6 +186,8 @@ function tb.closeNote()
     tb.mode = "LISTE"
     tb.AfficherBoutons()
     tb.insertMenu:Hide()
+    tb.titleBox:SetText(tb.text.TEMP_TITLE)
+    tb.editBox:SetText(tb.text.TEMP_CONTENT)
 end
 
 ------------------------------------------
@@ -348,7 +350,6 @@ function tb.comboLocation()
         end
     end
     tb.insertMenu:Hide()
-
 end
 
 -------------------------------
@@ -357,5 +358,9 @@ end
 
 function tb.choisirColor(couleur)
     tb.editBox:SetTextColor(couleur[1], couleur[2], couleur[3])
-    tb.notes[tb.currentIndex].color = couleur
+
+    if tb.currentIndex and tb.notes[tb.currentIndex] then
+        tb.notes[tb.currentIndex].color = couleur
+        tb.editMenu:Hide()
+    end
 end

@@ -45,8 +45,22 @@ Available insertions:
 * **Zone** — Insert your current zone name.
 * **Date** — Insert the current date.
 * **Time** — Insert the current time.
+* **Line** — Add a visual separator.
+* **NPC** — Insert the name of the selected NPC.
+* **Location** — Insert your current zone and coordinates.
 
 More insert options may be added in future versions.
+
+### Edit menu
+
+Traveler's Notebook includes an **Edit** menu.
+
+Available options:
+
+* **Pin** — Pin/unpin to highlight your most important notes
+* **Color palette** - Choose a color for your text.
+
+More edit options may be added in future versions.
 
 ## Philosophy
 

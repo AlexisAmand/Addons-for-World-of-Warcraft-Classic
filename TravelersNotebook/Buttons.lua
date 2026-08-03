@@ -3,7 +3,7 @@ tb = tb or {}
 function tb.CreationEditMenu()
 
     tb.editMenu = CreateFrame("Frame", nil, tb.frame, "BackdropTemplate")
-    tb.editMenu:SetSize(180, 135)
+    tb.editMenu:SetSize(180, 180)  -- 180,135
 
     tb.editMenu:SetBackdrop({
         bgFile = "Interface/Tooltips/UI-Tooltip-Background",
@@ -37,16 +37,21 @@ function tb.CreationEditMenu()
         GameTooltip:Hide()
     end)
 
+    -- a title pour la palette
+    tb.colorTitle = tb.editMenu:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    tb.colorTitle:SetText(tb.text.TXTCOLOR)
+    tb.colorTitle:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", -13, -10)
+
     -- 1er colonne des boutons de couleur
 
-    local mesCouleurs = {red = {1, 0, 0}, blue = {0, 0, 1}, green = {0, 1, 0}, purple = {0.5, 0, 0.5}, white = {1, 1, 1}}
+    local mesCouleurs = {jaune = {255/255, 241/255, 118/255}, rouge = {255/255, 138/255, 138/255}, orange = {255/255, 183/255, 120/255}, vert = {156/255, 220/255, 156/255}, bleu = {137/255, 196/255, 244/255}, violet = {190/255, 155/255, 230/255}}
     local position = 0
 
     for  c, couleur in pairs(mesCouleurs) do
         tb.colorButton = CreateFrame("Button", nil, tb.editMenu)
         tb.colorButton:SetSize(15, 15)
 
-        tb.colorButton:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", -10, - (10 + (position * 25)))
+        tb.colorButton:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", -10, - (30 + (position * 25)))
 
         tb.colorButton.texture = tb.colorButton:CreateTexture(nil, "BACKGROUND")
         tb.colorButton.texture:SetAllPoints()
@@ -58,7 +63,7 @@ function tb.CreationEditMenu()
         
         tb.colorButton:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("choisir la couleur")
+            GameTooltip:SetText(tb.text.CHOOSECOLOR)
             GameTooltip:Show()
         end)
 
@@ -72,14 +77,14 @@ function tb.CreationEditMenu()
 
     -- 2e colonne des boutons de couleur
 
-    local mesCouleurs = {yellow = {1, 0.8, 0}, orange = {1.0, 0.55, 0.2}, turquoise = {0.2, 0.8, 0.8}, bleudoux = {0.3, 0.55, 1.0}, vertdoux = {0.3, 0.8, 0.3}}
+    local mesCouleurs = {rose = {245/255, 166/255, 205/255}, cyan = {125/255, 220/255, 195/255}, bleuciel = {170/255, 215/255, 245/255}, menthe = {155/255, 225/255, 195/255}, marronclair = {205/255, 165/255, 195/255}, grisclair = {200/255, 200/255, 200/255}}
     local position = 0
 
     for  c, couleur in pairs(mesCouleurs) do
         tb.colorButton = CreateFrame("Button", nil, tb.editMenu)
         tb.colorButton:SetSize(15, 15)
 
-        tb.colorButton:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", - 35, - (10 + (position * 25)))
+        tb.colorButton:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", - 35, - (30 + (position * 25)))
 
         tb.colorButton.texture = tb.colorButton:CreateTexture(nil, "BACKGROUND")
         tb.colorButton.texture:SetAllPoints()
@@ -91,7 +96,7 @@ function tb.CreationEditMenu()
         
         tb.colorButton:SetScript("OnEnter", function(self)
             GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-            GameTooltip:SetText("choisir la couleur")
+            GameTooltip:SetText(tb.text.CHOOSECOLOR)
             GameTooltip:Show()
         end)
 
@@ -102,6 +107,39 @@ function tb.CreationEditMenu()
         position = position + 1
         
     end
+
+    -- 3e colonne des boutons de couleur
+
+    local mesCouleurs = {corail = {245/255, 145/255, 125/255}, magentaclair = {225/255, 145/255, 205/255}, oliveclair = {190/255, 195/255, 120/255}, turquoise = {105/255, 200/255, 190/255}, beige = {230/255, 205/255, 165/255}, lavande = {205/255, 185/255, 235/255}}
+    local position = 0
+
+    for  c, couleur in pairs(mesCouleurs) do
+        tb.colorButton = CreateFrame("Button", nil, tb.editMenu)
+        tb.colorButton:SetSize(15, 15)
+
+        tb.colorButton:SetPoint("TOPRIGHT", tb.editMenu, "TOPRIGHT", - 60, - (30 + (position * 25)))
+
+        tb.colorButton.texture = tb.colorButton:CreateTexture(nil, "BACKGROUND")
+        tb.colorButton.texture:SetAllPoints()
+        tb.colorButton.texture:SetColorTexture(couleur[1], couleur[2], couleur[3])
+        
+        tb.colorButton:SetScript("OnClick", function(self)
+            tb.choisirColor(couleur)
+        end)
+        
+        tb.colorButton:SetScript("OnEnter", function(self)
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(tb.text.CHOOSECOLOR)
+            GameTooltip:Show()
+        end)
+
+        tb.colorButton:SetScript("OnLeave", function()
+            GameTooltip:Hide()
+        end)  
+        
+        position = position + 1
+        
+    end    
 
 end
 
@@ -236,13 +274,13 @@ function tb.CreationInsertMenu()
 
     tb.comboButton = CreateFrame("Button", nil, tb.insertMenu, "UIPanelButtonTemplate")
     tb.comboButton:SetSize(75, 25)
-    tb.comboButton:SetText("Position")
+    tb.comboButton:SetText(tb.text.BUTTON_POSITION)
     tb.comboButton:SetPoint("TOPLEFT", tb.insertMenu, "TOPLEFT", 10, -100)
     tb.comboButton:SetScript("OnClick", tb.comboLocation)
 
     tb.comboButton:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Insert le nom de la position ainsi que les coordonnées du joueur")
+        GameTooltip:SetText(tb.text.BUTTON_POSITION_HELP)
         GameTooltip:Show()
     end)
 
@@ -264,6 +302,7 @@ function tb.CreationBoutons()
     tb.menuButton:SetSize(75, 25)
     tb.menuButton:SetText(tb.text.BUTTON_INSERT)
     tb.menuButton:SetScript("OnClick", function(self)
+        tb.editMenu:Hide()
         if tb.insertMenu:IsShown() then
             tb.insertMenu:Hide()
         else
@@ -285,8 +324,9 @@ function tb.CreationBoutons()
 
     tb.menu2Button = CreateFrame("Button", nil, tb.frame, "UIPanelButtonTemplate")
     tb.menu2Button:SetSize(75, 25)
-    tb.menu2Button:SetText("edit")
+    tb.menu2Button:SetText(tb.text.BUTONN_EDIT)
     tb.menu2Button:SetScript("OnClick", function(self)
+        tb.insertMenu:Hide()
         if tb.editMenu:IsShown() then
             tb.editMenu:Hide()
         else
@@ -296,7 +336,7 @@ function tb.CreationBoutons()
 
     tb.menu2Button:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("edit help")
+        GameTooltip:SetText(tb.text.BUTONN_EDIT_HELP)
         GameTooltip:Show()
     end)
 

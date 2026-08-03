@@ -9,7 +9,7 @@ tb.text.NO_TITLE_01 = "no-title"
 -- interface
 
 tb.text.MY_NOTES = "My Notes :"
-tb.text.NO_NOTE_YET = "Aucune note pour l’instant..."
+tb.text.NO_NOTE_YET = "No note yet..."
 tb.text.WELCOME = "Welcome in Traveler's Notebook !"
 tb.text.BUTTON_NEW = "New"
 tb.text.BUTTON_NEW_HELP = "Create a new note"
@@ -30,17 +30,22 @@ tb.text.BUTTON_PIN_HELP = "Pin current note"
 tb.text.BUTTON_UNPIN = "Unpin"
 tb.text.BUTTON_UNPIN_HELP = "Unpin current note"
 tb.text.BUTTON_GPS ="GPS"
-tb.text.BUTTON_GPS_HELP ="Insert la position X,Y du joueur"
+tb.text.BUTTON_GPS_HELP ="Insert the player’s X and Y coordinates"
 tb.text.BUTTON_TIME ="Time"
-tb.text.BUTTON_TIME_HELP ="Insert l'heure courante"
+tb.text.BUTTON_TIME_HELP ="Insert current time into note"
 tb.text.BUTTON_DATE ="Date"
-tb.text.BUTTON_DATE_HELP ="Insert la date courante"
-tb.text.BUTTON_ZONE ="Zone"
-tb.text.BUTTON_ZONE_HELP ="Insert le nom de la position du joueur"
-tb.text.BUTTON_LINE ="Line"
-tb.text.BUTTON_LINE_HELP ="Insert une ligne horizontale"
-tb.text.BUTTON_PNJ ="PNJ"
-tb.text.BUTTON_PNJ_HELP ="Insert le nom du PNJ selection"
+tb.text.BUTTON_DATE_HELP ="Insert current date into note"
+tb.text.BUTTON_ZONE = "Zone"
+tb.text.BUTTON_ZONE_HELP ="Insert current position into note"
+tb.text.BUTTON_LINE = "Line"
+tb.text.BUTTON_LINE_HELP = "Insert a horizontal line in the note"
+tb.text.BUTTON_PNJ = "NPC"
+tb.text.BUTTON_PNJ_HELP = "Insert the name of the selected NPC into the note"
+tb.text.BUTTON_POSITION = "Position"
+tb.text.BUTTON_POSITION_HELP = "Insert your location and coordinates into the note."
+tb.text.BUTONN_EDIT = "edit"
+tb.text.BUTONN_EDIT_HELP = "edit menu"
+
 
 -- logs dans le console
 
@@ -59,12 +64,14 @@ tb.text.CONSOLE_NOTARGET = "No target selected"
 
 tb.text.ENTER_TITLE = "Enter the title here"
 tb.text.ENTER_CONTENT = "And here the content"
+tb.text.TEMP_TITLE = "No notes selected"
+tb.text.TEMP_CONTENT = "Click on New or select a note to edit from the list on the left."
 
 -- messages
 
 tb.text.NO_TITLE = "Unable to save: no title."
 tb.text.NO_MSG = "Unable to del: no message."
-tb.text.NO_PNJ = "Oups. Pas de PNJ selectionné !"
+tb.text.NO_PNJ = "Oops. No NPC selected!"
 tb.text.NO_NOTE_DELETE ="No notes to delete."
 tb.text.BUTTON_CLOSE = "Close"
 tb.text.MSG_TITLE = "Message"
@@ -73,6 +80,8 @@ tb.text.DEL_OK = "The note has been deleted."
 
 -- the addon
 
+tb.text.TXTCOLOR = "Text color"
+tb.text.CHOOSECOLOR = "choose this color"
 tb.text.ADDON_TITLE = "Traveler's Notebook"
 tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
 tb.text.AUTHOR = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Author")

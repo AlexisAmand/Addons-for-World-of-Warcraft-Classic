@@ -23,11 +23,21 @@
 - [x] Revoir l'apparence des boutons
 - [x] Ajouter des tooltips
 - [x] Améliorer la gestion des erreurs
+- [ ] Texte multicolore
 
 ## Idées
 - [ ] Recherche dans les notes
 - [ ] Catégories
 - [ ] Export / import
 - [x] menu "insert" sur deux colonnes si besoin
+- [ ] gestion du presse papier (copier/couper/coller)
+
+
+
+- tri alpha AZ
+- tri alpha ZA
+- tri "pinned first" - défaut 
+
+
 
 

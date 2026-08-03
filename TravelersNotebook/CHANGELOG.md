@@ -78,4 +78,13 @@
 - Add : Edit button (en test)
 - Add : Changer la couleur du texte dans la zone d'édition (en test)
 
+## v0.7.3 - August 3, 2026
+- Bugfix : Retour depuis une note
+- Bugfix : La fenêtre de l'addon est maintenant masquée au démarrage de wow
+- nouvelles couleurs dans la palette.
+- GUI
+
+- Online !
+
+
 
