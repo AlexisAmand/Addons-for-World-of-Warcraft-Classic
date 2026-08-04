@@ -33,10 +33,9 @@
 - [ ] gestion du presse papier (copier/couper/coller)
 
 
-
-- tri alpha AZ
-- tri alpha ZA
-- tri "pinned first" - défaut 
+- case à cocher "hide in combat"
+- un menu qui permet le tri : tri alpha AZ, tri alpha ZA, tri "pinned first"
+- un champ de recherche
 
 
 

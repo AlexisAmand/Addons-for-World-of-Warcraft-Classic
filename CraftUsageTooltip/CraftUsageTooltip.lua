@@ -2,23 +2,7 @@
 
 local DB = LibStub("LibProfessionDB-1.0", true)
 
--- la base est-elle prête ?
-
-if DB and DB:IsReady() then
-    print("ProfessionDB est prête !")
-else
-    print("ProfessionDB n'est pas prête.")
-end
-
 -- pour chaque recette : son métier, son identifiant, et les informations de la recette
-
-local profsATester = {
-    [129] = true,
-    [164] = true,
-    [197] = true,
-    [202] = true,
-}
-
 -- création de la DB
 
 local CraftUsageDB = {}
@@ -34,6 +18,8 @@ for profId, recipeId, recipe in DB:Iterate() do
 
     end
 end
+
+_G.CraftUsageDB = CraftUsageDB
 
 -- liste des métiers
 
@@ -54,17 +40,23 @@ local ProfessionNames = {
     [755] = GetSpellInfo(25229),  -- Joaillerie
 }
 
--- icones pour les professions 
+-- icones pour les professions (a revoir)
 
 local ProfessionIcons = {
-    [197] = "Interface\\Icons\\Trade_Tailoring",
-    [165] = "Interface\\Icons\\INV_Misc_LeatherScrap_02",
-    [164] = "Interface\\Icons\\Trade_BlackSmithing",
-    [171] = "Interface\\Icons\\Trade_Alchemy",
-    [333] = "Interface\\Icons\\Trade_Engraving",
-    [185] = "Interface\\Icons\\INV_Misc_Food_15",
-    [186] = "Interface\\Icons\\INV_Misc_Organ_01",
-    [202] = "Interface\\Icons\\INV_Elemental_Primal_Fire",
+    [129] = "Interface\\Icons\\spell_holy_sealofsacrifice", -- Secourisme (ok)
+    [164] = "Interface\\Icons\\Trade_BlackSmithing", -- Forge (ok)
+    [165] = "Interface\\Icons\\trade_leatherworking", -- Travail du cuir
+    [171] = "Interface\\Icons\\Trade_Alchemy", -- Alchimie (ok)
+    [182] = "Interface\\Icons\\spell_nature_naturetouchgrow", -- Herboristerie (ok)
+    [185] = "Interface\\Icons\\INV_Misc_Food_15", -- Cuisine (ok)
+    [186] = "interface\\icons\\trade_mining", -- Minage (ok)
+    [197] = "Interface\\Icons\\trade_tailoring", -- Couture (ok)
+    [202] = "Interface\\Icons\\trade_engineering", -- Ingénierie (ok)
+    [333] = "Interface\\Icons\\Trade_Engraving", -- Enchantement (ok)
+    [356] = "Interface\\Icons\\Trade_Fishing", -- Pêche (ok)
+    [393] = "Interface\\Icons\\inv_misc_pelt_wolf_01", -- Dépeçage (ok)
+    [773] = "Interface\\Icons\\INV_Inscription_Tradeskill01", -- Calligraphie
+    [755] = "Interface\\Icons\\inv_misc_gem_01", -- Joaillerie (ok)
 }
 
 -- tooltip !

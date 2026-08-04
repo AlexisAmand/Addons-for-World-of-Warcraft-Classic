@@ -2,7 +2,7 @@
 ## Title: Craft Usage Tooltip
 ## Notes: Displays a tooltip when you hover over an item, showing the profession it corresponds to
 ## Author: La Team Panda
-## Version: 0.1
+## Version: 0.2
 ## Dependencies: ProfessionDB
 
 CraftUsageTooltip.lua
