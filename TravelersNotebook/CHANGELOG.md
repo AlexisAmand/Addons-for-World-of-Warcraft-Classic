@@ -86,5 +86,6 @@
 
 - Online !
 
-
-
+## v0.8 - August 4, 2026
+- Préparation de la topbar
+- ajout d'une case à cocher qui propose de masquer la fenêtre automatiquement pendant un combat.

@@ -9,6 +9,7 @@ TravelerNoteBookText.lua
 Messages.lua
 Functions.lua
 Buttons.lua
+topbar.lua
 TravelersNotebook.lua
 
 

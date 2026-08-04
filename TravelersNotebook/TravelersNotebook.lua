@@ -239,6 +239,12 @@ tb.frame.title = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 tb.frame.title:SetPoint("TOP", 0, -5)
 tb.frame.title:SetText(tb.text.ADDON_TITLE.." v"..tb.version)
 
+---------------------------
+-- Création de la top barre
+---------------------------
+
+tb.CreateTopBar()
+
 ------------------------------------------------------------
 -- LISTBOX (à gauche)
 ------------------------------------------------------------
