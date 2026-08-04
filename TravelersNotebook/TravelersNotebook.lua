@@ -8,6 +8,7 @@ tb.noteRows = {}
 tb.currentIndex = nil
 tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
 tb.noteModifiee = false
+tb.recherche = nil
 
 function tb.ShowPlaceholder()
     local child = tb.scrollFrame:GetScrollChild()
@@ -135,7 +136,7 @@ function tb.tnRefreshList()
 
     -- D'abord les notes épinglées
     for index, note in ipairs(tb.notes) do
-        if note.pinned then
+         if note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
             table.insert(sortedNotes, {
                 index = index,
                 note = note
@@ -145,7 +146,8 @@ function tb.tnRefreshList()
 
     -- Ensuite les notes normales
     for index, note in ipairs(tb.notes) do
-        if not note.pinned then
+        print("NOTE", index, note.title, note.content)
+        if not note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
             table.insert(sortedNotes, {
                 index = index,
                 note = note
@@ -249,16 +251,17 @@ tb.CreateTopBar()
 -- LISTBOX (à gauche)
 ------------------------------------------------------------
 tb.listFrame = CreateFrame("ScrollFrame", "tbListFrame", tb.frame, "UIPanelScrollFrameTemplate")
-tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -60)
-tb.listFrame:SetSize(200, 280)
+tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -75)
+tb.listFrame:SetSize(200, 270)
 
 tb.listContent = CreateFrame("Frame", nil, tb.listFrame)
-tb.listContent:SetSize(200, 600)
+tb.listContent:SetSize(200, 570)
 
 -- Add a title
 tb.listTitle = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 tb.listTitle:SetText(tb.text.MY_NOTES)
-tb.listTitle:SetPoint("BOTTOMLEFT", tb.listFrame, "TOPLEFT", 0, 10)
+tb.listTitle:ClearAllPoints()
+tb.listTitle:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -57)
 
 -- Add a background texture
 local bg = tb.listContent:CreateTexture(nil, "BACKGROUND")

@@ -86,6 +86,7 @@
 
 - Online !
 
-## v0.8 - August 4, 2026
+## v0.8 beta - August 4, 2026
 - Préparation de la topbar
 - ajout d'une case à cocher qui propose de masquer la fenêtre automatiquement pendant un combat.
+- ajout d'un champ de recherche pour filtrer les notes
