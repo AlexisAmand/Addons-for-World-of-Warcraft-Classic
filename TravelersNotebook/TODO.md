@@ -23,20 +23,18 @@
 - [x] Revoir l'apparence des boutons
 - [x] Ajouter des tooltips
 - [x] Améliorer la gestion des erreurs
-- [ ] Texte multicolore
+- [x] Texte multicolore
 
 ## Idées
-- [ ] Recherche dans les notes
+- [x] Recherche dans les notes
 - [ ] Catégories
 - [ ] Export / import
 - [x] menu "insert" sur deux colonnes si besoin
 - [ ] gestion du presse papier (copier/couper/coller)
 
-
-- case à cocher "hide in combat"
-- un menu qui permet le tri : tri alpha AZ, tri alpha ZA, tri "pinned first"
-- un champ de recherche
-
-
+## Todo
+- un menu qui permet le tri : tri alpha AZ, tri alpha ZA, tri "pinned first" (c'est celui par défaut)
+- remettre la loupe à droite
+- mettre les textes dans des variables
 
 

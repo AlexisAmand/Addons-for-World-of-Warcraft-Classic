@@ -86,7 +86,11 @@
 
 - Online !
 
-## v0.8 beta - August 4, 2026
-- Préparation de la topbar
-- ajout d'une case à cocher qui propose de masquer la fenêtre automatiquement pendant un combat.
-- ajout d'un champ de recherche pour filtrer les notes
+## v0.8 - August 6, 2026 (en test)
+- Top bar preparation
+- Added a checkbox to automatically hide the notebook during combat
+- Added a search box to filter notes
+- Added a submenu to sort the notes list
+- Added A–Z sorting
+- Added Z–A sorting
+- Added compatibility with World of Warcraft Retail

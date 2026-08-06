@@ -46,7 +46,6 @@ tb.text.BUTTON_POSITION_HELP = "Insert your location and coordinates into the no
 tb.text.BUTONN_EDIT = "edit"
 tb.text.BUTONN_EDIT_HELP = "edit menu"
 
-
 -- logs dans le console
 
 tb.text.CONSOLE_HELLO = "Hello there !"
@@ -87,3 +86,14 @@ tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
 tb.text.AUTHOR = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Author")
 tb.text.ICON_TOOLTIP = "Clic to open "..tb.text.ADDON_TITLE
 tb.text.ADDON_LOADED = tb.text.ADDON_TITLE.." loaded"
+
+-- topbar
+
+tb.text.TB_searchbox = "Search notes..."
+tb.text_TB_hide = "Hide in combat"
+tb.text_TB_sort_btn = "Sort"
+tb.text_TB_btn_01 = "Sort A..Z"
+tb.text_TB_btn_02 = "Sort Z..A"
+tb.text_TB_btn_03 = "Default"
+tb.text_TB_btn_04 = "Date >"
+tb.text_TB_btn_05 = "Date <"

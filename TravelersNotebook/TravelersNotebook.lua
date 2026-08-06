@@ -9,6 +9,7 @@ tb.currentIndex = nil
 tb.version = C_AddOns.GetAddOnMetadata("TravelersNoteBook", "Version")
 tb.noteModifiee = false
 tb.recherche = nil
+tb.sortMode = "D"
 
 function tb.ShowPlaceholder()
     local child = tb.scrollFrame:GetScrollChild()
@@ -56,7 +57,8 @@ frame:SetScript("OnEvent", function(self, event, addon)
             Write down your discoveries, reminders, and memories.
 
             Happy travels!
-            ]]
+            ]],
+            created = 1
             }
             TBSaved.notes = tb.notes
 
@@ -79,7 +81,8 @@ end)
 
 -- Bouton flottant Traveler's Notebook
 local btn = CreateFrame("CheckButton", "TNFloatingButton", UIParent, "ActionButtonTemplate")
-btn:SetSize(36, 36)
+local size = ActionButton1:GetWidth()
+btn:SetSize(size, size)
 btn:SetPoint("CENTER")
 
 -- Icône
@@ -129,31 +132,99 @@ function tb.tnRefreshList()
     local sortedNotes = {}
 
     -- Effacer les anciennes lignes
+    
     for _, row in ipairs(tb.noteRows) do
         row:Hide()
     end
     tb.noteRows = {}
 
-    -- D'abord les notes épinglées
-    for index, note in ipairs(tb.notes) do
-         if note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
-            table.insert(sortedNotes, {
-                index = index,
-                note = note
-            })
-        end
+    -- tri date croissante
+
+    if tb.sortMode == "TC" then
+        table.sort(tb.notes, function(a, b)
+            if not a.created then
+                return false
+            end
+
+            if not b.created then
+                return true
+            end
+
+            return a.created > b.created
+        end)
     end
 
-    -- Ensuite les notes normales
-    for index, note in ipairs(tb.notes) do
-        print("NOTE", index, note.title, note.content)
-        if not note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
-            table.insert(sortedNotes, {
-                index = index,
-                note = note
-            })
-        end
+    -- tri date décroissante
+
+    if tb.sortMode == "TD" then
+        table.sort(tb.notes, function(a, b)
+            if not a.created then
+                return false
+            end
+
+            if not b.created then
+                return true
+            end
+
+            return a.created < b.created
+        end)
     end
+
+    -- tri Z..A
+
+    if tb.sortMode == "ZA" then
+        table.sort(tb.notes, function(a, b)
+            return string.lower(a.title) > string.lower(b.title)
+        end)
+    end
+
+    -- tri A..Z
+
+    if tb.sortMode == "AZ" then
+        table.sort(tb.notes, function(a, b)
+            return string.lower(a.title) < string.lower(b.title)
+        end)
+    end
+
+    -- On met les éléments triés dans la liste "logique"
+
+    if tb.sortMode == "D" then -- tri par défaut
+
+        -- D'abord les notes épinglées
+        for index, note in ipairs(tb.notes) do
+            if note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
+                table.insert(sortedNotes, {
+                    index = index,
+                    note = note
+                })
+            end
+        end
+
+        -- Ensuite les notes normales
+        for index, note in ipairs(tb.notes) do
+            if not note.pinned and tb.noteCorrespond(note, tb.recherche or "") then
+                table.insert(sortedNotes, {
+                    index = index,
+                    note = note
+                })
+            end
+        end
+
+    else
+
+        -- AZ ou ZA
+        for index, note in ipairs(tb.notes) do
+            if tb.noteCorrespond(note, tb.recherche or "") then
+                table.insert(sortedNotes, {
+                    index = index,
+                    note = note
+                })
+            end
+        end
+
+    end
+
+    -- et maintenant, on les mets dans la liste qui s'affiche
 
     local y = -10
 
@@ -187,8 +258,8 @@ function tb.tnRefreshList()
         table.insert(tb.noteRows, row)
         y = y - 22
     end
-end
 
+end
 ------------------------------------------------------------
 -- Commande /tn
 ------------------------------------------------------------
@@ -250,9 +321,10 @@ tb.CreateTopBar()
 ------------------------------------------------------------
 -- LISTBOX (à gauche)
 ------------------------------------------------------------
+
 tb.listFrame = CreateFrame("ScrollFrame", "tbListFrame", tb.frame, "UIPanelScrollFrameTemplate")
-tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -75)
-tb.listFrame:SetSize(200, 270)
+tb.listFrame:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -85)
+tb.listFrame:SetSize(200, 256)
 
 tb.listContent = CreateFrame("Frame", nil, tb.listFrame)
 tb.listContent:SetSize(200, 570)
@@ -261,7 +333,7 @@ tb.listContent:SetSize(200, 570)
 tb.listTitle = tb.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 tb.listTitle:SetText(tb.text.MY_NOTES)
 tb.listTitle:ClearAllPoints()
-tb.listTitle:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -57)
+tb.listTitle:SetPoint("TOPLEFT", tb.frame, "TOPLEFT", 20, -67)
 
 -- Add a background texture
 local bg = tb.listContent:CreateTexture(nil, "BACKGROUND")
@@ -273,6 +345,7 @@ tb.listFrame:SetScrollChild(tb.listContent)
 ------------------------------------------------------------
 -- Champ titre (à droite)
 ------------------------------------------------------------
+
 tb.titleBox = CreateFrame("EditBox", "tbTitleBox", tb.frame, "InputBoxTemplate")
 tb.titleBox:SetSize(400, 20)
 tb.titleBox:SetPoint("TOPLEFT", tb.listFrame, "TOPRIGHT", 40, 0)
@@ -287,6 +360,7 @@ bg:SetColorTexture(0, 0, 0, 0.5) -- RGBA: black with 50% transparency
 ------------------------------------------------------------
 -- Zone de texte (scrollable)
 ------------------------------------------------------------
+
 tb.scrollFrame = CreateFrame("ScrollFrame", "tbScrollFrame", tb.frame, "UIPanelScrollFrameTemplate")
 tb.scrollFrame:SetPoint("TOPLEFT", tb.titleBox, "BOTTOMLEFT", 0, -20)
 tb.scrollFrame:SetPoint("BOTTOMRIGHT", tb.frame, "BOTTOMRIGHT", -40, 60)

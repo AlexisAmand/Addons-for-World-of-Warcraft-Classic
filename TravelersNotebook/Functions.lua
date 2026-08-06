@@ -75,6 +75,7 @@ function tb.tnSaveNote()
 
     tb.notes[tb.currentIndex].title = titre
     tb.notes[tb.currentIndex].content = contenu
+    tb.notes[tb.currentIndex].created = time()
     TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
     tnshowSaved()
@@ -113,6 +114,7 @@ function tb.tnSaveAutoNote()
 
     tb.notes[tb.currentIndex].title = titre
     tb.notes[tb.currentIndex].content = contenu
+    tb.notes[tb.currentIndex].created = time()
     TBSaved = TBSaved or {}
     TBSaved.notes = tb.notes
     print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_SAVE_01)
@@ -306,7 +308,6 @@ function tb.afficheTarget()
 
     if nom then
         tb.editBox:Insert(nom)
-        print(nom)
     else
         tnNoPnjSelected()
         print("|cff00ff00"..tb.text.ADDON_TITLE.." :|r "..tb.text.CONSOLE_NOTARGET)
@@ -318,8 +319,6 @@ end
 ------------------------------
 
 function tb.comboLocation()
-    print("combo test")
-
     local mapID = C_Map.GetBestMapForUnit("player")
     local zone = C_Map.GetMapInfo(mapID)
     local subZoneName = GetSubZoneText()
