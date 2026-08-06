@@ -36,7 +36,7 @@ While playing World of Warcraft, I often keep a real notebook next to me to writ
   <img src="TravelersNotebook/captures/capture-03.jpg" width="30%" />
 </p>
 
-Get the stable release on CurseForge: As soon as possible :)
+Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/travelers-notebook)
 
 ## Wisdom of Azeroth
 

@@ -2,6 +2,8 @@
 
 While playing World of Warcraft, I often keep a real notebook next to me to write down useful information: NPC locations, quests, ideas, and things I don't want to forget. **Traveler's Notebook** brings this habit directly into the game.
 
+Get the stable release on CurseForge: [Gasp of Pandaria](https://www.curseforge.com/wow/addons/travelers-notebook)
+
 ## Development notice
 
 The versions available on GitHub are still under development. They may contain bugs, and some features may not yet be fully functional.
