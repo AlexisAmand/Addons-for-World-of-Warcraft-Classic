@@ -1,0 +1,9 @@
+## Interface: 50504
+## Title: Feet of Azeroth
+## Notes: A small travel companion for Azeroth. Track the distance you've travelled through the world of Warcraft.
+## Author: La Team Panda
+## SavedVariables: FASaved
+## Version: 0.1
+
+Functions.lua
+FeetOfAzeroth.lua
