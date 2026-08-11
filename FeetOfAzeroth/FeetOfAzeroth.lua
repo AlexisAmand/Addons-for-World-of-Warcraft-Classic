@@ -1,5 +1,11 @@
 fa = fa or {}
 fa.nbclic = 0
+fa.uniteMetrique = true
+
+-------------------------------
+-- récupération des sauvegardes
+-- et initialisation de l'addon
+-------------------------------
 
 local loader = CreateFrame("Frame")
 

@@ -1,6 +1,6 @@
 # Feet Of Azeroth
 
-A small travel companion for Azeroth. Track the distance you've travelled through the world of Warcraft.
+A small travel companion for Azeroth. Display your current coordinates and track the distance you've travelled through the world of Warcraft.
 
 ## Features
 
@@ -9,8 +9,9 @@ A small travel companion for Azeroth. Track the distance you've travelled throug
   <img src="captures/capture-02.jpg" width="30%" />
 </p>
 
-* Distance travelled during the current session
-* Total distance travelled across all sessions
 * Display of the player's current coordinates
+* Distance travelled during the current session
+* Total distance travelled since the addon was installed
+* Switch between meters and yards
 
 

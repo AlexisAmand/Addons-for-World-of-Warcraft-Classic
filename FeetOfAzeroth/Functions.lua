@@ -1,5 +1,76 @@
 fa = fa or {}
 
+-------------------
+-- Menu des options
+-------------------
+
+function fa.CreationMenu()
+
+    fa.optionMenu = CreateFrame("Frame", nil, fa.frame, "BackdropTemplate")
+    fa.optionMenu:SetSize(180, 135) 
+
+    fa.optionMenu.bg = fa.optionMenu:CreateTexture(nil, "BACKGROUND")
+    fa.optionMenu.bg:SetAllPoints()
+    fa.optionMenu.bg:SetColorTexture(0, 0, 0, 0.7)
+
+    fa.optionMenu.border = CreateFrame("Frame", nil, fa.optionMenu, "BackdropTemplate")
+    fa.optionMenu.border:SetAllPoints()
+    fa.optionMenu.border:SetBackdrop({
+        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+        edgeSize = 12,
+    })
+
+    -- une zone pour le titre dans le menu des options
+    fa.optionTitre = fa.optionMenu:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.optionTitre:ClearAllPoints()
+    fa.optionTitre:SetPoint("TOP", fa.optionMenu, "TOP", 0, -10)
+    fa.optionTitre:SetText("Feet Of Azeroth "..fa.VERSION)
+
+    -- ligne de séparation
+
+    fa.topSeparator = fa.optionMenu:CreateTexture(nil, "ARTWORK")
+    fa.topSeparator:SetColorTexture(1, 1, 1, 0.15)
+    fa.topSeparator:SetSize(150, 1)
+    fa.topSeparator:SetPoint("TOP", fa.optionTitre, "BOTTOM", 0, -4)
+
+    -- bouton menu
+
+    fa.menuButton = CreateFrame("Button", nil, fa.frame, "UIPanelButtonTemplate")
+    fa.menuButton:SetSize(67, 25)
+    fa.menuButton:SetText("Menu")
+    fa.menuButton:SetPoint("BOTTOMRIGHT", fa.frame, "BOTTOMRIGHT", -7, 7)
+
+    fa.menuButton:SetScript("OnClick", function(self)
+        if fa.optionMenu:IsShown() then
+            fa.optionMenu:Hide()
+        else
+            fa.optionMenu:Show()
+        end
+    end)
+
+    -- bouton about
+
+    fa.aboutButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
+    fa.aboutButton:SetSize(67, 25)
+    fa.aboutButton:SetText("About")
+    fa.aboutButton:SetPoint("TOPLEFT", fa.topSeparator, "TOPLEFT", 5, -8)
+    fa.aboutButton:SetScript("OnClick", fa.showAbout)
+
+    -- bouton switch
+
+    fa.mydButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
+    fa.mydButton:SetSize(67, 25)
+    fa.mydButton:SetText("m / yd")
+    fa.mydButton:SetPoint("TOPRIGHT", fa.topSeparator, "TOPRIGHT", -5, -8)
+    fa.mydButton:SetScript("OnClick", fa.switchUnites)
+
+    -- Position du menu 
+    fa.optionMenu:SetPoint("TOP", fa.menuButton, "BOTTOM", 0, -10)
+
+    -- Le menu est caché au démarrage 
+    fa.optionMenu:Hide()
+end
+
 -------------------------
 -- création de la fenêtre
 -------------------------
@@ -45,40 +116,76 @@ function fa.creationFenetre()
 
     -- bouton toggle
     fa.toggleButton = CreateFrame("Button", nil, fa.frame, "UIPanelButtonTemplate")
-    fa.toggleButton:SetSize(75, 25)
+    fa.toggleButton:SetSize(67, 25)
     fa.toggleButton:SetText("Toggle")
-    fa.toggleButton:SetPoint("BOTTOM", fa.frame, "BOTTOM", 0, 7)
+    fa.toggleButton:SetPoint("BOTTOMLEFT", fa.frame, "BOTTOMLEFT", 7, 7)
     fa.toggleButton:SetScript("OnClick", fa.toggleTexte)
+
+    fa.CreationMenu()
+
 end
 
--- formatage du texte 
+-------------------
+--
+-----------------
+
+local function tronqueDeuxDecimales(nombre)
+    return math.floor(nombre * 100) / 100
+end
+
+---------------------------------------------------------
+-- formatage du texte avec les unités du système métrique
+---------------------------------------------------------
 
 function fa.formatDistance(distance)
 
-    local metres = distance * 0.9144
+    if fa.uniteMetrique then
 
-    if metres < 10 then
-        return string.format("%.2f m", metres)
+        local distanceAffichee = distance * 0.9144
+        
+        if distanceAffichee < 10 then
+            return string.format("%.2f m", tronqueDeuxDecimales(distanceAffichee))
 
-    elseif metres < 100 then
-        return string.format("%.2f dam", metres / 10)
+        elseif distanceAffichee < 100 then
+            return string.format("%.2f dam", tronqueDeuxDecimales(distanceAffichee / 10))
 
-    elseif metres < 1000 then
-        return string.format("%.2f hm", metres / 100)
+        elseif distanceAffichee < 1000 then
+            return string.format("%.2f hm", tronqueDeuxDecimales(distanceAffichee / 100))
 
-    elseif metres < 1000000 then
-        return string.format("%.2f km", metres / 1000)
+        elseif distanceAffichee < 1000000 then
+            return string.format("%.2f km", tronqueDeuxDecimales(distanceAffichee / 1000))
 
-    elseif metres < 1000000000 then
-        return string.format("%.2f Mm", metres / 1000000)
+        elseif distanceAffichee < 1000000000 then
+            return string.format("%.2f Mm", tronqueDeuxDecimales(distanceAffichee / 1000000))
+
+        else
+            return string.format("%.2f Gm", tronqueDeuxDecimales(distanceAffichee / 1000000000))
+        end
 
     else
-        return string.format("%.2f Gm", metres / 1000000000)
+
+        local distanceAffichee = distance
+
+        if distanceAffichee < 10 then
+            return string.format("%.2f yd", tronqueDeuxDecimales(distanceAffichee))
+
+        elseif distanceAffichee < 1000000 then
+            return string.format("%.2f kyd", tronqueDeuxDecimales(distanceAffichee / 1000))
+
+        elseif distanceAffichee < 1000000000 then
+            return string.format("%.2f Myd", tronqueDeuxDecimales(distanceAffichee / 1000000))
+
+        else
+            return string.format("%.2f Gyd", tronqueDeuxDecimales(distanceAffichee / 1000000000))
+        end
+
     end
 
 end
 
+----------------------------------
 -- met à jour le texte du compteur
+----------------------------------
 
 function fa.updateTexte()
 
@@ -87,8 +194,12 @@ function fa.updateTexte()
         fa.piedTexte:SetText(
             string.format("Lifetime : "..fa.formatDistance(fa.distanceTotal))
         )
+    elseif fa.nbclic == 2 then
+        -- affichage de l'heure
+        local heure = date("%H:%M:%S")
+        fa.piedTexte:SetText("It's :"..heure)
     else
-        -- affichage
+        -- affichage de le session
         fa.piedTexte:SetText(
             string.format("Session : "..fa.formatDistance(fa.distanceSession))
         )
@@ -96,7 +207,9 @@ function fa.updateTexte()
     end  
 end
 
--- récup position
+---------------------------------
+-- récup de la position du joueur
+---------------------------------
 
 function fa.recuperationPosition()
 
@@ -130,14 +243,18 @@ function fa.recuperationPosition()
 
 end
 
--- toggle le texte
+----------------------------------
+-- fonctionnement du bouton toggle
+----------------------------------
 
 function fa.toggleTexte()
     fa.nbclic = fa.nbclic + 1
     fa.updateTexte() 
 end
 
--- actualise la fenêtre
+--------------------------------------
+-- actualise les infos dans la fenêtre
+--------------------------------------
 
 function fa.demarrerPodometre()
     fa.timer = C_Timer.NewTicker(0.1, function()
@@ -146,7 +263,9 @@ function fa.demarrerPodometre()
     end)
 end 
 
--- gps
+---------------------------------------
+-- affichage des coordonnées du joueurs
+---------------------------------------
 
 function fa.afficheCoordonnees()
 
@@ -176,4 +295,62 @@ function fa.afficheCoordonnees()
         fa.coordTexte:SetText(texte)
     end
 end
+
+----------------
+-- fenêtre about
+----------------
+
+function fa.showAbout()
+
+    fa.optionMenu:Hide()
+
+    local aboutFrame = CreateFrame("Frame", "TNAbout", UIParent, "BasicFrameTemplateWithInset")
+
+    aboutFrame:SetFrameStrata("DIALOG")
+    aboutFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
+
+    aboutFrame:SetSize(250, 120)
+    aboutFrame:SetPoint("CENTER")
+    
+    aboutFrame.title = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    aboutFrame.title:SetPoint("TOP", 0, -5)
+    aboutFrame.title:SetText("About")
+
+    aboutFrame.text = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    aboutFrame.text:SetWidth(250)
+    aboutFrame.text:SetJustifyH("CENTER")
+    aboutFrame.text:SetPoint("TOP", 0, -40)
+
+    aboutFrame.text:SetText(
+    fa.ADDON_TITLE.."\n"..
+    "Version "..fa.VERSION.."\n"..
+    "By "..fa.AUTHOR.."\n\n"
+    )
+
+    aboutFrame:Show()
+
+    local closeButton = CreateFrame("Button", nil, aboutFrame, "UIPanelButtonTemplate")
+    closeButton:SetSize(80, 25)
+    closeButton:SetPoint("BOTTOM", 0, 10)
+    closeButton:SetText("close")
+    closeButton:SetScript("OnClick", function()
+        aboutFrame:Hide()
+    end)
+
+end
+
+-------------------------------------
+-- fonction qui switche entre yd et m
+-------------------------------------
+
+function  fa.switchUnites()
+
+    if fa.uniteMetrique == true then
+        fa.uniteMetrique = false 
+    else
+        fa.uniteMetrique = true
+    end
+
+end
+
 
