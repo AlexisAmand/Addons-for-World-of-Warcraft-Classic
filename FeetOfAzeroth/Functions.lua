@@ -56,6 +56,25 @@ function fa.CreationMenu()
     fa.aboutButton:SetPoint("TOPLEFT", fa.topSeparator, "TOPLEFT", 5, -8)
     fa.aboutButton:SetScript("OnClick", fa.showAbout)
 
+    -- bouton reset all
+
+    fa.resetAllButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
+    fa.resetAllButton:SetSize(67, 25)
+    fa.resetAllButton:SetText("Reset All")
+    fa.resetAllButton:SetPoint("TOPLEFT", fa.aboutButton, "TOPLEFT", 0, -28)
+    fa.resetAllButton:SetScript("OnClick", function(self)
+        fa.distanceSession = 0
+        fa.distanceTotal = 0
+    end)
+
+    -- bouton achievements
+
+    fa.achievementButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
+    fa.achievementButton:SetSize(67, 25)
+    fa.achievementButton:SetText("Achievements")
+    fa.achievementButton:SetPoint("TOPLEFT", fa.resetAllButton, "TOPLEFT", 0, -28)
+    fa.achievementButton:SetScript("OnClick",  fa.afficherAchievements)
+
     -- bouton switch
 
     fa.mydButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
@@ -63,6 +82,14 @@ function fa.CreationMenu()
     fa.mydButton:SetText("m / yd")
     fa.mydButton:SetPoint("TOPRIGHT", fa.topSeparator, "TOPRIGHT", -5, -8)
     fa.mydButton:SetScript("OnClick", fa.switchUnites)
+
+    -- bouton stats
+
+    fa.statButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
+    fa.statButton:SetSize(67, 25)
+    fa.statButton:SetText("Stats")
+    fa.statButton:SetPoint("TOPRIGHT", fa.mydButton, "TOPRIGHT", 0, -28)
+    fa.statButton:SetScript("OnClick", fa.afficherStats)
 
     -- Position du menu 
     fa.optionMenu:SetPoint("TOP", fa.menuButton, "BOTTOM", 0, -10)
@@ -109,10 +136,16 @@ function fa.creationFenetre()
     fa.piedTexte:ClearAllPoints()
     fa.piedTexte:SetPoint("TOP", fa.frame, "TOP", 0, -10)
 
+    -- une zone pour la vitesse
+    fa.vitesseTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.vitesseTexte:ClearAllPoints()
+    fa.vitesseTexte:SetPoint("TOP", fa.frame, "TOP", 0, -29)
+    fa.vitesseTexte:SetText("Vitesse")
+
     -- une zone pour les coordonnées
     fa.coordTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.coordTexte:ClearAllPoints()
-    fa.coordTexte:SetPoint("TOP", fa.frame, "TOP", 0, -40)
+    fa.coordTexte:SetPoint("TOP", fa.frame, "TOP", 0, -48)
 
     -- bouton toggle
     fa.toggleButton = CreateFrame("Button", nil, fa.frame, "UIPanelButtonTemplate")
@@ -183,9 +216,9 @@ function fa.formatDistance(distance)
 
 end
 
-----------------------------------
--- met à jour le texte du compteur
-----------------------------------
+-----------------------------------------------
+-- met à jour le texte du compteur selon toggle
+-----------------------------------------------
 
 function fa.updateTexte()
 
@@ -196,8 +229,11 @@ function fa.updateTexte()
         )
     elseif fa.nbclic == 2 then
         -- affichage de l'heure
-        local heure = date("%H:%M:%S")
-        fa.piedTexte:SetText("It's :"..heure)
+        local heure = date("%I:%M:%S %p")
+        fa.piedTexte:SetText("It's : "..heure)
+    elseif fa.nbclic == 3 then
+        -- affichage de l'heure
+        fa.piedTexte:SetText("Hello there !")
     else
         -- affichage de le session
         fa.piedTexte:SetText(
@@ -233,6 +269,8 @@ function fa.recuperationPosition()
     fa.distanceSession = fa.distanceSession + fa.distance
     fa.distanceTotal = fa.distanceTotal + fa.distance
 
+    fa.validationAchievements()
+
     FASaved.FeetOfAzerothDB.distanceTotal = fa.distanceTotal
 
     -- la position actuelle devient l'ancienne position
@@ -260,6 +298,7 @@ function fa.demarrerPodometre()
     fa.timer = C_Timer.NewTicker(0.1, function()
         fa.recuperationPosition()
         fa.afficheCoordonnees()
+        fa.vitesseDuJoueur()
     end)
 end 
 
@@ -307,7 +346,7 @@ function fa.showAbout()
     local aboutFrame = CreateFrame("Frame", "TNAbout", UIParent, "BasicFrameTemplateWithInset")
 
     aboutFrame:SetFrameStrata("DIALOG")
-    aboutFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
+    aboutFrame:SetFrameLevel(fa.frame:GetFrameLevel() + 10)
 
     aboutFrame:SetSize(250, 120)
     aboutFrame:SetPoint("CENTER")
@@ -350,7 +389,120 @@ function  fa.switchUnites()
     else
         fa.uniteMetrique = true
     end
+    fa.optionMenu:Hide()
+end
+
+------------------------------------
+-- affichage de la vitesse du joueur
+------------------------------------
+
+function  fa.vitesseDuJoueur()
+
+    local vitesse = GetUnitSpeed("player")
+    local texte
+
+    if fa.uniteMetrique == true then 
+        vitesse = vitesse * 3,29184 -- selon un ratio trouvé en ligne
+        texte = string.format("Vitesse %.2f km/h", vitesse)
+    else 
+        texte = string.format("Vitesse %.2f yd/s", vitesse)
+    end
+
+    fa.vitesseTexte:SetText(texte)
 
 end
 
+----------------------
+-- affichage des stats
+----------------------
 
+function fa.afficherStats()
+
+    fa.optionMenu:Hide()
+
+    -- fenêtre
+
+    fa.frameStats = CreateFrame("Frame", "FAWindow", UIParent)
+    fa.frameStats:SetSize(300, 250)
+    fa.frameStats:SetPoint("CENTER")
+
+    -- Fond
+
+    fa.frameStats.bg = fa.frameStats:CreateTexture(nil, "BACKGROUND")
+    fa.frameStats.bg:SetAllPoints()
+    fa.frameStats.bg:SetColorTexture(0, 0, 0, 0.7)
+
+    -- Bordure
+
+    fa.frameStats.border = CreateFrame("Frame", nil, fa.frameStats, "BackdropTemplate")
+    fa.frameStats.border:SetAllPoints()
+    fa.frameStats.border:SetBackdrop({
+        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+        edgeSize = 12,
+    })
+
+    -- Titre
+
+    fa.frameStats.titre = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    fa.frameStats.titre:ClearAllPoints()
+    fa.frameStats.titre:SetPoint("TOP", fa.frameStats, "TOP", 0, -10)
+    fa.frameStats.titre:SetText("Stats")
+
+    -- ligne de séparation
+
+    fa.frameStatsSeparator = fa.frameStats:CreateTexture(nil, "ARTWORK")
+    fa.frameStatsSeparator:SetColorTexture(1, 1, 1, 0.15)
+    fa.frameStatsSeparator:SetSize(270, 1)
+    fa.frameStatsSeparator:SetPoint("TOP", fa.frameStats.titre, "BOTTOM", 0, -4)
+
+    -- Distance totale (en Yards)
+
+    fa.frameStats.distanceYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.distanceYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -12)
+    local texte = string.format("Distance Totale : %.2f yds", tronqueDeuxDecimales(fa.distanceTotal))
+    fa.frameStats.distanceYd:SetText(texte)
+
+    -- Distance totale (en m)
+
+    fa.frameStats.distanceM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.distanceM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -27)
+    local texte = string.format("Distance Totale : %.2f m", tronqueDeuxDecimales(fa.distanceTotal * 0.9144))
+    fa.frameStats.distanceM:SetText(texte)
+
+    -- Distance session (en Yards)
+
+    fa.frameStats.sessionYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.sessionYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -52)
+    local texte = string.format("Distance Session : %.2f yds", tronqueDeuxDecimales(fa.distanceSession))
+    fa.frameStats.sessionYd:SetText(texte)
+
+    -- Distance session (en m)
+
+    fa.frameStats.sessionM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.sessionM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT",10 , -67)
+    local texte = string.format("Distance Session : %.2f m", tronqueDeuxDecimales(fa.distanceSession * 0.9144))
+    fa.frameStats.sessionM:SetText(texte)
+
+    -- Texte en bas
+
+    fa.frameStats.message = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.message:SetPoint("BOTTOM", 0, 40)
+    fa.frameStats.message:SetText("Noodle soup & naps keep you healthy !")
+
+    -- ligne de séparation
+
+    fa.frameStatsSeparator = fa.frameStats:CreateTexture(nil, "ARTWORK")
+    fa.frameStatsSeparator:SetColorTexture(1, 1, 1, 0.15)
+    fa.frameStatsSeparator:SetSize(270, 1)
+    fa.frameStatsSeparator:SetPoint("BOTTOM", fa.frameStats.message, "TOP", 0, 4)
+
+    -- Bouton fermeture
+
+    fa.closeButton = CreateFrame("Button", nil, fa.frameStats, "UIPanelButtonTemplate")
+    fa.closeButton:SetSize(67, 25)
+    fa.closeButton:SetText("Close")
+    fa.closeButton:SetPoint("BOTTOM", fa.frameStats, "BOTTOM", 0, 10)
+    fa.closeButton:SetScript("OnClick", function(self)
+        fa.frameStats:Hide()
+    end)
+end

@@ -14,4 +14,7 @@ A small travel companion for Azeroth. Display your current coordinates and track
 * Total distance travelled since the addon was installed
 * Switch between meters and yards
 
+## Sources
+
+* https://wowpedia.fandom.com/wiki/Speed
 
