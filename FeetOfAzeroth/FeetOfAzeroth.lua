@@ -1,6 +1,6 @@
 fa = fa or {}
 fa.nbclic = 0
-fa.uniteMetrique = true
+fa.taux = 0.9144
 
 SLASH_FATEST1 = "/fatest"
 
@@ -26,9 +26,15 @@ loader:SetScript("OnEvent", function(self, event, addonName)
     FASaved = FASaved or {}
     FASaved.FeetOfAzerothDB = FASaved.FeetOfAzerothDB or {}
     FASaved.FeetOfAzerothDB.achievements = FASaved.FeetOfAzerothDB.achievements or {}
-
+    
     fa.distanceSession = 0
     fa.distanceTotal = FASaved.FeetOfAzerothDB.distanceTotal or 0
+    
+    if FASaved.FeetOfAzerothDB.uniteMetrique == nil then
+        fa.uniteMetrique = true
+    else
+        fa.uniteMetrique = FASaved.FeetOfAzerothDB.uniteMetrique
+    end
 
     for _, achievement in ipairs(fa.achievements) do
         if FASaved.FeetOfAzerothDB.achievements[achievement.id] == nil then
@@ -39,3 +45,5 @@ loader:SetScript("OnEvent", function(self, event, addonName)
     fa.creationFenetre()
     fa.demarrerPodometre()
 end)
+
+print("|cff00ff00"..fa.ADDON_TITLE.." :|r "..fa.CSL_READY)

@@ -1,11 +1,12 @@
-## Interface: 50504
+## Interface: 120007, 50504
 ## Title: Feet of Azeroth
 ## Notes: A small travel companion for Azeroth. Track the distance you've travelled through the world of Warcraft.
 ## Author: La Team Panda
 ## SavedVariables: FASaved
-## Version: 0.4
+## Version: 0.7
 
 FeetOfAzerothText.lua
+List.lua
 Achievements.lua
 Functions.lua
 FeetOfAzeroth.lua

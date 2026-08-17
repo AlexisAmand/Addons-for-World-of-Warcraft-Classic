@@ -71,7 +71,7 @@ function fa.CreationMenu()
 
     fa.achievementButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.achievementButton:SetSize(67, 25)
-    fa.achievementButton:SetText("Achievements")
+    fa.achievementButton:SetText("Feats")
     fa.achievementButton:SetPoint("TOPLEFT", fa.resetAllButton, "TOPLEFT", 0, -28)
     fa.achievementButton:SetScript("OnClick",  fa.afficherAchievements)
 
@@ -174,7 +174,7 @@ function fa.formatDistance(distance)
 
     if fa.uniteMetrique then
 
-        local distanceAffichee = distance * 0.9144
+        local distanceAffichee = distance * fa.taux
         
         if distanceAffichee < 10 then
             return string.format("%.2f m", tronqueDeuxDecimales(distanceAffichee))
@@ -250,20 +250,38 @@ end
 function fa.recuperationPosition()
 
     -- récupération de la position du joueur
-    fa.x, fa.y, fa.instanceID = UnitPosition("player")
+    fa.x, fa.y, fa.z, fa.instanceID = UnitPosition("player")
+
+    -- coordonnées temporairement indisponibles
+    if not fa.x or not fa.y or not fa.z then
+        fa.ancienneX = nil
+        fa.ancienneY = nil
+        fa.ancienneZ = nil
+        return
+    end
 
     -- première position : on mémorise seulement
     if not fa.ancienneX then
         fa.ancienneX = fa.x
         fa.ancienneY = fa.y
+        fa.ancienneZ = fa.z
         return
     end
 
     -- calcul du déplacement
     local dx = fa.x - fa.ancienneX
     local dy = fa.y - fa.ancienneY
+    local dz = fa.z - fa.ancienneZ
 
-    fa.distance = math.sqrt(dx * dx + dy * dy)
+    fa.distance = math.sqrt(dx * dx + dy * dy + dz * dz)
+
+    -- C'est une téléportation (test)
+    local vitesse = GetUnitSpeed("player")
+
+    if vitesse > 0 and fa.distance > vitesse * 0.1 * 2 then
+        fa.distance = 0
+        print("|cff00ff00"..fa.ADDON_TITLE.." :|r téléportation détectée !")
+    end
 
     -- calculs en yards
     fa.distanceSession = fa.distanceSession + fa.distance
@@ -276,6 +294,7 @@ function fa.recuperationPosition()
     -- la position actuelle devient l'ancienne position
     fa.ancienneX = fa.x
     fa.ancienneY = fa.y
+    fa.ancienneZ = fa.z 
 
     fa.updateTexte()
 
@@ -386,8 +405,10 @@ function  fa.switchUnites()
 
     if fa.uniteMetrique == true then
         fa.uniteMetrique = false 
+        FASaved.FeetOfAzerothDB.uniteMetrique = false
     else
         fa.uniteMetrique = true
+        FASaved.FeetOfAzerothDB.uniteMetrique = true
     end
     fa.optionMenu:Hide()
 end
@@ -466,7 +487,7 @@ function fa.afficherStats()
 
     fa.frameStats.distanceM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.distanceM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -27)
-    local texte = string.format("Distance Totale : %.2f m", tronqueDeuxDecimales(fa.distanceTotal * 0.9144))
+    local texte = string.format("Distance Totale : %.2f m", tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
     fa.frameStats.distanceM:SetText(texte)
 
     -- Distance session (en Yards)
@@ -480,7 +501,7 @@ function fa.afficherStats()
 
     fa.frameStats.sessionM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.sessionM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT",10 , -67)
-    local texte = string.format("Distance Session : %.2f m", tronqueDeuxDecimales(fa.distanceSession * 0.9144))
+    local texte = string.format("Distance Session : %.2f m", tronqueDeuxDecimales(fa.distanceSession * fa.taux))
     fa.frameStats.sessionM:SetText(texte)
 
     -- Texte en bas

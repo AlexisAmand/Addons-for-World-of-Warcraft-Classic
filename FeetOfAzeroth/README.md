@@ -7,6 +7,7 @@ A small travel companion for Azeroth. Display your current coordinates and track
 <p align="center">
   <img src="captures/capture-01.jpg" width="30%" />
   <img src="captures/capture-02.jpg" width="30%" />
+  <img src="captures/capture-03.jpg" width="30%" />
 </p>
 
 * Display of the player's current coordinates
@@ -17,4 +18,5 @@ A small travel companion for Azeroth. Display your current coordinates and track
 ## Sources
 
 * https://wowpedia.fandom.com/wiki/Speed
+* https://warcraft.wiki.gg/wiki/Movement
 
