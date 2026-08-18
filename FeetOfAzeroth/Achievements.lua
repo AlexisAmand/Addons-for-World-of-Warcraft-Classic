@@ -13,6 +13,19 @@ function fa.afficherAchievements()
     fa.frameAchievements:SetSize(300, 250)
     fa.frameAchievements:SetPoint("CENTER")
 
+    -- On rend la fenêtre déplaçable
+    fa.frameAchievements:SetMovable(true)
+    fa.frameAchievements:EnableMouse(true)
+    fa.frameAchievements:RegisterForDrag("LeftButton")
+
+    fa.frameAchievements:SetScript("OnDragStart", function(self)
+        self:StartMoving()
+    end)
+
+    fa.frameAchievements:SetScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
+    end)
+
     -- Fond
     fa.frameAchievements.bg = fa.frameAchievements:CreateTexture(nil, "BACKGROUND")
     fa.frameAchievements.bg:SetAllPoints()
@@ -182,7 +195,7 @@ function fa.afficherSucces(achievement)
 
     fa.successFrame:Show()
 
-    print("|cff00ff00"..fa.ADDON_TITLE.." :|r Succès validé ! "..achievement.name)
+    print("|cff00ff00"..fa.ADDON_TITLE.." :|r "..fa.CSL_FEATS_OK..achievement.name)
 
 end
 

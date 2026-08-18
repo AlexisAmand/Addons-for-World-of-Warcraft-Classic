@@ -12,7 +12,7 @@ function fa.CreationMenu()
     fa.optionMenu.bg = fa.optionMenu:CreateTexture(nil, "BACKGROUND")
     fa.optionMenu.bg:SetAllPoints()
     fa.optionMenu.bg:SetColorTexture(0, 0, 0, 0.7)
-
+    
     fa.optionMenu.border = CreateFrame("Frame", nil, fa.optionMenu, "BackdropTemplate")
     fa.optionMenu.border:SetAllPoints()
     fa.optionMenu.border:SetBackdrop({
@@ -24,7 +24,7 @@ function fa.CreationMenu()
     fa.optionTitre = fa.optionMenu:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.optionTitre:ClearAllPoints()
     fa.optionTitre:SetPoint("TOP", fa.optionMenu, "TOP", 0, -10)
-    fa.optionTitre:SetText("Feet Of Azeroth "..fa.VERSION)
+    fa.optionTitre:SetText(fa.ADDON_TITLE..fa.VERSION)
 
     -- ligne de séparation
 
@@ -37,7 +37,7 @@ function fa.CreationMenu()
 
     fa.menuButton = CreateFrame("Button", nil, fa.frame, "UIPanelButtonTemplate")
     fa.menuButton:SetSize(67, 25)
-    fa.menuButton:SetText("Menu")
+    fa.menuButton:SetText(fa.MAIN_OPT)
     fa.menuButton:SetPoint("BOTTOMRIGHT", fa.frame, "BOTTOMRIGHT", -7, 7)
 
     fa.menuButton:SetScript("OnClick", function(self)
@@ -52,7 +52,7 @@ function fa.CreationMenu()
 
     fa.aboutButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.aboutButton:SetSize(67, 25)
-    fa.aboutButton:SetText("About")
+    fa.aboutButton:SetText(fa.MAIN_ABT)
     fa.aboutButton:SetPoint("TOPLEFT", fa.topSeparator, "TOPLEFT", 5, -8)
     fa.aboutButton:SetScript("OnClick", fa.showAbout)
 
@@ -60,7 +60,7 @@ function fa.CreationMenu()
 
     fa.resetAllButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.resetAllButton:SetSize(67, 25)
-    fa.resetAllButton:SetText("Reset All")
+    fa.resetAllButton:SetText(fa.MAIN_RST)
     fa.resetAllButton:SetPoint("TOPLEFT", fa.aboutButton, "TOPLEFT", 0, -28)
     fa.resetAllButton:SetScript("OnClick", function(self)
         fa.distanceSession = 0
@@ -71,7 +71,7 @@ function fa.CreationMenu()
 
     fa.achievementButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.achievementButton:SetSize(67, 25)
-    fa.achievementButton:SetText("Feats")
+    fa.achievementButton:SetText(fa.MAIN_FTS)
     fa.achievementButton:SetPoint("TOPLEFT", fa.resetAllButton, "TOPLEFT", 0, -28)
     fa.achievementButton:SetScript("OnClick",  fa.afficherAchievements)
 
@@ -79,7 +79,7 @@ function fa.CreationMenu()
 
     fa.mydButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.mydButton:SetSize(67, 25)
-    fa.mydButton:SetText("m / yd")
+    fa.mydButton:SetText(fa.MAIN_CNV)
     fa.mydButton:SetPoint("TOPRIGHT", fa.topSeparator, "TOPRIGHT", -5, -8)
     fa.mydButton:SetScript("OnClick", fa.switchUnites)
 
@@ -87,7 +87,7 @@ function fa.CreationMenu()
 
     fa.statButton = CreateFrame("Button", nil, fa.optionMenu, "UIPanelButtonTemplate")
     fa.statButton:SetSize(67, 25)
-    fa.statButton:SetText("Stats")
+    fa.statButton:SetText(fa.MAIN_STS)
     fa.statButton:SetPoint("TOPRIGHT", fa.mydButton, "TOPRIGHT", 0, -28)
     fa.statButton:SetScript("OnClick", fa.afficherStats)
 
@@ -132,25 +132,25 @@ function fa.creationFenetre()
     end)
 
     -- une zone pour le texte
-    fa.piedTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.piedTexte:ClearAllPoints()
-    fa.piedTexte:SetPoint("TOP", fa.frame, "TOP", 0, -10)
+    fa.mainTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.mainTexte:ClearAllPoints()
+    fa.mainTexte:SetPoint("TOP", fa.frame, "TOP", 0, -10) -- -10
 
     -- une zone pour la vitesse
-    fa.vitesseTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.vitesseTexte:ClearAllPoints()
-    fa.vitesseTexte:SetPoint("TOP", fa.frame, "TOP", 0, -29)
-    fa.vitesseTexte:SetText("Vitesse")
+    fa.secondTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.secondTexte:ClearAllPoints()
+    fa.secondTexte:SetPoint("TOP", fa.frame, "TOP", 0, -29) -- -29
+    fa.secondTexte:SetText(fa.MAIN_SPD)
 
     -- une zone pour les coordonnées
     fa.coordTexte = fa.frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.coordTexte:ClearAllPoints()
-    fa.coordTexte:SetPoint("TOP", fa.frame, "TOP", 0, -48)
+    fa.coordTexte:SetPoint("TOP", fa.frame, "TOP", 0, -48) -- -48
 
     -- bouton toggle
     fa.toggleButton = CreateFrame("Button", nil, fa.frame, "UIPanelButtonTemplate")
     fa.toggleButton:SetSize(67, 25)
-    fa.toggleButton:SetText("Toggle")
+    fa.toggleButton:SetText(fa.MAIN_TGL)
     fa.toggleButton:SetPoint("BOTTOMLEFT", fa.frame, "BOTTOMLEFT", 7, 7)
     fa.toggleButton:SetScript("OnClick", fa.toggleTexte)
 
@@ -162,9 +162,9 @@ end
 --
 -----------------
 
-local function tronqueDeuxDecimales(nombre)
-    return math.floor(nombre * 100) / 100
-end
+--------------------------------------
+-- Conversion des secondes en hh:mm:ss
+--------------------------------------
 
 ---------------------------------------------------------
 -- formatage du texte avec les unités du système métrique
@@ -177,22 +177,22 @@ function fa.formatDistance(distance)
         local distanceAffichee = distance * fa.taux
         
         if distanceAffichee < 10 then
-            return string.format("%.2f m", tronqueDeuxDecimales(distanceAffichee))
+            return string.format("%.2f m", fa.tronqueDeuxDecimales(distanceAffichee))
 
         elseif distanceAffichee < 100 then
-            return string.format("%.2f dam", tronqueDeuxDecimales(distanceAffichee / 10))
+            return string.format("%.2f dam", fa.tronqueDeuxDecimales(distanceAffichee / 10))
 
         elseif distanceAffichee < 1000 then
-            return string.format("%.2f hm", tronqueDeuxDecimales(distanceAffichee / 100))
+            return string.format("%.2f hm", fa.tronqueDeuxDecimales(distanceAffichee / 100))
 
         elseif distanceAffichee < 1000000 then
-            return string.format("%.2f km", tronqueDeuxDecimales(distanceAffichee / 1000))
+            return string.format("%.2f km", fa.tronqueDeuxDecimales(distanceAffichee / 1000))
 
         elseif distanceAffichee < 1000000000 then
-            return string.format("%.2f Mm", tronqueDeuxDecimales(distanceAffichee / 1000000))
+            return string.format("%.2f Mm", fa.tronqueDeuxDecimales(distanceAffichee / 1000000))
 
         else
-            return string.format("%.2f Gm", tronqueDeuxDecimales(distanceAffichee / 1000000000))
+            return string.format("%.2f Gm", fa.tronqueDeuxDecimales(distanceAffichee / 1000000000))
         end
 
     else
@@ -200,16 +200,16 @@ function fa.formatDistance(distance)
         local distanceAffichee = distance
 
         if distanceAffichee < 10 then
-            return string.format("%.2f yd", tronqueDeuxDecimales(distanceAffichee))
+            return string.format("%.2f yd", fa.tronqueDeuxDecimales(distanceAffichee))
 
         elseif distanceAffichee < 1000000 then
-            return string.format("%.2f kyd", tronqueDeuxDecimales(distanceAffichee / 1000))
+            return string.format("%.2f kyd", fa.tronqueDeuxDecimales(distanceAffichee / 1000))
 
         elseif distanceAffichee < 1000000000 then
-            return string.format("%.2f Myd", tronqueDeuxDecimales(distanceAffichee / 1000000))
+            return string.format("%.2f Myd", fa.tronqueDeuxDecimales(distanceAffichee / 1000000))
 
         else
-            return string.format("%.2f Gyd", tronqueDeuxDecimales(distanceAffichee / 1000000000))
+            return string.format("%.2f Gyd", fa.tronqueDeuxDecimales(distanceAffichee / 1000000000))
         end
 
     end
@@ -223,21 +223,42 @@ end
 function fa.updateTexte()
 
     if fa.nbclic == 1 then
-        -- afficher le Total
-        fa.piedTexte:SetText(
-            string.format("Lifetime : "..fa.formatDistance(fa.distanceTotal))
+        -- afficher la distance totale
+        fa.mainTexte:SetText(
+            string.format(fa.MAIN_LFTM..fa.formatDistance(fa.distanceTotal))
         )
+        -- afficher la vitesse
+        fa.secondTexte:SetText(fa.vitesseDuJoueur())
     elseif fa.nbclic == 2 then
+        -- afficher la distance session
+        fa.mainTexte:SetText(
+            string.format(fa.MAIN_SESSION..fa.formatDistance(fa.distanceSession))
+        )
+        -- afficher la vitesse
+        fa.secondTexte:SetText(fa.vitesseDuJoueur())      
+    elseif fa.nbclic == 3 then
+        -- afficher la distance session
+        fa.mainTexte:SetText(
+            string.format(fa.MAIN_SESSION..fa.formatDistance(fa.distanceSession))
+        )
+        -- afficher la distance totale
+        fa.secondTexte:SetText(
+            string.format(fa.MAIN_LFTM..fa.formatDistance(fa.distanceTotal))
+        )  
+    elseif fa.nbclic == 4 then
+        -- affichage joke SW
+        fa.mainTexte:SetText(fa.MAIN_HELLO)
         -- affichage de l'heure
         local heure = date("%I:%M:%S %p")
-        fa.piedTexte:SetText("It's : "..heure)
-    elseif fa.nbclic == 3 then
-        -- affichage de l'heure
-        fa.piedTexte:SetText("Hello there !")
-    else
-        -- affichage de le session
-        fa.piedTexte:SetText(
-            string.format("Session : "..fa.formatDistance(fa.distanceSession))
+        fa.secondTexte:SetText(fa.MAIN_TM..heure)   
+     else
+        -- temps AFK
+        fa.mainTexte:SetText(
+            string.format("AFK : %s", fa.FormatTime(fa.restAFK))
+        )
+        -- temps DEAD
+        fa.secondTexte:SetText(
+            string.format("Ghost : %s", fa.FormatTime(fa.ghostTime))
         )
         fa.nbclic = 0
     end  
@@ -280,7 +301,7 @@ function fa.recuperationPosition()
 
     if vitesse > 0 and fa.distance > vitesse * 0.1 * 2 then
         fa.distance = 0
-        print("|cff00ff00"..fa.ADDON_TITLE.." :|r téléportation détectée !")
+        print("Téléportation détectée :", fa.distance, "yd")
     end
 
     -- calculs en yards
@@ -317,7 +338,9 @@ function fa.demarrerPodometre()
     fa.timer = C_Timer.NewTicker(0.1, function()
         fa.recuperationPosition()
         fa.afficheCoordonnees()
-        fa.vitesseDuJoueur()
+        -- fa.vitesseDuJoueur()
+        fa.updateRestTime()
+        fa.updateDeadTime()
     end)
 end 
 
@@ -343,7 +366,7 @@ function fa.afficheCoordonnees()
         local a, b = position:GetXY()
 
         local texte = string.format(
-            "GPS : %.2f, %.2f",
+            fa.MAIN_GPS.."%.2f, %.2f",
             a * 100,
             b * 100
         )
@@ -362,7 +385,7 @@ function fa.showAbout()
 
     fa.optionMenu:Hide()
 
-    local aboutFrame = CreateFrame("Frame", "TNAbout", UIParent, "BasicFrameTemplateWithInset")
+    local aboutFrame = CreateFrame("Frame", "FAAbout", UIParent, "BasicFrameTemplateWithInset")
 
     aboutFrame:SetFrameStrata("DIALOG")
     aboutFrame:SetFrameLevel(fa.frame:GetFrameLevel() + 10)
@@ -372,7 +395,7 @@ function fa.showAbout()
     
     aboutFrame.title = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     aboutFrame.title:SetPoint("TOP", 0, -5)
-    aboutFrame.title:SetText("About")
+    aboutFrame.title:SetText(fa.MAIN_ABT)
 
     aboutFrame.text = aboutFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     aboutFrame.text:SetWidth(250)
@@ -381,8 +404,8 @@ function fa.showAbout()
 
     aboutFrame.text:SetText(
     fa.ADDON_TITLE.."\n"..
-    "Version "..fa.VERSION.."\n"..
-    "By "..fa.AUTHOR.."\n\n"
+    fa.ABT_VERSION..fa.VERSION.."\n"..
+    fa.ABT_BY..fa.AUTHOR.."\n\n"
     )
 
     aboutFrame:Show()
@@ -390,7 +413,7 @@ function fa.showAbout()
     local closeButton = CreateFrame("Button", nil, aboutFrame, "UIPanelButtonTemplate")
     closeButton:SetSize(80, 25)
     closeButton:SetPoint("BOTTOM", 0, 10)
-    closeButton:SetText("close")
+    closeButton:SetText(fa.BTN_CLOSE)
     closeButton:SetScript("OnClick", function()
         aboutFrame:Hide()
     end)
@@ -424,106 +447,39 @@ function  fa.vitesseDuJoueur()
 
     if fa.uniteMetrique == true then 
         vitesse = vitesse * 3,29184 -- selon un ratio trouvé en ligne
-        texte = string.format("Vitesse %.2f km/h", vitesse)
+        texte = string.format(fa.MAIN_SPD.." %.2f km/h", vitesse)
     else 
-        texte = string.format("Vitesse %.2f yd/s", vitesse)
+        texte = string.format(fa.MAIN_SPD.." %.2f yd/s", vitesse)
     end
 
-    fa.vitesseTexte:SetText(texte)
-
+    return texte
+    
 end
 
 ----------------------
 -- affichage des stats
 ----------------------
 
-function fa.afficherStats()
+-----------------------------
+-- Temps d'AFK et/ou de repos
+-----------------------------
 
-    fa.optionMenu:Hide()
+function fa.updateRestTime()
+    -- TODO : Compatibilité avec retail : IsPlayerAFK() ?
+    if UnitIsAFK("player") then
+        fa.restAFK = fa.restAFK + 0.1
+        FASaved.FeetOfAzerothDB.restAFK = fa.restAFK
+    end
+end
 
-    -- fenêtre
+-------------------------------------------
+-- Temps passé en temps que mort ou fantôme
+-------------------------------------------
 
-    fa.frameStats = CreateFrame("Frame", "FAWindow", UIParent)
-    fa.frameStats:SetSize(300, 250)
-    fa.frameStats:SetPoint("CENTER")
-
-    -- Fond
-
-    fa.frameStats.bg = fa.frameStats:CreateTexture(nil, "BACKGROUND")
-    fa.frameStats.bg:SetAllPoints()
-    fa.frameStats.bg:SetColorTexture(0, 0, 0, 0.7)
-
-    -- Bordure
-
-    fa.frameStats.border = CreateFrame("Frame", nil, fa.frameStats, "BackdropTemplate")
-    fa.frameStats.border:SetAllPoints()
-    fa.frameStats.border:SetBackdrop({
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        edgeSize = 12,
-    })
-
-    -- Titre
-
-    fa.frameStats.titre = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-    fa.frameStats.titre:ClearAllPoints()
-    fa.frameStats.titre:SetPoint("TOP", fa.frameStats, "TOP", 0, -10)
-    fa.frameStats.titre:SetText("Stats")
-
-    -- ligne de séparation
-
-    fa.frameStatsSeparator = fa.frameStats:CreateTexture(nil, "ARTWORK")
-    fa.frameStatsSeparator:SetColorTexture(1, 1, 1, 0.15)
-    fa.frameStatsSeparator:SetSize(270, 1)
-    fa.frameStatsSeparator:SetPoint("TOP", fa.frameStats.titre, "BOTTOM", 0, -4)
-
-    -- Distance totale (en Yards)
-
-    fa.frameStats.distanceYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.frameStats.distanceYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -12)
-    local texte = string.format("Distance Totale : %.2f yds", tronqueDeuxDecimales(fa.distanceTotal))
-    fa.frameStats.distanceYd:SetText(texte)
-
-    -- Distance totale (en m)
-
-    fa.frameStats.distanceM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.frameStats.distanceM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -27)
-    local texte = string.format("Distance Totale : %.2f m", tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
-    fa.frameStats.distanceM:SetText(texte)
-
-    -- Distance session (en Yards)
-
-    fa.frameStats.sessionYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.frameStats.sessionYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -52)
-    local texte = string.format("Distance Session : %.2f yds", tronqueDeuxDecimales(fa.distanceSession))
-    fa.frameStats.sessionYd:SetText(texte)
-
-    -- Distance session (en m)
-
-    fa.frameStats.sessionM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.frameStats.sessionM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT",10 , -67)
-    local texte = string.format("Distance Session : %.2f m", tronqueDeuxDecimales(fa.distanceSession * fa.taux))
-    fa.frameStats.sessionM:SetText(texte)
-
-    -- Texte en bas
-
-    fa.frameStats.message = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    fa.frameStats.message:SetPoint("BOTTOM", 0, 40)
-    fa.frameStats.message:SetText("Noodle soup & naps keep you healthy !")
-
-    -- ligne de séparation
-
-    fa.frameStatsSeparator = fa.frameStats:CreateTexture(nil, "ARTWORK")
-    fa.frameStatsSeparator:SetColorTexture(1, 1, 1, 0.15)
-    fa.frameStatsSeparator:SetSize(270, 1)
-    fa.frameStatsSeparator:SetPoint("BOTTOM", fa.frameStats.message, "TOP", 0, 4)
-
-    -- Bouton fermeture
-
-    fa.closeButton = CreateFrame("Button", nil, fa.frameStats, "UIPanelButtonTemplate")
-    fa.closeButton:SetSize(67, 25)
-    fa.closeButton:SetText("Close")
-    fa.closeButton:SetPoint("BOTTOM", fa.frameStats, "BOTTOM", 0, 10)
-    fa.closeButton:SetScript("OnClick", function(self)
-        fa.frameStats:Hide()
-    end)
+function fa.updateDeadTime()
+    -- TODO : Compatibilité avec retail  ? 
+    if UnitIsDeadOrGhost("player") then
+        fa.ghostTime = fa.ghostTime + 0.1
+        FASaved.FeetOfAzerothDB.ghostTime = fa.ghostTime
+    end
 end

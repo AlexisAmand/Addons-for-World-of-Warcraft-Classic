@@ -1,5 +1,5 @@
 fa = fa or {}
-fa.nbclic = 0
+fa.nbclic = 3
 fa.taux = 0.9144
 
 SLASH_FATEST1 = "/fatest"
@@ -29,6 +29,8 @@ loader:SetScript("OnEvent", function(self, event, addonName)
     
     fa.distanceSession = 0
     fa.distanceTotal = FASaved.FeetOfAzerothDB.distanceTotal or 0
+    fa.restAFK = FASaved.FeetOfAzerothDB.restAFK or 0
+    fa.ghostTime = FASaved.FeetOfAzerothDB.ghostTime or 0
     
     if FASaved.FeetOfAzerothDB.uniteMetrique == nil then
         fa.uniteMetrique = true

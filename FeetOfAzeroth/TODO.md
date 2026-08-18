@@ -9,7 +9,7 @@
 
 ### A tester
 
-- [ ] tester le podo avec le tram des profondeurs
+- [x] tester le podo avec le tram des profondeurs
 - [ ] tester le podo avec l'ascenseur de la zone des champis d'Outreterre
 - [ ] tester le podo avec une téléportation
 - [ ] tester le podo avec le délai supérieur à 0.1s
@@ -20,6 +20,15 @@
 - [ ] ajouter la phrase "Noodle soup & naps..." aux succès
 - [ ] Ajouter une case à cocher « Ne pas afficher les notifications de succès »
 - [ ] Sauvegarder le choix de cette option
-- [ ] Ajouter un ```print()``` lorsqu'un succès est débloqué
+- [x] Ajouter un ```print()``` lorsqu'un succès est débloqué
  
+- Quand on affiche la fenêtre achievelemets, on masque la fenêtre stats
+- et inversement !
+
+- Bugfix : plus de message d'erreur suite à une téléportation. (test)
+- Tests :
+    - OK de Shattrath à Hurlevent
+    - Ok pour tram des nains
+    - Ok pour la porte des ténèbres
+    - pas Ok pour retour à l'auberge ----------------------------- BUG !
 
