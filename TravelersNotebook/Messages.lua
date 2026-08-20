@@ -48,8 +48,7 @@ function tnshowSaved()
     local saveFrame = CreateFrame("Frame", "TNsave", UIParent, "BasicFrameTemplateWithInset")
 
     saveFrame:SetFrameStrata("DIALOG")
-    saveFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
-
+    saveFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
     saveFrame:SetSize(250, 100)
     saveFrame:SetPoint("CENTER")
     
@@ -84,7 +83,7 @@ function tnshowDeleted()
     local deleteFrame = CreateFrame("Frame", "TNdelete", UIParent, "BasicFrameTemplateWithInset")
 
     deleteFrame:SetFrameStrata("DIALOG")
-    deleteFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+    deleteFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
 
     deleteFrame:SetSize(250, 100)
     deleteFrame:SetPoint("CENTER")
@@ -120,7 +119,7 @@ function tnshowNoTitle()
     local notitleFrame = CreateFrame("Frame", "TNnotitle", UIParent, "BasicFrameTemplateWithInset")
 
     notitleFrame:SetFrameStrata("DIALOG")
-    notitleFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+    notitleFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
 
     notitleFrame:SetSize(250, 100)
     notitleFrame:SetPoint("CENTER")
@@ -156,7 +155,7 @@ function tnshowNoNote()
     local nonoteFrame = CreateFrame("Frame", "TNnonote", UIParent, "BasicFrameTemplateWithInset")
 
     nonoteFrame:SetFrameStrata("DIALOG")
-    nonoteFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+    nonoteFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
 
     nonoteFrame:SetSize(250, 100)
     nonoteFrame:SetPoint("CENTER")
@@ -192,7 +191,7 @@ function tnNoPnjSelected()
     local messageFrame = CreateFrame("Frame", "TNnonote", UIParent, "BasicFrameTemplateWithInset")
 
     messageFrame:SetFrameStrata("DIALOG")
-    messageFrame:SetFrameLevel(Gasp.frame:GetFrameLevel() + 10)
+    messageFrame:SetFrameLevel(tb.frame:GetFrameLevel() + 10)
 
     messageFrame:SetSize(250, 100)
     messageFrame:SetPoint("CENTER")

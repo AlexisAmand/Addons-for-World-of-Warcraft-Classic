@@ -33,6 +33,12 @@ function fa.afficherStats()
 
     fa.optionMenu:Hide()
 
+    if fa.frameAchievements:IsShown() then
+        fa.frameAchievements:Hide()
+    else
+        fa.frameAchievements:Show()
+    end
+
     -- Création de la fenêtre
 
     fa.frameStats = CreateFrame("Frame", "FAWindow", UIParent)
@@ -85,28 +91,28 @@ function fa.afficherStats()
 
     fa.frameStats.distanceYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.distanceYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -12)
-    local texte = string.format(fa.STAT_DIST_TOT.."%.2f yds", fa.tronqueDeuxDecimales(fa.distanceTotal))
+    local texte = string.format(fa.STAT_DIST_TOT, fa.tronqueDeuxDecimales(fa.distanceTotal))
     fa.frameStats.distanceYd:SetText(texte)
 
     -- Distance totale (en m)
 
     fa.frameStats.distanceM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.distanceM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -27)
-    local texte = string.format(fa.STAT_DIST_TOT.."%.2f m", fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
+    local texte = string.format(fa.STAT_DIST_TOT, fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
     fa.frameStats.distanceM:SetText(texte)
 
     -- Distance session (en Yards)
 
     fa.frameStats.sessionYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.sessionYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -52)
-    local texte = string.format(fa.STAT_DIST_SESS.."%.2f yds", fa.tronqueDeuxDecimales(fa.distanceSession))
+    local texte = string.format(fa.STAT_DIST_SESS, fa.tronqueDeuxDecimales(fa.distanceSession))
     fa.frameStats.sessionYd:SetText(texte)
 
     -- Distance session (en m)
 
     fa.frameStats.sessionM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.sessionM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT",10 , -67)
-    local texte = string.format(fa.STAT_DIST_SESS.."%.2f m", fa.tronqueDeuxDecimales(fa.distanceSession * fa.taux))
+    local texte = string.format(fa.STAT_DIST_SESS, fa.tronqueDeuxDecimales(fa.distanceSession * fa.taux))
     fa.frameStats.sessionM:SetText(texte)
 
     -- Temps AFK
@@ -114,14 +120,28 @@ function fa.afficherStats()
     fa.frameStats.afkText = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.afkText:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -92)
     -- local texte = string.format(fa.STAT_DIST_TOT.."%.2f m", fa.fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
-    fa.frameStats.afkText:SetText("AFK : "..fa.FormatTime(fa.restAFK).." test")
+    fa.frameStats.afkText:SetText(fa.STAT_AFK..fa.FormatTime(fa.restAFK))
 
     -- Temps Ghost
 
     fa.frameStats.deadText = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.deadText:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -107)
     -- local texte = string.format(fa.STAT_DIST_TOT.."%.2f m", fa.fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
-    fa.frameStats.deadText:SetText("Ghost : "..fa.FormatTime(fa.ghostTime).." test")
+    fa.frameStats.deadText:SetText(fa.STAT_GHOST..fa.FormatTime(fa.ghostTime))
+
+    -- Record de vitesse (yd/s)
+
+    fa.frameStats.deadText = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.deadText:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -132)
+    local texte = string.format(fa.STAT_VITYD, fa.recordVitesse)
+    fa.frameStats.deadText:SetText(texte)
+    
+    -- Record de vitesse (km/h)
+
+    fa.frameStats.deadText = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+    fa.frameStats.deadText:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -147)
+    local texte = string.format(fa.STAT_VITKM, fa.recordVitesse * 3.29184)
+    fa.frameStats.deadText:SetText(texte)
 
     -- Texte en bas
 

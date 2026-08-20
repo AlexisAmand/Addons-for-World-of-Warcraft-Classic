@@ -3,7 +3,7 @@
 ## Notes: A small travel companion for Azeroth. Track the distance you've travelled through the world of Warcraft.
 ## Author: La Team Panda
 ## SavedVariables: FASaved
-## Version: 0.7
+## Version: 0.8
 
 FeetOfAzerothText.lua
 List.lua

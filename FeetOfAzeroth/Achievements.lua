@@ -8,6 +8,12 @@ function fa.afficherAchievements()
 
     fa.optionMenu:Hide()
 
+    if fa.frameStats:IsShown() then
+        fa.frameStats:Hide()
+    else
+        fa.frameStats:Show()
+    end
+
     -- Fenêtre
     fa.frameAchievements = CreateFrame("Frame", "FAWindow", UIParent)
     fa.frameAchievements:SetSize(300, 250)

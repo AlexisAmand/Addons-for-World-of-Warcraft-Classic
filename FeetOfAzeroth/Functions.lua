@@ -24,7 +24,7 @@ function fa.CreationMenu()
     fa.optionTitre = fa.optionMenu:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.optionTitre:ClearAllPoints()
     fa.optionTitre:SetPoint("TOP", fa.optionMenu, "TOP", 0, -10)
-    fa.optionTitre:SetText(fa.ADDON_TITLE..fa.VERSION)
+    fa.optionTitre:SetText(fa.ADDON_TITLE.." "..fa.VERSION)
 
     -- ligne de séparation
 
@@ -41,6 +41,7 @@ function fa.CreationMenu()
     fa.menuButton:SetPoint("BOTTOMRIGHT", fa.frame, "BOTTOMRIGHT", -7, 7)
 
     fa.menuButton:SetScript("OnClick", function(self)
+        -- fa.frameAchievements:Hide()
         if fa.optionMenu:IsShown() then
             fa.optionMenu:Hide()
         else
@@ -64,7 +65,8 @@ function fa.CreationMenu()
     fa.resetAllButton:SetPoint("TOPLEFT", fa.aboutButton, "TOPLEFT", 0, -28)
     fa.resetAllButton:SetScript("OnClick", function(self)
         fa.distanceSession = 0
-        fa.distanceTotal = 0
+        -- fa.distanceTotal = 0
+        fa.recordVitesse = 0
     end)
 
     -- bouton achievements
@@ -335,10 +337,14 @@ end
 --------------------------------------
 
 function fa.demarrerPodometre()
-    fa.timer = C_Timer.NewTicker(0.1, function()
+    fa.timerPosition = C_Timer.NewTicker(0.1, function()
         fa.recuperationPosition()
+    end)
+    fa.timerAffichage = C_Timer.NewTicker(0.25, function()
         fa.afficheCoordonnees()
-        -- fa.vitesseDuJoueur()
+        fa.updateRecordVitesse()
+    end)
+    fa.timerTemps = C_Timer.NewTicker(1, function()
         fa.updateRestTime()
         fa.updateDeadTime()
     end)
@@ -446,7 +452,7 @@ function  fa.vitesseDuJoueur()
     local texte
 
     if fa.uniteMetrique == true then 
-        vitesse = vitesse * 3,29184 -- selon un ratio trouvé en ligne
+        vitesse = vitesse * 3.29184 -- selon un ratio trouvé en ligne
         texte = string.format(fa.MAIN_SPD.." %.2f km/h", vitesse)
     else 
         texte = string.format(fa.MAIN_SPD.." %.2f yd/s", vitesse)
@@ -481,5 +487,20 @@ function fa.updateDeadTime()
     if UnitIsDeadOrGhost("player") then
         fa.ghostTime = fa.ghostTime + 0.1
         FASaved.FeetOfAzerothDB.ghostTime = fa.ghostTime
+    end
+end
+
+---------------------------------------
+-- un record de vitesse est-il établi ?
+---------------------------------------
+
+function fa.updateRecordVitesse()
+    local vitesse = GetUnitSpeed("player")
+
+    if vitesse > fa.recordVitesse then
+        fa.recordVitesse = vitesse
+        FASaved.FeetOfAzerothDB.recordVitesse = fa.recordVitesse
+        local texte = string.format("|cff00ff00" .. fa.ADDON_TITLE .. " :|r Nouveau record de vitesse : %.2f", fa.recordVitesse)
+        print(texte)
     end
 end

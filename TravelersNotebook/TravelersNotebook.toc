@@ -1,13 +1,12 @@
-## Interface: 120007, 50504
+## Interface: 120007, 50504, 120100
 ## Title: Traveler's Notebook
 ## Notes: A simple notebook to write and save your own notes in WoW.
 ## Author: La Team Panda
 ## SavedVariables: TBSaved
-## Version: 0.8
+## Version: 0.8.1
 
 TravelerNoteBookText.lua
 Messages.lua
-list.lua
 Functions.lua
 Buttons.lua
 topbar.lua

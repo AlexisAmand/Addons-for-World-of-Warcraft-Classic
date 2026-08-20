@@ -48,3 +48,6 @@
 - Added dead/ghost time to the Statistics window
 - GUI improvements and cleanup
 - Redesigned the podometer display with multiple display modes
+
+### 0.8 — August 19, 2026 (Testing)
+- Sauvegarde du record de vitesse et affichage dans la fenêtre des stats

@@ -31,6 +31,7 @@ loader:SetScript("OnEvent", function(self, event, addonName)
     fa.distanceTotal = FASaved.FeetOfAzerothDB.distanceTotal or 0
     fa.restAFK = FASaved.FeetOfAzerothDB.restAFK or 0
     fa.ghostTime = FASaved.FeetOfAzerothDB.ghostTime or 0
+    fa.recordVitesse = FASaved.FeetOfAzerothDB.recordVitesse or 0
     
     if FASaved.FeetOfAzerothDB.uniteMetrique == nil then
         fa.uniteMetrique = true

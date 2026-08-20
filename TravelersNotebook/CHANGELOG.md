@@ -86,7 +86,7 @@
 
 - Online !
 
-## v0.8 - August 6, 2026 (en test)
+## v0.8 - August 6, 2026
 - Top bar preparation
 - Added a checkbox to automatically hide the notebook during combat
 - Added a search box to filter notes
@@ -94,3 +94,7 @@
 - Added A–Z sorting
 - Added Z–A sorting
 - Added compatibility with World of Warcraft Retail
+
+## v0.8.1 - Auguste 20, 2026
+- Support for World of Warcraft patch 12.1.0
+- Bug fixes
