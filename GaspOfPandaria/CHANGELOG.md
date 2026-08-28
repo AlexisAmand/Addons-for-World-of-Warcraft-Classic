@@ -169,7 +169,8 @@ All notable changes to the project are documented here.
 
 ---
 
-## v0.13.1 — Work in progress
+## v0.13.2 — August 20, 2026
 - update "Notes" in toc file
-
----
+- Support for World of Warcraft patch 12.1.0
+- Minor GUI changes
+- Online !

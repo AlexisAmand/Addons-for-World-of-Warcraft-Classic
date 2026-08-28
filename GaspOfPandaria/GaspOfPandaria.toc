@@ -1,9 +1,9 @@
-## Interface: 120007, 50504
+## Interface: 120007, 50504, 120100
 ## Title: Gasp Of Pandaria
 ## Notes: A relaxing Pandaren puzzle game to play between adventures.
 ## Author: La Team Panda
 ## SavedVariables: GaspSaved
-## Version: 0.13
+## Version: 0.13.2
 
 functions.lua
 options.lua

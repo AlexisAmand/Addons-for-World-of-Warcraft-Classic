@@ -31,17 +31,9 @@ end
 
 function fa.afficherStats()
 
-    fa.optionMenu:Hide()
-
-    if fa.frameAchievements:IsShown() then
-        fa.frameAchievements:Hide()
-    else
-        fa.frameAchievements:Show()
-    end
-
     -- Création de la fenêtre
 
-    fa.frameStats = CreateFrame("Frame", "FAWindow", UIParent)
+    fa.frameStats = CreateFrame("Frame", "FAStatsWindow", UIParent)
     fa.frameStats:SetSize(300, 250)
     fa.frameStats:SetPoint("CENTER")
 
@@ -91,28 +83,28 @@ function fa.afficherStats()
 
     fa.frameStats.distanceYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.distanceYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -12)
-    local texte = string.format(fa.STAT_DIST_TOT, fa.tronqueDeuxDecimales(fa.distanceTotal))
+    local texte = string.format(fa.STAT_DIST_TOT_Y, fa.tronqueDeuxDecimales(fa.distanceTotal))
     fa.frameStats.distanceYd:SetText(texte)
 
     -- Distance totale (en m)
 
     fa.frameStats.distanceM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.distanceM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -27)
-    local texte = string.format(fa.STAT_DIST_TOT, fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
+    local texte = string.format(fa.STAT_DIST_TOT_M, fa.tronqueDeuxDecimales(fa.distanceTotal * fa.taux))
     fa.frameStats.distanceM:SetText(texte)
 
     -- Distance session (en Yards)
 
     fa.frameStats.sessionYd = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.sessionYd:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT", 10, -52)
-    local texte = string.format(fa.STAT_DIST_SESS, fa.tronqueDeuxDecimales(fa.distanceSession))
+    local texte = string.format(fa.STAT_DIST_SESS_Y, fa.tronqueDeuxDecimales(fa.distanceSession))
     fa.frameStats.sessionYd:SetText(texte)
 
     -- Distance session (en m)
 
     fa.frameStats.sessionM = fa.frameStats:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     fa.frameStats.sessionM:SetPoint("TOPLEFT", fa.frameStatsSeparator, "TOPLEFT",10 , -67)
-    local texte = string.format(fa.STAT_DIST_SESS, fa.tronqueDeuxDecimales(fa.distanceSession * fa.taux))
+    local texte = string.format(fa.STAT_DIST_SESS_M, fa.tronqueDeuxDecimales(fa.distanceSession * fa.taux))
     fa.frameStats.sessionM:SetText(texte)
 
     -- Temps AFK

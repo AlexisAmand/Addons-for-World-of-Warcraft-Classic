@@ -66,7 +66,8 @@ end)
 
 -- Bouton 
 local btn = CreateFrame("CheckButton", "GOPFloatingButton", UIParent, "ActionButtonTemplate")
-btn:SetSize(36, 36)
+local size = ActionButton1:GetWidth()
+btn:SetSize(size, size)
 btn:SetPoint("CENTER")
 
 -- Icône

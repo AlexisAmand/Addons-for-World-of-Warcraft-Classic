@@ -6,16 +6,8 @@ fa = fa or {}
 
 function fa.afficherAchievements()
 
-    fa.optionMenu:Hide()
-
-    if fa.frameStats:IsShown() then
-        fa.frameStats:Hide()
-    else
-        fa.frameStats:Show()
-    end
-
     -- Fenêtre
-    fa.frameAchievements = CreateFrame("Frame", "FAWindow", UIParent)
+    fa.frameAchievements = CreateFrame("Frame", "FAAchivementWindow", UIParent)
     fa.frameAchievements:SetSize(300, 250)
     fa.frameAchievements:SetPoint("CENTER")
 
@@ -161,11 +153,11 @@ end
 function fa.afficherSucces(achievement)
 
     if fa.successFrame then
-        fa.successFrame:Hide()
+       fa.successFrame:Hide()
     end
 
     fa.successFrame = CreateFrame("Frame", nil, UIParent, "BackdropTemplate")
-    fa.successFrame:SetSize(280, 150)
+    fa.successFrame:SetSize(280, 95)
     fa.successFrame:SetPoint("TOP")
 
     fa.successFrame.bg = fa.successFrame:CreateTexture(nil, "BACKGROUND")
@@ -179,14 +171,28 @@ function fa.afficherSucces(achievement)
         edgeSize = 12,
     })
 
+    -- Titre de la fenêtre
+
+    fa.successFrame.titre = fa.successFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    fa.successFrame.titre:ClearAllPoints()
+    fa.successFrame.titre:SetPoint("TOP", fa.successFrame, "TOP", 0, -10)
+    fa.successFrame.titre:SetText("|cffffd700Feet of Azeroth: Achievement Unlocked!|r")
+
+    -- ligne de séparation
+
+    fa.successFrameSeparator = fa.successFrame:CreateTexture(nil, "ARTWORK")
+    fa.successFrameSeparator:SetColorTexture(1, 1, 1, 0.15)
+    fa.successFrameSeparator:SetSize(250, 1)
+    fa.successFrameSeparator:SetPoint("TOP", fa.successFrame.titre, "BOTTOM", 0, -4)
+
+    -- texte
+
     local nom = fa.successFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    nom:SetPoint("TOP", 0, 0)
+    nom:SetPoint("TOPLEFT", fa.successFrameSeparator, "TOPLEFT", 0, -12)
     nom:SetText(
-        "Great !\n\nSuccès débloqué !\n\n"
-        ..achievement.name
-        .."\n\n"
-        ..achievement.description
-        )
+        "|cffffffff"..achievement.name.."|r\n\n"
+        .."|cffaaaaaa"..achievement.description.."|r"
+    )
 
     fa.successFrame.elapsed = 0
 
@@ -210,6 +216,11 @@ end
 ------------------------
 
 function fa.validationAchievements()
+
+    -- if fa.distance > 0 then
+    --   fa.afficherSucces(fa.achievements[3])
+    -- end 
+
     for _, achievement in ipairs(fa.achievements) do
         if fa.distanceTotal * fa.taux >= achievement.distance
         and not FASaved.FeetOfAzerothDB.achievements[achievement.id] then

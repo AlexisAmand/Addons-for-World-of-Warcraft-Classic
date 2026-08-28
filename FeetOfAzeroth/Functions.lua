@@ -75,7 +75,13 @@ function fa.CreationMenu()
     fa.achievementButton:SetSize(67, 25)
     fa.achievementButton:SetText(fa.MAIN_FTS)
     fa.achievementButton:SetPoint("TOPLEFT", fa.resetAllButton, "TOPLEFT", 0, -28)
-    fa.achievementButton:SetScript("OnClick",  fa.afficherAchievements)
+    fa.achievementButton:SetScript("OnClick", function()    
+        if fa.frameStats and fa.frameStats:IsShown() then
+            fa.frameStats:Hide()
+        end
+        fa.optionMenu:Hide()  
+        fa.afficherAchievements()
+    end)
 
     -- bouton switch
 
@@ -91,7 +97,13 @@ function fa.CreationMenu()
     fa.statButton:SetSize(67, 25)
     fa.statButton:SetText(fa.MAIN_STS)
     fa.statButton:SetPoint("TOPRIGHT", fa.mydButton, "TOPRIGHT", 0, -28)
-    fa.statButton:SetScript("OnClick", fa.afficherStats)
+    fa.statButton:SetScript("OnClick", function()    
+        if fa.frameAchievements and fa.frameAchievements:IsShown() then
+            fa.frameAchievements:Hide()
+        end
+        fa.optionMenu:Hide()  
+        fa.afficherStats()
+    end)
 
     -- Position du menu 
     fa.optionMenu:SetPoint("TOP", fa.menuButton, "BOTTOM", 0, -10)
@@ -301,9 +313,14 @@ function fa.recuperationPosition()
     -- C'est une téléportation (test)
     local vitesse = GetUnitSpeed("player")
 
-    if vitesse > 0 and fa.distance > vitesse * 0.1 * 2 then
-        fa.distance = 0
+    if vitesse > 0 then
+        if fa.distance > vitesse * 0.1 * 2 then
+            print("Téléportation détectée :", fa.distance, "yd")
+            fa.distance = 0
+        end
+    elseif fa.distance > 1 then
         print("Téléportation détectée :", fa.distance, "yd")
+        fa.distance = 0
     end
 
     -- calculs en yards

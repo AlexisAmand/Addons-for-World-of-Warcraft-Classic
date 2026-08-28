@@ -1,4 +1,4 @@
-## Interface: 120007, 50504
+## Interface: 120007, 50504, 120100
 ## Title: Feet of Azeroth
 ## Notes: A small travel companion for Azeroth. Track the distance you've travelled through the world of Warcraft.
 ## Author: La Team Panda
